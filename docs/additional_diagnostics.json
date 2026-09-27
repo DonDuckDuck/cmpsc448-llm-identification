@@ -1,0 +1,9 @@
+{
+  "added_utc": "2026-10-10T17:31:36.181604+00:00",
+  "reason": "Post hoc pipeline diagnostic, not hyperparameter tuning or replacement of primary results.",
+  "runs": [
+    "cnn_output_s448_shuffled",
+    "lstm_output_s448_shuffled"
+  ],
+  "procedure": "Permute training labels only with seed 448, preserve validation/test labels and same fixed training settings."
+}

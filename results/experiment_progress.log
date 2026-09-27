@@ -1,0 +1,52 @@
+RUN cnn_input_s448
+COMPLETE cnn_input_s448 acc 0.3333 F1 0.2683
+RUN cnn_output_s448
+COMPLETE cnn_output_s448 acc 0.7746 F1 0.7765
+RUN cnn_combined_s448
+COMPLETE cnn_combined_s448 acc 0.7418 F1 0.7453
+RUN lstm_input_s448
+COMPLETE lstm_input_s448 acc 0.3333 F1 0.3317
+RUN lstm_output_s448
+COMPLETE lstm_output_s448 acc 0.6213 F1 0.623
+RUN lstm_combined_s448
+COMPLETE lstm_combined_s448 acc 0.5915 F1 0.591
+RUN cnn_input_s449
+COMPLETE cnn_input_s449 acc 0.3333 F1 0.3167
+RUN cnn_output_s449
+COMPLETE cnn_output_s449 acc 0.784 F1 0.7879
+RUN cnn_combined_s449
+COMPLETE cnn_combined_s449 acc 0.7465 F1 0.7504
+RUN lstm_input_s449
+COMPLETE lstm_input_s449 acc 0.3333 F1 0.3316
+RUN lstm_output_s449
+COMPLETE lstm_output_s449 acc 0.651 F1 0.6486
+RUN lstm_combined_s449
+COMPLETE lstm_combined_s449 acc 0.5947 F1 0.5951
+RUN cnn_input_s450
+COMPLETE cnn_input_s450 acc 0.3333 F1 0.2633
+RUN cnn_output_s450
+COMPLETE cnn_output_s450 acc 0.7668 F1 0.7692
+RUN cnn_combined_s450
+COMPLETE cnn_combined_s450 acc 0.7277 F1 0.7294
+RUN lstm_input_s450
+COMPLETE lstm_input_s450 acc 0.3333 F1 0.331
+RUN lstm_output_s450
+COMPLETE lstm_output_s450 acc 0.6479 F1 0.6476
+RUN lstm_combined_s450
+COMPLETE lstm_combined_s450 acc 0.59 F1 0.5901
+RUN cnn_output_s448_normalized
+COMPLETE cnn_output_s448_normalized acc 0.7559 F1 0.7601
+RUN cnn_output_s448_source_holdout
+COMPLETE cnn_output_s448_source_holdout acc 0.7011 F1 0.6973
+RUN cnn_output_s448_source_control
+COMPLETE cnn_output_s448_source_control acc 0.7299 F1 0.7288
+RUN lstm_output_s448_normalized
+COMPLETE lstm_output_s448_normalized acc 0.6745 F1 0.674
+RUN lstm_output_s448_source_holdout
+COMPLETE lstm_output_s448_source_holdout acc 0.5805 F1 0.5821
+RUN lstm_output_s448_source_control
+COMPLETE lstm_output_s448_source_control acc 0.5632 F1 0.5649
+RUN cnn_output_s448_shuffled
+COMPLETE cnn_output_s448_shuffled acc 0.2645 F1 0.2306
+RUN lstm_output_s448_shuffled
+COMPLETE lstm_output_s448_shuffled acc 0.2958 F1 0.2975

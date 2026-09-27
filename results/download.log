@@ -1,0 +1,4 @@
+Downloading 0000.parquet
+{'url': 'https://huggingface.co/datasets/openbmb/UltraFeedback/resolve/f5d499befd5cedca7d09ee86d2cbbd210a330798/default/train/0000.parquet', 'file': 'data/raw/0000.parquet', 'bytes': 185175893, 'sha256': '1d3061d5ea00f64c4bec9e53ac899752e01a89ebffa271c461516f5bf95e81ff'}
+Downloading 0001.parquet
+{'url': 'https://huggingface.co/datasets/openbmb/UltraFeedback/resolve/f5d499befd5cedca7d09ee86d2cbbd210a330798/default/train/0001.parquet', 'file': 'data/raw/0001.parquet', 'bytes': 137673942, 'sha256': 'e3ee9e436b4c9bd5a8811d02ae3b5a6dff69605cb66719ac47fad61c65e562fe'}

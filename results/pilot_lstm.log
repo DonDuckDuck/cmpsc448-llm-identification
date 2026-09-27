@@ -1,0 +1,3 @@
+START lstm_output_s448_pilot device=mps rows={'train': 2976, 'val': 639, 'test': 639} vocab=11649
+{"epoch": 1, "train_loss": 1.0579881962909494, "val_loss": 0.9992861799977382, "val_accuracy": 0.5054773082942097, "val_macro_f1": 0.49388462804635963, "seconds": 1.7877625827677548}
+DONE lstm_output_s448_pilot {}

@@ -1,0 +1,57 @@
+{
+  "tag": "lstm_output_s448_pilot",
+  "config": {
+    "model": "lstm",
+    "mode": "output",
+    "seed": 448,
+    "epochs": 1,
+    "batch": 64,
+    "device": "auto",
+    "normalized": false,
+    "domain": false,
+    "pilot": true
+  },
+  "device": "mps",
+  "torch_version": "2.14.1",
+  "platform": "macOS-26.2-arm64-arm-64bit",
+  "labels": [
+    "Falcon",
+    "GPT",
+    "Llama"
+  ],
+  "vocab_size": 11649,
+  "parameters": 779011,
+  "row_counts": {
+    "train": 2976,
+    "val": 639,
+    "test": 639
+  },
+  "best_epoch": 1,
+  "best_val_macro_f1": 0.49388462804635963,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.0579881962909494,
+      "val_loss": 0.9992861799977382,
+      "val_accuracy": 0.5054773082942097,
+      "val_macro_f1": 0.49388462804635963,
+      "seconds": 1.7877625827677548
+    }
+  ],
+  "training_seconds": 1.7921023326925933,
+  "split_manifest_sha256": "e9f676f578ca2f22018dcec24b20f575870969e64446308079316af5bbab62f8",
+  "token_stats": {
+    "train": {
+      "unk_fraction": 0.021524221222222525,
+      "mean_input_tokens": 123.2825940860215
+    },
+    "val": {
+      "unk_fraction": 0.05541819421945605,
+      "mean_input_tokens": 128.4866979655712
+    },
+    "test": {
+      "unk_fraction": 0.06447738836230274,
+      "mean_input_tokens": 121.18622848200313
+    }
+  }
+}

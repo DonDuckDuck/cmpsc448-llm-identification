@@ -1,0 +1,161 @@
+{
+  "tag": "lstm_input_s448",
+  "config": {
+    "model": "lstm",
+    "mode": "input",
+    "seed": 448,
+    "epochs": 8,
+    "batch": 64,
+    "device": "auto",
+    "source_control": false,
+    "normalized": false,
+    "domain": false,
+    "pilot": false
+  },
+  "device": "mps",
+  "torch_version": "2.14.1",
+  "platform": "macOS-26.2-arm64-arm-64bit",
+  "labels": [
+    "Falcon",
+    "GPT",
+    "Llama"
+  ],
+  "vocab_size": 8380,
+  "parameters": 569795,
+  "row_counts": {
+    "train": 2976,
+    "val": 639,
+    "test": 639
+  },
+  "best_epoch": 4,
+  "best_val_macro_f1": 0.33127655274832696,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.1081590716556837,
+      "val_loss": 1.1001373911874022,
+      "val_accuracy": 0.3333333333333333,
+      "val_macro_f1": 0.3200832911944023,
+      "seconds": 0.6189904999919236
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.1044044520265313,
+      "val_loss": 1.0995626315264635,
+      "val_accuracy": 0.3333333333333333,
+      "val_macro_f1": 0.3266592922123523,
+      "seconds": 0.3714415826834738
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.1021183844535583,
+      "val_loss": 1.0993520172548965,
+      "val_accuracy": 0.3333333333333333,
+      "val_macro_f1": 0.32050921604293725,
+      "seconds": 0.38306979183107615
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.1024428477851294,
+      "val_loss": 1.099210580936247,
+      "val_accuracy": 0.3333333333333333,
+      "val_macro_f1": 0.33127655274832696,
+      "seconds": 0.34505641693249345
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.102207673493252,
+      "val_loss": 1.099088641959177,
+      "val_accuracy": 0.3333333333333333,
+      "val_macro_f1": 0.3295224416369594,
+      "seconds": 0.35892712511122227
+    },
+    {
+      "epoch": 6,
+      "train_loss": 1.1011730137691702,
+      "val_loss": 1.0989750487517116,
+      "val_accuracy": 0.3333333333333333,
+      "val_macro_f1": 0.310746496326708,
+      "seconds": 0.3920251657254994
+    },
+    {
+      "epoch": 7,
+      "train_loss": 1.102035307115124,
+      "val_loss": 1.0989317319389427,
+      "val_accuracy": 0.3333333333333333,
+      "val_macro_f1": 0.3196396196396197,
+      "seconds": 0.32872524997219443
+    }
+  ],
+  "training_seconds": 2.805439291987568,
+  "split_manifest_sha256": "e9f676f578ca2f22018dcec24b20f575870969e64446308079316af5bbab62f8",
+  "token_stats": {
+    "train": {
+      "unk_fraction": 0.0,
+      "mean_input_tokens": 63.746975806451616
+    },
+    "val": {
+      "unk_fraction": 0.08579839172889143,
+      "mean_input_tokens": 65.38967136150235
+    },
+    "test": {
+      "unk_fraction": 0.08925177729288379,
+      "mean_input_tokens": 66.69953051643192
+    }
+  },
+  "test": {
+    "accuracy": 0.3333333333333333,
+    "macro_f1": 0.3317448816731305,
+    "confusion_matrix": [
+      [
+        74,
+        58,
+        81
+      ],
+      [
+        74,
+        58,
+        81
+      ],
+      [
+        74,
+        58,
+        81
+      ]
+    ],
+    "classification_report": {
+      "Falcon": {
+        "precision": 0.3333333333333333,
+        "recall": 0.3474178403755869,
+        "f1-score": 0.34022988505747126,
+        "support": 213.0
+      },
+      "GPT": {
+        "precision": 0.3333333333333333,
+        "recall": 0.27230046948356806,
+        "f1-score": 0.2997416020671835,
+        "support": 213.0
+      },
+      "Llama": {
+        "precision": 0.3333333333333333,
+        "recall": 0.38028169014084506,
+        "f1-score": 0.35526315789473684,
+        "support": 213.0
+      },
+      "accuracy": 0.3333333333333333,
+      "macro avg": {
+        "precision": 0.3333333333333333,
+        "recall": 0.3333333333333333,
+        "f1-score": 0.3317448816731305,
+        "support": 639.0
+      },
+      "weighted avg": {
+        "precision": 0.3333333333333333,
+        "recall": 0.3333333333333333,
+        "f1-score": 0.3317448816731305,
+        "support": 639.0
+      }
+    },
+    "loss": 1.0992293380235842
+  }
+}

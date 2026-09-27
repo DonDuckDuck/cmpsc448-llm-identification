@@ -1,0 +1,3 @@
+START cnn_output_s448_pilot device=mps rows={'train': 2976, 'val': 639, 'test': 639} vocab=11649
+{"epoch": 1, "train_loss": 1.0263295910691703, "val_loss": 0.8052292586492261, "val_accuracy": 0.6384976525821596, "val_macro_f1": 0.6366234310746263, "seconds": 3.1486107502132654}
+DONE cnn_output_s448_pilot {}

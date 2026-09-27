@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+data/raw/
+data/processed/*.jsonl
+results/checkpoints/
+tmp/
+
+docs/*.pdf
+
+docs/WORK_PLAN.md
+report/outline.md

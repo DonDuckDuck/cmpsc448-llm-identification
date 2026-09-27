@@ -1,0 +1,28 @@
+{
+  "dataset": "openbmb/UltraFeedback",
+  "original_revision": "40b436560ca83a8dba36114c22ab3c66e43f6d5e",
+  "parquet_revision": "f5d499befd5cedca7d09ee86d2cbbd210a330798",
+  "downloaded_utc": "2026-10-10T17:26:23Z",
+  "artifacts": [
+    {
+      "url": "https://huggingface.co/datasets/openbmb/UltraFeedback/resolve/f5d499befd5cedca7d09ee86d2cbbd210a330798/default/train/0000.parquet",
+      "file": "data/raw/0000.parquet",
+      "bytes": 185175893,
+      "sha256": "1d3061d5ea00f64c4bec9e53ac899752e01a89ebffa271c461516f5bf95e81ff"
+    },
+    {
+      "url": "https://huggingface.co/datasets/openbmb/UltraFeedback/resolve/f5d499befd5cedca7d09ee86d2cbbd210a330798/default/train/0001.parquet",
+      "file": "data/raw/0001.parquet",
+      "bytes": 137673942,
+      "sha256": "e3ee9e436b4c9bd5a8811d02ae3b5a6dff69605cb66719ac47fad61c65e562fe"
+    }
+  ],
+  "dataset_card": {
+    "url": "https://huggingface.co/datasets/openbmb/UltraFeedback/resolve/40b436560ca83a8dba36114c22ab3c66e43f6d5e/README.md",
+    "file": "data/raw/dataset_card.md",
+    "bytes": 15395,
+    "sha256": "70a22b5659215ab738b9dfd0dc6bd40d3bb040bf846b4e34955358f30625a4f7"
+  },
+  "license_label": "MIT (dataset card); upstream source terms also apply",
+  "notes": "No quality annotations or system prompts are used as predictive inputs. Raw records are kept local."
+}
