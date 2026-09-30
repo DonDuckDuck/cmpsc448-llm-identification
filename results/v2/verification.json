@@ -1,0 +1,11 @@
+{
+  "validation_files_verified": 32,
+  "selection_recomputed": true,
+  "prediction_files_verified": 18,
+  "metrics_recomputed": true,
+  "frozen_selection_hash": "e56ec41cc3dc654b61bc3e126c61fd29c493d33214b90fe1207f8f1ee06841c5",
+  "checkpoint_replay_max_error": {
+    "cnn": 0.0,
+    "lstm": 0.0
+  }
+}

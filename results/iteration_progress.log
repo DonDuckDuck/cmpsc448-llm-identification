@@ -1,0 +1,51 @@
+FIT c01_output_s448 val F1 0.8054 epoch 22 seconds 8.9
+FIT c02_output_s448 val F1 0.8071 epoch 13 seconds 9.8
+FIT c03_output_s448 val F1 0.7892 epoch 12 seconds 10.4
+FIT c04_output_s448 val F1 0.83 epoch 22 seconds 23.0
+FIT r01_output_s448 val F1 0.6919 epoch 24 seconds 12.6
+FIT r02_output_s448 val F1 0.8136 epoch 21 seconds 13.4
+FIT r03_output_s448 val F1 0.7953 epoch 20 seconds 22.8
+FIT r04_output_s448 val F1 0.7617 epoch 18 seconds 13.7
+FIT r05_output_s448 val F1 0.7549 epoch 12 seconds 17.0
+FIT r06_output_s448 val F1 0.7919 epoch 20 seconds 43.0
+FIT r07_output_s448 val F1 0.7898 epoch 8 seconds 32.7
+FIT r08_output_s448 val F1 0.7942 epoch 24 seconds 13.2
+FIT c04_output_s449 val F1 0.8169 epoch 23 seconds 22.9
+FIT c04_output_s450 val F1 0.8047 epoch 12 seconds 16.2
+FIT c02_output_s449 val F1 0.8327 epoch 24 seconds 13.5
+FIT c02_output_s450 val F1 0.8136 epoch 18 seconds 12.7
+FIT r02_output_s449 val F1 0.7863 epoch 17 seconds 12.1
+FIT r02_output_s450 val F1 0.7961 epoch 17 seconds 12.2
+FIT r03_output_s449 val F1 0.7704 epoch 12 seconds 16.2
+FIT r03_output_s450 val F1 0.7939 epoch 16 seconds 19.8
+FROZEN {"cnn": {"candidate": "c02", "validation_macro_f1_mean": 0.8177909649566786, "validation_loss_mean": 0.4826024094782089, "config": {"emb": 64, "hidden": 64, "dropout": 0.3, "lr": 0.001, "max_tokens": 384, "normalized": false, "bidirectional": false, "pooling": "meanmax", "epochs": 24, "patience": 5, "batch": 64, "architecture": "cnn"}, "finalist_scores": [{"candidate": "c04", "mean_val_macro_f1": 0.817208429553462, "mean_val_loss": 0.4738027590541212}, {"candidate": "c02", "mean_val_macro_f1": 0.8177909649566786, "mean_val_loss": 0.4826024094782089}]}, "lstm": {"candidate": "r02", "validation_macro_f1_mean": 0.7986567494780351, "validation_loss_mean": 0.6017710591705753, "config": {"emb": 64, "hidden": 64, "dropout": 0.3, "lr": 0.001, "max_tokens": 192, "normalized": false, "bidirectional": false, "pooling": "meanmax", "epochs": 24, "patience": 5, "batch": 64, "architecture": "lstm"}, "finalist_scores": [{"candidate": "r02", "mean_val_macro_f1": 0.7986567494780351, "mean_val_loss": 0.6017710591705753}, {"candidate": "r03", "mean_val_macro_f1": 0.7865002753030138, "mean_val_loss": 0.6023303436374814}]}}
+FIT c02_input_s448 val F1 0.2708 epoch 3 seconds 2.1
+FIT c02_input_s449 val F1 0.284 epoch 2 seconds 1.6
+FIT c02_input_s450 val F1 0.2557 epoch 3 seconds 2.1
+FIT c02_combined_s448 val F1 0.7901 epoch 12 seconds 11.3
+FIT c02_combined_s449 val F1 0.8163 epoch 24 seconds 15.6
+FIT c02_combined_s450 val F1 0.8088 epoch 18 seconds 15.0
+FIT r02_input_s448 val F1 0.3329 epoch 6 seconds 3.8
+FIT r02_input_s449 val F1 0.2974 epoch 4 seconds 3.2
+FIT r02_input_s450 val F1 0.3093 epoch 3 seconds 2.9
+FIT r02_combined_s448 val F1 0.7578 epoch 23 seconds 18.2
+FIT r02_combined_s449 val F1 0.7444 epoch 23 seconds 18.5
+FIT r02_combined_s450 val F1 0.7618 epoch 24 seconds 18.2
+TEST c02_input_s448 accuracy 0.3333 F1 0.2673
+TEST c02_input_s449 accuracy 0.3333 F1 0.2907
+TEST c02_input_s450 accuracy 0.3333 F1 0.2637
+TEST c02_output_s448 accuracy 0.7966 F1 0.7991
+TEST c02_output_s449 accuracy 0.8153 F1 0.8176
+TEST c02_output_s450 accuracy 0.8153 F1 0.8163
+TEST c02_combined_s448 accuracy 0.784 F1 0.7864
+TEST c02_combined_s449 accuracy 0.7966 F1 0.7983
+TEST c02_combined_s450 accuracy 0.7919 F1 0.7939
+TEST r02_input_s448 accuracy 0.3333 F1 0.3328
+TEST r02_input_s449 accuracy 0.3333 F1 0.2936
+TEST r02_input_s450 accuracy 0.3333 F1 0.3126
+TEST r02_output_s448 accuracy 0.7762 F1 0.7784
+TEST r02_output_s449 accuracy 0.7574 F1 0.7591
+TEST r02_output_s450 accuracy 0.7762 F1 0.7797
+TEST r02_combined_s448 accuracy 0.7574 F1 0.7606
+TEST r02_combined_s449 accuracy 0.7355 F1 0.7382
+TEST r02_combined_s450 accuracy 0.7762 F1 0.7781

@@ -1,0 +1,9 @@
+{
+  "prediction_files_verified": 31,
+  "all_metrics_match_saved_predictions": true,
+  "prompt_only_accuracy_exactly_one_third": true,
+  "split_manifest_hash": "e9f676f578ca2f22018dcec24b20f575870969e64446308079316af5bbab62f8",
+  "checkpoint_replay": "cnn_output_s448",
+  "checkpoint_replay_device": "mps",
+  "max_probability_difference": 0.0
+}

@@ -1,0 +1,9 @@
+{
+  "predicted_family": "Falcon",
+  "uncalibrated_model_probabilities": {
+    "Falcon": 0.8379629850387573,
+    "GPT": 0.10850729048252106,
+    "Llama": 0.05352965369820595
+  },
+  "scope": "Only Falcon/GPT/Llama releases represented in the historical dataset. Not a reliable attribution tool for arbitrary text."
+}

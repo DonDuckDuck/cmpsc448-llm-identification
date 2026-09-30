@@ -1,0 +1,160 @@
+{
+  "tag": "r02_input_s449",
+  "candidate": "r02",
+  "mode": "input",
+  "seed": 449,
+  "config": {
+    "emb": 64,
+    "hidden": 64,
+    "dropout": 0.3,
+    "lr": 0.001,
+    "max_tokens": 192,
+    "normalized": false,
+    "bidirectional": false,
+    "pooling": "meanmax",
+    "epochs": 24,
+    "patience": 5,
+    "batch": 64,
+    "architecture": "lstm"
+  },
+  "best_epoch": 4,
+  "best_val_macro_f1": 0.29736273937765484,
+  "best_val_loss": 1.0988943610392825,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.1057464191990514,
+      "val_loss": 1.1001350390892446,
+      "val_accuracy": 0.3333333333333333,
+      "val_macro_f1": 0.19551644448904723,
+      "seconds": 0.3599367500282824
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.1044015512671521,
+      "val_loss": 1.0990826482877298,
+      "val_accuracy": 0.3333333333333333,
+      "val_macro_f1": 0.29126815191637084,
+      "seconds": 0.36731962487101555
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.1034478384961364,
+      "val_loss": 1.1008462085037352,
+      "val_accuracy": 0.3333333333333333,
+      "val_macro_f1": 0.16955677703616456,
+      "seconds": 0.40485079074278474
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.1018637405928744,
+      "val_loss": 1.0988943610392825,
+      "val_accuracy": 0.3333333333333333,
+      "val_macro_f1": 0.29736273937765484,
+      "seconds": 0.3343771668151021
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.1026664190394904,
+      "val_loss": 1.0995288544417547,
+      "val_accuracy": 0.3333333333333333,
+      "val_macro_f1": 0.18984848484848485,
+      "seconds": 0.3319342089816928
+    },
+    {
+      "epoch": 6,
+      "train_loss": 1.101852040137014,
+      "val_loss": 1.0988575751792657,
+      "val_accuracy": 0.3333333333333333,
+      "val_macro_f1": 0.27845767318206055,
+      "seconds": 0.34449466597288847
+    },
+    {
+      "epoch": 7,
+      "train_loss": 1.1017032618163733,
+      "val_loss": 1.0988118107516627,
+      "val_accuracy": 0.3333333333333333,
+      "val_macro_f1": 0.27785216061078133,
+      "seconds": 0.3606638330966234
+    },
+    {
+      "epoch": 8,
+      "train_loss": 1.1007265711343417,
+      "val_loss": 1.0988316065828565,
+      "val_accuracy": 0.3333333333333333,
+      "val_macro_f1": 0.2583646840779589,
+      "seconds": 0.3591267499141395
+    },
+    {
+      "epoch": 9,
+      "train_loss": 1.101864053357032,
+      "val_loss": 1.0988845586403622,
+      "val_accuracy": 0.3333333333333333,
+      "val_macro_f1": 0.27424501424501424,
+      "seconds": 0.35910720797255635
+    }
+  ],
+  "training_seconds": 3.226814041379839,
+  "device": "mps",
+  "torch_version": "2.14.1",
+  "vocab_size": 8380,
+  "parameters": 569987,
+  "split_manifest_sha256": "e9f676f578ca2f22018dcec24b20f575870969e64446308079316af5bbab62f8",
+  "test_accessed": true,
+  "test": {
+    "accuracy": 0.3333333333333333,
+    "macro_f1": 0.2936469112365415,
+    "confusion_matrix": [
+      [
+        23,
+        140,
+        50
+      ],
+      [
+        23,
+        140,
+        50
+      ],
+      [
+        23,
+        140,
+        50
+      ]
+    ],
+    "classification_report": {
+      "Falcon": {
+        "precision": 0.3333333333333333,
+        "recall": 0.107981220657277,
+        "f1-score": 0.16312056737588654,
+        "support": 213.0
+      },
+      "GPT": {
+        "precision": 0.3333333333333333,
+        "recall": 0.6572769953051644,
+        "f1-score": 0.4423380726698262,
+        "support": 213.0
+      },
+      "Llama": {
+        "precision": 0.3333333333333333,
+        "recall": 0.2347417840375587,
+        "f1-score": 0.27548209366391185,
+        "support": 213.0
+      },
+      "accuracy": 0.3333333333333333,
+      "macro avg": {
+        "precision": 0.3333333333333333,
+        "recall": 0.3333333333333333,
+        "f1-score": 0.2936469112365415,
+        "support": 639.0
+      },
+      "weighted avg": {
+        "precision": 0.3333333333333333,
+        "recall": 0.3333333333333333,
+        "f1-score": 0.2936469112365415,
+        "support": 639.0
+      }
+    },
+    "loss": 1.0988892986554308
+  },
+  "selection_sha256": "e56ec41cc3dc654b61bc3e126c61fd29c493d33214b90fe1207f8f1ee06841c5"
+}

@@ -1,0 +1,13 @@
+test_combined_reserves_response_budget (test_invariants.Invariants.test_combined_reserves_response_budget) ... ok
+test_group_disjoint_and_prompt_balanced (test_invariants.Invariants.test_group_disjoint_and_prompt_balanced) ... ok
+test_padding_does_not_change_logits (test_invariants.Invariants.test_padding_does_not_change_logits) ... ok
+test_vocab_cannot_see_heldout_tokens (test_invariants.Invariants.test_vocab_cannot_see_heldout_tokens) ... ok
+test_backward_direction_receives_gradient (test_v2.V2Invariants.test_backward_direction_receives_gradient) ... ok
+test_bidirectional_matches_packed_pytorch (test_v2.V2Invariants.test_bidirectional_matches_packed_pytorch) ... ok
+test_padding_and_batch_composition_do_not_change_prediction (test_v2.V2Invariants.test_padding_and_batch_composition_do_not_change_prediction) ... ok
+test_reversal_preserves_padding_and_is_involution (test_v2.V2Invariants.test_reversal_preserves_padding_and_is_involution) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.486s
+
+OK

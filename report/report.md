@@ -1,4 +1,4 @@
-# Who Wrote It?
+# Whose Slop Is It?
 
 Identifying LLM families under a matched-prompt evaluation
 
@@ -6,18 +6,18 @@ Haodong Huang | Individual projectCMPSC 448 | October 10, 2026
 
 ### Abstract
 
-This project compares a text CNN and an LSTM for identifying Falcon, GPT, and Llama responses. A curated UltraFeedback subset contains 1,418 shared prompts and 4,254 responses. Each prompt appears once per family; near-duplicate prompt groups remain within a single data split. Model-name tokens are masked, and no model metadata enter the classifiers. Across three initialization seeds, response-only CNN accuracy is 77.5% and LSTM accuracy is 64.0%. Prompt-only accuracy is exactly 33.3% by construction. Adding the prompt reduces accuracy for both architectures under this fixed training recipe. Structural baselines, normalization, and a source-holdout experiment test alternative explanations. These are results for selected historical models and this curated distribution, not a universal detector of contemporary LLMs.
+This project compares a text CNN and an LSTM recurrent neural network (RNN) for identifying Falcon, GPT, and Llama responses. A curated UltraFeedback subset contains 1,418 shared prompts and 4,254 responses. Each prompt appears once per family; near-duplicate prompt groups remain within a single data split. Model-name tokens are masked, and no model metadata enter the classifiers. Initial response-only accuracies are 77.5% (CNN) and 64.0% (LSTM). A bounded validation-only search subsequently yields 80.9% and 77.0% across three seeds. All configurations are chosen before follow-up test evaluation. Prompt-only accuracy is exactly 33.3% by construction. Both initial and optimized input comparisons are reported. Structural baselines, normalization, and a source-holdout experiment test alternative explanations. These are results for selected historical models and this curated distribution, not a universal detector of contemporary LLMs.
 
 ### Main findings
 
 | Question | Evidence and answer |
 | --- | --- |
-| RQ1: Can responses identify a family? | Yes, within this benchmark. CNN: 77.5%; LSTM: 64.0%; chance: 33.3%. |
-| RQ2: Does the prompt help? | No under the tested recipe. CNN change: -3.65 pp; LSTM: -4.80 pp. |
-| RQ3: Transfer across sources? | Both models remain above chance on a held-out source. Differences from matched-size controls are uncertain. |
-| RQ4: What signals matter? | Structural features predict above chance. Removing formatting helps the LSTM in one seed; the CNN effect is inconclusive. |
+| RQ1: Can responses identify a family? | Optimized CNN: 80.9%; optimized LSTM: 77.0%; chance: 33.3%. |
+| RQ2: Does the prompt help? | Optimized combined-minus-response change: CNN -1.83 pp; LSTM -1.36 pp. Both intervals include zero. |
+| RQ3: Transfer across sources? | Initial-model probe: both exceed chance on a held-out source; differences from matched-size controls are uncertain. |
+| RQ4: What signals matter? | Initial-model probes: structural features predict above chance; formatting effects depend on the model and training recipe. |
 
-Scope: 18 primary neural runs, 8 auxiliary neural runs, 5 classical baselines, 2 validation-only timing pilots, and 2,000 cluster-bootstrap resamples. The report addresses both required questions and two exploratory extra-credit questions.
+Scope: 26 initial neural runs, 5 classical baselines, 32 optimization-stage fits (18 evaluated on test), 2 validation-only timing pilots, and 2,000 cluster-bootstrap resamples. The follow-up reuses the previously reported split; it is not a fresh blind test.
 
 
 ## 1. Dataset and problem definition
@@ -82,9 +82,9 @@ UltraFeedback varies instruction principles and custom system prompts during gen
 Automated checks verify split disjointness, one response per family per prompt, train-only vocabulary construction, preserved response budget in combined inputs, and prediction invariance to extra padding.
 
 
-## 3. Models and training procedure
+## 3. Initial models and training procedure
 
-The CNN follows the course treatment of convolution and pooling, adapted to a one-dimensional token sequence (Chapter 4, especially p. 36). The recurrent model follows its LSTM material (Chapter 4, pp. 69-79). Mini-batch optimization and Adam follow Chapter 9, pp. 41-48 and 62-65 [3,4]. PyTorch supplies the differentiable layers and optimizer [5].
+The CNN follows the course treatment of convolution and pooling, adapted to a one-dimensional token sequence (Chapter 4, especially p. 36). LSTM fulfills the required RNN model; it follows the course LSTM material (Chapter 4, pp. 69-79). Mini-batch optimization and Adam follow Chapter 9, pp. 41-48 and 62-65 [3,4]. PyTorch supplies the differentiable layers and optimizer [5].
 
 | Component | Text CNN | Text LSTM |
 | --- | --- | --- |
@@ -105,9 +105,9 @@ Figure 1. Response-only learning curves for the predesignated seed 448; all runs
 ![Figure 1. Response-only learning curves for the predesignated seed 448; all runs and checkpoints are retained.](../results/figures/learning_curves.png)
 
 
-## 4. Required experiments: RQ1 and RQ2
+## 4. Initial experiments: RQ1 and RQ2
 
-The six conditions share the same examples and split. Accuracy and macro-F1 are reported as mean plus/minus sample standard deviation across three training seeds. Intervals resample near-duplicate clusters, carrying all matched answers together, and average the metric over the same three fitted models. They quantify held-out-sample uncertainty conditional on these runs, not uncertainty over all datasets or all possible training seeds.
+The six initial conditions share the same examples and split. Accuracy and macro-F1 are reported as mean plus/minus sample standard deviation across three training seeds. Intervals resample near-duplicate clusters, carrying all matched answers together, and average the metric over the same three fitted models. They quantify held-out-sample uncertainty conditional on these runs, not uncertainty over all datasets or all possible training seeds.
 
 | Model | Input | Accuracy (%) | Macro-F1 (%) | 95% accuracy CI |
 | --- | --- | --- | --- | --- |
@@ -127,7 +127,7 @@ RQ1: Both response-only networks identify families above chance. CNN reaches 77.
 RQ2: Adding the prompt changes CNN accuracy by -3.65 percentage points; paired 95% CI [-5.58, -1.82]; for LSTM the change is -4.80 percentage points; paired 95% CI [-7.09, -2.41]. Both intervals exclude zero. Irrelevant prompt variation and limited model capacity are plausible explanations, not isolated causal findings. Combined models retain the same 192-token answer budget.
 
 
-## 5. Errors and variation within each family
+## 5. Initial-model errors and family variation
 
 Figure 3. Response-only confusion matrices, row-normalized after averaging counts across three seeds. Each family has 213 held-out responses.
 
@@ -149,7 +149,7 @@ These are per-version recalls for the family classifier, not version-identificat
 Truncation is substantial: 38.3% of test responses exceed 192 tokens, and 45.1% of test prompts exceed 96 tokens. Predictions therefore concern bounded prefixes. The CNN can capture local patterns anywhere within its retained prefix; a final-state LSTM must summarize that prefix in 64 hidden units. This is a plausible source of the architectural gap, but a pooling or bidirectional-LSTM ablation would be needed to test it.
 
 
-## 6. Classical baselines and negative controls
+## 6. Initial baselines and negative controls
 
 A TF-IDF + logistic regression baseline uses the same truncated tokens as the neural models, with unigram/bigram features, sublinear term frequency, minimum document frequency 2, at most 30,000 features, C = 1, and 1,000 maximum iterations. Training-only features prevent vocabulary leakage. This checks whether a simple sparse classifier is already competitive.
 
@@ -172,7 +172,7 @@ TF-IDF response-only accuracy is 77.3%, close to the CNN mean. There is no basis
 An additional post hoc diagnostic permutes training labels while preserving validation/test labels and all settings. CNN accuracy falls to 26.4% and LSTM to 29.6%. These particular runs are below chance, not exactly at chance. They show that corrupted supervision does not retain useful above-chance performance; one permutation does not prove that every form of leakage has been excluded. This diagnostic was not used to tune or replace the primary results.
 
 
-## 7. RQ4: linguistic and structural signals
+## 7. RQ4: initial-model signal probes
 
 The structural baseline uses ten features: log character count, log word count, mean word length, lexical diversity, newline rate, punctuation rate, digit rate, uppercase rate, list-line rate, and code-fence count. Standardization is fitted only on training examples. This baseline sees full responses, unlike the prefix-limited text classifiers, so it is an exploratory signal probe rather than an equal-information leaderboard.
 
@@ -194,7 +194,7 @@ CNN change: -1.88 percentage points; paired 95% CI [-5.16, 1.25]. LSTM change: +
 Normalization retains lowercase word tokens and removes punctuation/newline tokens. It also changes token boundaries and allows more words inside the fixed token limit. The intervention bundles formatting removal with altered effective context; it cannot isolate a pure causal effect of punctuation. Auxiliary results use one seed and should be repeated before strong claims.
 
 
-## 8. RQ3: transfer to an unseen data source
+## 8. RQ3: initial-model source transfer
 
 This exploratory experiment holds out Evol-Instruct from training and validation and evaluates on its original test prompts. Source identity is a proxy for distribution shift, not a clean coding-versus-writing task label. The 58 test prompts (174 responses) are identical for both conditions. A mixed-source control randomly subsamples the original training prompts to match the holdout training size.
 
@@ -221,15 +221,15 @@ Holding training size constant reduces a simple data-volume confound. It does no
 
 ### Reproduce the results
 
-Create a Python 3.12 environment and install requirements-lock.txt. Run, in order: src/download_data.py, src/prepare_data.py, the tests, src/run_experiments.py, src/baselines.py, src/analyze.py, and src/build_report.py. The README contains exact commands. The experiment runner resumes completed runs; a fresh result directory is required for a complete retraining. Every neural result records its settings, selected epoch, vocabulary size, parameter count, history, device, runtime, and split-manifest hash.
+Create a Python 3.12 environment and install requirements-lock.txt. First run the download and preparation scripts, tests, initial experiment runner, baselines, and initial analysis. Then run src/iterate.py with search, confirm, and evaluate in that order, followed by analyze_v2.py, both verification scripts, and build_report.py. The README contains exact commands. The experiment runner resumes completed runs; a fresh result directory is required for a complete retraining. Every neural result records its settings, selected epoch, vocabulary size, parameter count, history, device, runtime, and split-manifest hash.
 
-Recorded fitting and validation time summed across the reported neural runs and classical baselines is 90.3 seconds. This excludes process startup, downloads, data preparation, report generation, and the timing pilots. The small networks and short sequences make fitting fast; data curation and analysis remain essential work.
+Recorded fitting and validation time summed across the initial neural runs and classical baselines is 90.3 seconds. This excludes process startup, downloads, data preparation, report generation, and the timing pilots. The small networks and short sequences make fitting fast; data curation and analysis remain essential work.
 
 ### Practical lessons supported by the experiments
 
 Evaluation design can matter more than an extra model layer. Matched prompts turn an ambiguous input-only experiment into an exact negative control. Grouped splitting prevents related answers from entering both train and test.
 
-More input is not automatically better. Both architectures lose accuracy after adding prompts under the fixed recipe. Keeping the answer budget unchanged makes this comparison easier to interpret.
+More input is not automatically better. Both initial architectures lose accuracy after adding prompts under the fixed recipe; the optimized comparison is reported separately. Keeping the answer budget unchanged makes this comparison easier to interpret.
 
 A strong baseline improves the conclusion. TF-IDF is competitive with CNN, while structural features alone predict above chance. These findings constrain what can be claimed about learned LLM fingerprints.
 
@@ -237,16 +237,74 @@ Uncertain and negative findings belong in the report. The source-shift intervals
 
 ### Boundaries of the evidence
 
-The labels describe selected historical releases rather than current hosted systems or unseen families. Common-prompt availability creates a selected subset. Custom system prompts and generation principles remain confounds. Near-duplicate detection is incomplete. Short prefixes, small models, a fixed eight-epoch budget, one split, and three primary seeds restrict conclusions. Bootstrap intervals are conditional on fitted models and assume clusters are approximately independent; they are not corrected for multiple exploratory comparisons. The study is not suitable for accusing an individual author of using a particular AI system.
+The labels describe selected historical releases rather than current hosted systems or unseen families. Common-prompt availability creates a selected subset. Custom system prompts and generation principles remain confounds. Near-duplicate detection is incomplete. Short prefixes, small models, fixed budgets (initially 8 epochs, then up to 24), one split, and three primary seeds restrict conclusions. Bootstrap intervals are conditional on fitted models and assume clusters are approximately independent; they are not corrected for multiple exploratory comparisons. The optimization stage is a post hoc follow-up using the same test split, and validation performance is optimistic after model selection. The study is not suitable for accusing an individual author of using a particular AI system.
 
 ### AI assistance disclosure
 
 ChatGPT assisted with experiment design, implementation, debugging, analysis, and report drafting. All reported metrics come from locally executed scripts and saved predictions, not invented examples. Automated checks cover important data and model invariants. Haodong Huang is responsible for reviewing, understanding, and explaining the submitted work, as required by the assignment [6].
 
 
-## Appendix A. Complete neural run ledger
+## 10. Optimization: select using validation only
 
-All primary and auxiliary runs are listed; no unfavorable seed is omitted. Values are test accuracy and macro-F1. Epoch is chosen on validation data. Timing pilots have no test score and are excluded.
+The initial model comparison prompted a bounded follow-up, rather than an open-ended attempt to maximize the test score. Before fitting, docs/iteration_plan.json fixed twelve candidates. Each used output-only training and seed 448. The top two candidates per architecture were repeated with seeds 449 and 450; the winner maximized mean validation macro-F1. Selection was saved and hashed before fitting the other input conditions or evaluating any optimized test predictions.
+
+All candidates use Adam, weight decay 0.0001, batch size 64, gradient clipping 1.0, at most 24 epochs, and validation patience 5. They add embedding dropout 0.10 and allow up to 16,000 training-only vocabulary entries. The search changes multiple settings, so improvement over the initial recipe cannot be attributed to one isolated factor.
+
+| ID | Structure / dimensions / tokens | Limit | LR | Val. F1 (448) |
+| --- | --- | --- | --- | --- |
+| c01 | CNN; e64/h64; raw | 192 | 0.001 | 80.5% |
+| c02 * | CNN; e64/h64; raw | 384 | 0.001 | 80.7% |
+| c03 | CNN; e128/h96; raw | 192 | 0.0007 | 78.9% |
+| c04 | CNN; e128/h96; raw | 384 | 0.0007 | 83.0% |
+| r01 | LSTM last; e64/h64; raw | 192 | 0.001 | 69.2% |
+| r02 * | LSTM pool; e64/h64; raw | 192 | 0.001 | 81.4% |
+| r03 | BiLSTM pool; e64/h64; raw | 192 | 0.001 | 79.5% |
+| r04 | LSTM pool; e64/h64; words | 192 | 0.001 | 76.2% |
+| r05 | BiLSTM pool; e64/h64; words | 192 | 0.001 | 75.5% |
+| r06 | BiLSTM pool; e64/h64; raw | 384 | 0.001 | 79.2% |
+| r07 | BiLSTM pool; e128/h96; raw | 384 | 0.0007 | 79.0% |
+| r08 | LSTM pool; e64/h64; raw | 192 | 0.0005 | 79.4% |
+
+e = embedding size; h = hidden units or CNN filters per kernel; pool = masked mean + max across valid positions; words = punctuation/newline removal. Asterisk marks the final three-seed validation winner, which need not be the seed-448 winner. Candidate details and all results are retained.
+
+### Selected configurations
+
+CNN c02: 384-token response budget, embedding 64, hidden/filter width 64, dropout 0.3, learning rate 0.001; pooling max, bidirectional not applicable. Mean validation macro-F1: 81.8%.
+
+LSTM r02: 192-token response budget, embedding 64, hidden/filter width 64, dropout 0.3, learning rate 0.001; pooling meanmax, bidirectional False. Mean validation macro-F1: 79.9%.
+
+The backward LSTM reverses only the valid token prefix. Its valid-position outputs were tested against a packed PyTorch bidirectional LSTM; extra padding and batch composition do not change predictions. These tests guard against a subtle source of invalid performance gains.
+
+
+## 11. Optimized results and the limits of improvement
+
+| Model | Input | Accuracy (%) | Macro-F1 (%) | 95% accuracy CI |
+| --- | --- | --- | --- | --- |
+| CNN | Prompt | 33.33 +/- 0.00 | 27.39 +/- 1.47 | [33.33, 33.33] |
+| CNN | Response | 80.91 +/- 1.08 | 81.10 +/- 1.03 | [78.35, 83.36] |
+| CNN | Both | 79.08 +/- 0.63 | 79.29 +/- 0.60 | [76.53, 81.60] |
+| LSTM | Prompt | 33.33 +/- 0.00 | 31.30 +/- 1.96 | [33.33, 33.33] |
+| LSTM | Response | 77.00 +/- 1.08 | 77.24 +/- 1.15 | [74.42, 79.67] |
+| LSTM | Both | 75.64 +/- 2.04 | 75.90 +/- 2.00 | [73.03, 78.14] |
+
+Figure 7. Initial versus optimized recipes on the same test split. Means over three seeds; intervals resample matched-prompt clusters.
+
+![Figure 7. Initial versus optimized recipes on the same test split. Means over three seeds; intervals resample matched-prompt clusters.](../results/figures/optimization_results.png)
+
+CNN: response-only improvement is +3.39 percentage points (paired 95% CI [1.62, 5.16]). Within the optimized recipe, adding the prompt changes accuracy by -1.83 pp (CI [-3.86, 0.26]).
+
+LSTM: response-only improvement is +12.99 percentage points (paired 95% CI [10.28, 15.99]). Within the optimized recipe, adding the prompt changes accuracy by -1.36 pp (CI [-3.58, 0.79]).
+
+For both optimized architectures, the combined-minus-response intervals include zero. The lower point estimates therefore do not establish a clear benefit or harm from adding prompts under the optimized recipes.
+
+Optimization used 32 fits and 458.5 seconds of recorded training/validation time; process startup and analysis are excluded. Only the six selected conditions across three seeds were evaluated on test. The full candidate/seed ledger is available as CSV.
+
+These are improvements within a bounded search, not a global optimum or a state-of-the-art claim. All optimized choices used validation metrics, but the original test results motivated this follow-up, so this is not an untouched confirmatory test. The original source-shift and signal-removal findings concern the initial networks and are not automatically transferred to optimized models. A new independent dataset would strengthen the conclusions.
+
+
+## Appendix A. Initial neural run ledger
+
+All initial primary and auxiliary runs are listed; no unfavorable seed is omitted. The 32 optimization fits are listed separately in results/v2/run_ledger.csv. Values are test accuracy and macro-F1. Epoch is chosen on validation data. Timing pilots have no test score and are excluded.
 
 | Model | Condition | Seed | Epoch | Acc. (%) | F1 (%) |
 | --- | --- | --- | --- | --- | --- |
@@ -320,8 +378,8 @@ Artifact hashes and download URLs are recorded in docs/data_provenance.json. The
 | --- | --- |
 | src/ | Data acquisition, curation, models, experiments, statistics, and report builder |
 | tests/ | Checks that guard against leakage and padding errors |
-| models/ | Seed-448 response-only CNN and LSTM demonstration weights |
-| results/ | Aggregate metrics, training logs, and six figures |
+| models/ | Initial and optimized CNN/LSTM demonstration weights (seed 448) |
+| results/ | Initial and optimized metrics, non-text predictions, logs, and figures |
 | docs/ | Provenance, experiment plan, and supplementary protocol |
 | report/ | This PDF and editable Markdown source |
 | README.md; requirements-lock.txt | Run instructions and exact dependency versions |
