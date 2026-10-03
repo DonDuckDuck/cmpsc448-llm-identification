@@ -1,12 +1,12 @@
-# Whose Slop Is It?
+# Who Wrote It?
 
-### Identifying LLM families under a matched-prompt evaluation
+### Identifying LLMs from Their Responses
 
 **Haodong Huang · CMPSC 448 · Individual midterm project**
 
 A reproducible comparison of a text CNN and an LSTM **recurrent neural network (RNN)** on **1,418 matched prompts / 4,254 responses** from Falcon, GPT, and Llama. Matching the user prompt across all three families controls a common confound: learning which questions were asked of each model instead of recognizing the responses.
 
-[Read the updated report](report/Whose_Slop_Is_It_Haodong_Huang.pdf) · [Editable report](report/report.md) · [中文讲解与答辩准备](docs/ORAL_DEFENSE_ZH.md)
+[Read the updated report](report/Who_Wrote_It_Haodong_Huang.pdf) · [Editable report](report/report.md) · [中文讲解与答辩准备](docs/ORAL_DEFENSE_ZH.md)
 
 ![Initial and optimized experiments](results/figures/optimization_results.png)
 

@@ -1,6 +1,6 @@
-# 第二轮优化：Whose Slop Is It?
+# 第二轮优化：Who Wrote It?
 
-“Who Wrote It?”来自老师的作业原题。我们把自己的项目标题改为更有辨识度的 **Whose Slop Is It?**，副标题仍明确说明是 LLM 家族识别研究。题名是趣味表达，实验标签识别的是来源，不是回答质量。
+项目采用老师的作业原题 **Who Wrote It? Identifying LLMs from Their Responses**。实验标签识别的是 LLM 来源家族，不是回答质量。
 
 ## 为什么改 LSTM？
 

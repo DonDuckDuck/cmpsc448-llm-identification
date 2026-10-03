@@ -26,7 +26,7 @@ def bootstrap(version,tags):
     return np.array(acc),np.array(f1)
 def main():
     frozen=read(ROOT/'docs/iteration_selection.json');old=read(ROOT/'results/summary.json')
-    summary={'title':'Whose Slop Is It?','selection':frozen['selection'],'core':{},'contrasts':{},'search_ledger':[],
+    summary={'title':'Who Wrote It?','selection':frozen['selection'],'core':{},'contrasts':{},'search_ledger':[],
              'evaluation_note':'V2 is follow-up on the previously reported split. Configurations selected only with validation metrics. Test is not a new blind sample.'}
     for cid,cfg in CANDIDATES.items():
         rr=[read(p) for p in sorted(DEST.glob(f'{cid}_output_s*.json'))]

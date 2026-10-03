@@ -63,10 +63,10 @@ def contrast(name):
     c=S['contrasts'][name];return f"{pp(c['accuracy_difference'])} percentage points; paired 95% CI {interval(c['ci95'])}"
 
 story.append(Spacer(1,25))
-story.append(Paragraph('WHOSE SLOP IS IT?',styles['TitleCustom']))
-p('<b>Identifying LLM families under a matched-prompt evaluation</b>')
+story.append(Paragraph('WHO WROTE IT?',styles['TitleCustom']))
+p('<b>Identifying LLMs from Their Responses</b>')
 p('Haodong Huang | Individual project<br/>CMPSC 448 | October 10, 2026')
-md.insert(0,'# Whose Slop Is It?\n')
+md.insert(0,'# Who Wrote It?\n')
 story.append(Spacer(1,18))
 sub('Abstract')
 p(f'This project compares a text CNN and an LSTM recurrent neural network (RNN) for identifying Falcon, GPT, and Llama responses. A curated UltraFeedback subset contains {A["selected_prompts"]:,} shared prompts and {A["selected_rows"]:,} responses. Each prompt appears once per family; near-duplicate prompt groups remain within a single data split. Model-name tokens are masked, and no model metadata enter the classifiers. Initial response-only accuracies are {pct(S["core"]["cnn_output"]["accuracy_mean"])} (CNN) and {pct(S["core"]["lstm_output"]["accuracy_mean"])} (LSTM). A bounded validation-only search subsequently yields {pct(V["core"]["cnn_output"]["accuracy_mean"])} and {pct(V["core"]["lstm_output"]["accuracy_mean"])} across three seeds. All configurations are chosen before follow-up test evaluation. Prompt-only accuracy is exactly 33.3% by construction. Both initial and optimized input comparisons are reported. Structural baselines, normalization, and a source-holdout experiment test alternative explanations. These are results for selected historical models and this curated distribution, not a universal detector of contemporary LLMs.')
@@ -248,13 +248,13 @@ class NumberedCanvas(canvas.Canvas):
             self.__dict__.update(state);self.setStrokeColor(colors.HexColor('#D6E2E4'));self.line(48,752,564,752)
             self.setFont('Bold',7.5);self.setFillColor(TEAL);self.drawString(48,763,'CMPSC 448 / MIDTERM PROJECT')
             self.setFont('Body',7.5);self.setFillColor(GRAY);self.drawRightString(564,763,'HAODONG HUANG')
-            self.drawString(48,27,'Whose Slop Is It? | Matched-prompt evaluation');self.drawRightString(564,27,f'{self._pageNumber} / {total}')
+            self.drawString(48,27,'Who Wrote It? | Matched-prompt evaluation');self.drawRightString(564,27,f'{self._pageNumber} / {total}')
             super().showPage()
         super().save()
 
 out=ROOT/'report';out.mkdir(exist_ok=True)
-doc=SimpleDocTemplate(str(out/'Whose_Slop_Is_It_Haodong_Huang.pdf'),pagesize=(612,792),leftMargin=48,rightMargin=48,topMargin=55,bottomMargin=48,
-                      title='Whose Slop Is It? Identifying LLM Families',author='Haodong Huang')
+doc=SimpleDocTemplate(str(out/'Who_Wrote_It_Haodong_Huang.pdf'),pagesize=(612,792),leftMargin=48,rightMargin=48,topMargin=55,bottomMargin=48,
+                      title='Who Wrote It? Identifying LLMs from Their Responses',author='Haodong Huang')
 doc.build(story,canvasmaker=NumberedCanvas)
 (out/'report.md').write_text('\n'.join(md),encoding='utf-8')
-print(out/'Whose_Slop_Is_It_Haodong_Huang.pdf')
+print(out/'Who_Wrote_It_Haodong_Huang.pdf')

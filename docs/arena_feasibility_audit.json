@@ -1,0 +1,45 @@
+{
+  "checked_on": "2026-10-10",
+  "dataset": "lmarena-ai/arena-human-preference-140k",
+  "revision": "6322995ab34d7c2693e3f47dd13fa5caa0789a74",
+  "statistics_url": "https://datasets-server.huggingface.co/statistics?dataset=lmarena-ai%2Farena-human-preference-140k&config=default&split=train",
+  "dataset_rows": 135634,
+  "partial": false,
+  "count_definition": "Sum of model_a and model_b frequencies; before English/first-turn/deduplication filtering; not independent conversations or final training examples. GPT excludes OpenAI o-series.",
+  "family_counts": {
+    "Claude": 57441,
+    "GPT": 21474,
+    "Grok": 16393,
+    "DeepSeek": 12671
+  },
+  "model_counts": {
+    "Claude": {
+      "claude-3-5-haiku-20241022": 6466,
+      "claude-3-5-sonnet-20241022": 6817,
+      "claude-3-7-sonnet-20250219": 6852,
+      "claude-3-7-sonnet-20250219-thinking-32k": 7149,
+      "claude-opus-4-20250514": 10092,
+      "claude-opus-4-20250514-thinking-16k": 6157,
+      "claude-sonnet-4-20250514": 8295,
+      "claude-sonnet-4-20250514-thinking-32k": 5613
+    },
+    "GPT": {
+      "chatgpt-4o-latest-20250326": 7650,
+      "gpt-4.1-2025-04-14": 6540,
+      "gpt-4.1-mini-2025-04-14": 6121,
+      "gpt-4o-2024-11-20": 573,
+      "gpt-4o-mini-2024-07-18": 590
+    },
+    "Grok": {
+      "grok-3-mini-beta": 5991,
+      "grok-3-mini-high": 2801,
+      "grok-3-preview-02-24": 6040,
+      "grok-4-0709": 1561
+    },
+    "DeepSeek": {
+      "deepseek-r1-0528": 6554,
+      "deepseek-v3-0324": 6117
+    }
+  },
+  "status": "Dataset feasibility audit only; no new model training or replacement of reported experiments."
+}

@@ -1,6 +1,6 @@
-# Whose Slop Is It?
+# Who Wrote It?
 
-Identifying LLM families under a matched-prompt evaluation
+Identifying LLMs from Their Responses
 
 Haodong Huang | Individual projectCMPSC 448 | October 10, 2026
 

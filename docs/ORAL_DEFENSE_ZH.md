@@ -2,7 +2,7 @@
 
 这份文件帮助你理解项目，不替代英文提交报告。署名：Haodong Huang，个人项目。
 
-项目现名 **Whose Slop Is It?**。下面第 8—13 节保留的是初版实验，优化方法和新版结果见 [第二轮优化说明](ITERATION_NOTES_ZH.md) 及英文报告的 Optimized results 表。
+项目现名 **Who Wrote It?**。下面第 8—13 节保留的是初版实验，优化方法和新版结果见 [第二轮优化说明](ITERATION_NOTES_ZH.md) 及英文报告的 Optimized results 表。
 
 ## 1. 我们到底训练了什么？
 
