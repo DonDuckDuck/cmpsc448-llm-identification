@@ -1,3 +1,5 @@
+> 历史 UltraFeedback 实验说明。当前主实验已切换至 Arena；请先阅读 [Arena 方法与答辩说明](ARENA_PROTOCOL_ZH.md)。
+
 # 第二轮优化：Who Wrote It?
 
 项目采用老师的作业原题 **Who Wrote It? Identifying LLMs from Their Responses**。实验标签识别的是 LLM 来源家族，不是回答质量。

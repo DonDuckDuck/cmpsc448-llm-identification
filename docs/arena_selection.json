@@ -1,0 +1,44 @@
+{
+  "selection": {
+    "cnn": {
+      "candidate": "c2",
+      "config": {
+        "emb": 128,
+        "hidden": 96,
+        "dropout": 0.4,
+        "lr": 0.001,
+        "max_tokens": 384,
+        "normalized": false,
+        "bidirectional": false,
+        "pooling": "meanmax",
+        "epochs": 20,
+        "patience": 4,
+        "batch": 128,
+        "num_classes": 4,
+        "architecture": "cnn"
+      },
+      "screen_val_macro_f1": 0.8703839571172206
+    },
+    "lstm": {
+      "candidate": "r2",
+      "config": {
+        "emb": 64,
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "max_tokens": 192,
+        "normalized": false,
+        "bidirectional": true,
+        "pooling": "meanmax",
+        "epochs": 20,
+        "patience": 4,
+        "batch": 128,
+        "num_classes": 4,
+        "architecture": "lstm"
+      },
+      "screen_val_macro_f1": 0.8269936045713707
+    }
+  },
+  "frozen_utc": "2026-10-11T01:56:20Z",
+  "plan_sha256": "d0771138b8d24eec93b2f7def5a8ea1fc8abf3dee4f1a3710706c0542d761c4d"
+}

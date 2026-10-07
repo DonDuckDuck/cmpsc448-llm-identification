@@ -1,0 +1,10 @@
+{
+  "predicted_family": "Grok",
+  "uncalibrated_model_probabilities": {
+    "Claude": 0.11044831573963165,
+    "GPT": 0.2609919309616089,
+    "Grok": 0.5857251286506653,
+    "DeepSeek": 0.042834557592868805
+  },
+  "scope": "Only the four specific Claude/GPT/Grok/DeepSeek releases in the curated Arena study. Not a reliable attribution tool for arbitrary text."
+}

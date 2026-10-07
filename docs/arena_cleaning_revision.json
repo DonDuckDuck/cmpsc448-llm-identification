@@ -1,0 +1,10 @@
+{
+  "revision": "full-selected-model-id-mask-with-space-aliases",
+  "reason": "An audit identified three residual version suffixes. Complete selected IDs with hyphen/space variants are now masked before shorter family names.",
+  "split_assignments_unchanged": false,
+  "residual_model_date_suffixes": 0,
+  "test_metrics_seen_before_fix": false,
+  "action": "All published fits use the final preprocessing from scratch. Development fits are excluded.",
+  "changed_text_rows_total": 3,
+  "rows_reassigned_after_regrouping": 3023
+}

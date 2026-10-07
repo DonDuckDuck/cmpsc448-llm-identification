@@ -1,0 +1,18 @@
+test_attribution_rejects_mixed_history (test_arena.ArenaTests.test_attribution_rejects_mixed_history) ... ok
+test_four_class_forward_and_padding (test_arena.ArenaTests.test_four_class_forward_and_padding) ... ok
+test_identity_and_sensitive_exclusion (test_arena.ArenaTests.test_identity_and_sensitive_exclusion) ... ok
+test_jsonl_unicode_line_separator_is_not_a_record_boundary (test_arena.ArenaTests.test_jsonl_unicode_line_separator_is_not_a_record_boundary) ... ok
+test_vocab_uses_supplied_training_rows_only (test_arena.ArenaTests.test_vocab_uses_supplied_training_rows_only) ... ok
+test_combined_reserves_response_budget (test_invariants.Invariants.test_combined_reserves_response_budget) ... ok
+test_group_disjoint_and_prompt_balanced (test_invariants.Invariants.test_group_disjoint_and_prompt_balanced) ... ok
+test_padding_does_not_change_logits (test_invariants.Invariants.test_padding_does_not_change_logits) ... ok
+test_vocab_cannot_see_heldout_tokens (test_invariants.Invariants.test_vocab_cannot_see_heldout_tokens) ... ok
+test_backward_direction_receives_gradient (test_v2.V2Invariants.test_backward_direction_receives_gradient) ... ok
+test_bidirectional_matches_packed_pytorch (test_v2.V2Invariants.test_bidirectional_matches_packed_pytorch) ... ok
+test_padding_and_batch_composition_do_not_change_prediction (test_v2.V2Invariants.test_padding_and_batch_composition_do_not_change_prediction) ... ok
+test_reversal_preserves_padding_and_is_involution (test_v2.V2Invariants.test_reversal_preserves_padding_and_is_involution) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.372s
+
+OK

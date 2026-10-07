@@ -1,0 +1,5 @@
+{
+  "seed": 1448,
+  "training": "Non-code only, compared with mixed-domain control matched exactly by per-class training count. Both validate on non-code only. Existing selected architecture recipes are reused.",
+  "evaluation": "Coding subset of the untouched test split. Single-seed exploratory domain-transfer study; code labels come from Arena metadata."
+}

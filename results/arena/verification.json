@@ -1,0 +1,11 @@
+{
+  "validation_files_recomputed": 33,
+  "test_prediction_files_recomputed": 31,
+  "selection_recomputed": true,
+  "session_prompt_duplicate_groups_disjoint": true,
+  "checkpoint_cpu_replay_max_error": {
+    "cnn": 7.748603820800781e-07,
+    "lstm": 1.0728836059570312e-06
+  },
+  "training_complete_sha256": "3df012d1b348b15bbdd88056e85df77734af1846382aeff38df491d9c53f6075"
+}

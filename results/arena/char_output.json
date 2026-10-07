@@ -1,0 +1,79 @@
+{
+  "tag": "char_output",
+  "kind": "baseline",
+  "best_val_macro_f1": 0.8576251733962988,
+  "training_seconds": 14.032989208120853,
+  "test_accessed": true,
+  "split_manifest_sha256": "7264352f4a869d731c088dea5d230c1de89beb0696ae5c46d723290a84459e9a",
+  "test": {
+    "accuracy": 0.8765347885402456,
+    "balanced_accuracy": 0.8728392626551771,
+    "macro_f1": 0.8732983762930397,
+    "confusion_matrix": [
+      [
+        401,
+        4,
+        5,
+        11
+      ],
+      [
+        7,
+        315,
+        20,
+        22
+      ],
+      [
+        14,
+        17,
+        289,
+        10
+      ],
+      [
+        25,
+        27,
+        19,
+        280
+      ]
+    ],
+    "classification_report": {
+      "Claude": {
+        "precision": 0.8970917225950783,
+        "recall": 0.9524940617577197,
+        "f1-score": 0.923963133640553,
+        "support": 421.0
+      },
+      "GPT": {
+        "precision": 0.8677685950413223,
+        "recall": 0.8653846153846154,
+        "f1-score": 0.8665749656121046,
+        "support": 364.0
+      },
+      "Grok": {
+        "precision": 0.8678678678678678,
+        "recall": 0.8757575757575757,
+        "f1-score": 0.8717948717948718,
+        "support": 330.0
+      },
+      "DeepSeek": {
+        "precision": 0.8668730650154799,
+        "recall": 0.7977207977207977,
+        "f1-score": 0.8308605341246291,
+        "support": 351.0
+      },
+      "accuracy": 0.8765347885402456,
+      "macro avg": {
+        "precision": 0.8749003126299371,
+        "recall": 0.8728392626551771,
+        "f1-score": 0.8732983762930397,
+        "support": 1466.0
+      },
+      "weighted avg": {
+        "precision": 0.8759974256646652,
+        "recall": 0.8765347885402456,
+        "f1-score": 0.8756794828891755,
+        "support": 1466.0
+      }
+    }
+  },
+  "training_complete_sha256": "3df012d1b348b15bbdd88056e85df77734af1846382aeff38df491d9c53f6075"
+}

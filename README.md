@@ -4,152 +4,109 @@
 
 **Haodong Huang · CMPSC 448 · Individual midterm project**
 
-A reproducible comparison of a text CNN and an LSTM **recurrent neural network (RNN)** on **1,418 matched prompts / 4,254 responses** from Falcon, GPT, and Llama. Matching the user prompt across all three families controls a common confound: learning which questions were asked of each model instead of recognizing the responses.
+The main study now uses **Arena Human Preference 140k**: **9,643 curated English, single-turn responses** from four specific model releases. Required CNN and RNN/LSTM models are trained, selected on validation data, and evaluated across three seeds.
 
-[Read the updated report](report/Who_Wrote_It_Haodong_Huang.pdf) · [Editable report](report/report.md) · [中文讲解与答辩准备](docs/ORAL_DEFENSE_ZH.md)
+[Read the current PDF](report/Who_Wrote_It_Haodong_Huang.pdf) · [Editable report](report/report.md) · [中文结果](docs/ARENA_RESULTS_ZH.md) · [中文方法与答辩](docs/ARENA_PROTOCOL_ZH.md)
 
-![Initial and optimized experiments](results/figures/optimization_results.png)
+![Arena neural results](results/figures/arena_results.png)
 
-## Optimized results
+## Main results
 
-A bounded search selected configurations using validation metrics only. The selected CNN reads up to 384 response tokens; the selected LSTM uses masked mean + max pooling over 192 tokens. Both remain small, course-grounded networks. Three-seed test accuracy:
+Means across seeds 1448, 1449, and 1450 on the same 1,466-response test split. Macro-F1 is the primary metric; per-class recall, seed variation, and group-bootstrap intervals are in the report.
 
-| Model | Initial response-only | Optimized response-only | Change |
-|---|---:|---:|---:|
-| CNN | 77.52% | **80.91 ± 1.08%** | +3.39 pp |
-| LSTM | 64.01% | **77.00 ± 1.08%** | +12.99 pp |
+| Model | Input | Accuracy | Macro-F1 | Balanced accuracy |
+|---|---|---:|---:|---:|
+| CNN | input | 26.94% | 26.31% | 26.69% |
+| CNN | output | 86.79% | 86.51% | 86.49% |
+| CNN | combined | 86.54% | 86.18% | 86.22% |
+| LSTM | input | 25.15% | 24.06% | 25.25% |
+| LSTM | output | 83.04% | 82.52% | 82.63% |
+| LSTM | combined | 81.20% | 80.79% | 80.95% |
 
-Both paired 95% improvement intervals exclude zero on this follow-up split. The optimized prompt-gain intervals include zero: the slightly lower combined-input point estimates do not establish that adding prompts helps or hurts. The test split was previously seen in the initial study, so this is not a new blind test.
+The character TF-IDF baseline scores **87.65% accuracy / 87.33% macro-F1**. Its point estimate is slightly higher than the CNN mean; it is retained as a strong, inexpensive comparator.
 
-## Initial results (preserved)
+The majority-class accuracy is **28.72%**. Uniform random accuracy and constant-class balanced accuracy are 25%. Prompt-only macro-F1 is not mathematically fixed at 25% in this unpaired four-source subset.
 
-Test accuracy, mean ± sample standard deviation over seeds 448, 449, 450. The same prompt-disjoint split is used throughout.
+## What data are actually used?
 
-| Model | Prompt only | Response only | Prompt + response |
-|---|---:|---:|---:|
-| CNN | 33.33 ± 0.00% | **77.52 ± 0.86%** | 73.87 ± 0.98% |
-| LSTM | 33.33 ± 0.00% | **64.01 ± 1.63%** | 59.21 ± 0.24% |
+| Label | Exact model ID | Retained responses |
+|---|---|---:|
+| Claude | `claude-sonnet-4-20250514` | 2,774 |
+| GPT | `gpt-4.1-2025-04-14` | 2,388 |
+| Grok | `grok-3-preview-02-24` | 2,201 |
+| DeepSeek | `deepseek-v3-0324` | 2,280 |
 
-- Prompt-only accuracy is exactly one third by construction: every prompt appears once per family.
-- Adding prompts lowers accuracy under the fixed recipe; paired cluster-bootstrap intervals exclude zero for both architectures.
-- A TF-IDF + logistic regression baseline reaches 77.31% response-only accuracy, comparable to CNN.
-- RQ4: structural feature probes and normalization/retraining test potential stylistic cues.
-- RQ3: an exploratory held-out-source test uses equal-size training controls. Differences are uncertain; this is not proof of general domain robustness.
-- The study concerns selected historical releases and this distribution, not arbitrary current LLMs or human authorship.
+Source: [Arena dataset](https://huggingface.co/datasets/lmarena-ai/arena-human-preference-140k), pinned revision `6322995ab34d7c2693e3f47dd13fa5caa0789a74`. The complete release has 135,634 battles from April-July 2025. The four selected IDs contribute 26,992 sides before filtering. We retain all eligible English, first-evaluation, strict single-turn text answers after length, sensitive-pattern, and duplicate checks. Complete model IDs and family names are masked.
 
-See `results/summary.json` for macro-F1, confidence intervals, contrasts, and all auxiliary results. The report includes all neural runs, limitations, references, and AI assistance disclosure.
+The target is **four fixed releases**, not every member of their families or the latest 2026 models. User prompts are CC-BY-4.0; the source card notes separate provider terms for model outputs. Raw conversations are neither committed nor reproduced in the report.
 
-## Environment
+## Experimental controls
 
-Tested with Python 3.12.13, PyTorch 2.14.1, macOS on Apple M4 Pro (24 GB), using MPS. A CPU fallback is automatic. Linux/CUDA has not been tested; the current runner chooses CPU rather than CUDA on non-MPS machines. Random seeds do not guarantee bitwise agreement across hardware or library versions.
+- Train / validation / test: **6,735 / 1,442 / 1,466** responses. Sessions, exact/near-duplicate prompts, and exact repeated answers cannot cross splits.
+- Training-only vocabularies, TF-IDF, scalers, and inverse-frequency class weights.
+- Four validation-screen candidates; selected CNN/LSTM recipes repeated across all three input conditions and three seeds.
+- **RQ1:** response-only author classification. **RQ2:** prompt vs. response vs. combined input.
+- **RQ3:** non-code training and coding test, compared with a mixed-domain control matched by each training-class count; one seed per diagnostic condition.
+- **RQ4:** six lexical/structural baselines and neural word-only normalization ablations.
+- Shuffled-training-label CNN negative control; independent validation/test rescoring and saved-model replay.
 
-Using [uv](https://docs.astral.sh/uv/):
+The current study contains **27 neural fits + 6 classical fits**, with **31 test prediction files**. Rejected screen candidates have no test scores. [Complete run ledger](results/arena/run_ledger.csv) · [Verification](results/arena/verification.json)
 
-```bash
-uv venv --python 3.12 .venv
-uv pip install --python .venv/bin/python -r requirements-lock.txt
+## Reproduce
+
+Use Python 3.12. Create a virtual environment and install the pinned dependencies:
+
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements-lock.txt
+python src/arena_data.py download
+python src/arena_data.py prepare
+python src/arena_train.py train
+python src/arena_train.py domain
+python src/arena_train.py evaluate
+python src/arena_analyze.py
+python -m unittest discover -s tests -v
+python src/build_report.py
+python src/build_readme.py
 ```
 
-Alternatively, create a Python 3.12 virtual environment and install `requirements-lock.txt` with pip.
+Reproduce in a fresh clone. `prepare` validates the published manifest and refuses to overwrite existing split text. The roughly 1.61 GB download and full training checkpoints stay local. Retained final-study fit/validation time was 12.5 minutes on the original machine, excluding downloading, curation, analysis, reporting, and superseded development fits. Different hardware may take longer and produce slightly different results. See [reproducibility details](docs/REPRODUCIBILITY.md).
 
-## Reproduce the initial experiments
+## Demonstrate a saved model
 
-Run from this repository's root:
-
-```bash
-.venv/bin/python src/download_data.py
-.venv/bin/python src/prepare_data.py
-.venv/bin/python -m unittest discover -s tests -v
-.venv/bin/python src/run_experiments.py
-.venv/bin/python src/baselines.py
-.venv/bin/python src/analyze.py
-.venv/bin/python src/verify_results.py
+```sh
+python src/predict.py --response 'Your example answer goes here.'
+python src/predict.py --checkpoint models/arena_lstm_output_s1448.pt --response 'Your example answer goes here.'
 ```
 
-`download_data.py` retrieves about 323 MB of pinned Parquet files and validates their SHA-256 hashes. The dataset is available without an API key. Download, processing, and training require additional local disk space. The script records immutable source URLs in `docs/data_provenance.json`.
+Scores are **uncalibrated closed-set outputs**, not reliable probabilities of authorship for arbitrary text. The supplied CNN and LSTM examples use seed 1448; reported main results average three separately trained models, not the demonstration alone.
 
-The initial experiment runner executes 26 neural runs: 18 primary runs (2 architectures × 3 inputs × 3 seeds), 2 normalization runs, 4 source-shift/control runs, and 2 shuffled-label diagnostics. It skips a completed run **only if its metrics, predictions, and checkpoint all exist**. All non-text predictions and initial/optimized demonstration weights are included. Full training checkpoints remain local, so a fresh clone retrains the experiment matrix. To force rerunning a particular experiment, move that experiment's JSON result aside first. Aggregate results in the published repository are a snapshot of the reported experiment; rerunning can overwrite them.
+## Interpret the results carefully
 
-After environment setup and data reconstruction, run `src/verify_results.py` without retraining to recompute all 31 published metrics and replay the included CNN. Non-text prediction files contain hashes, labels, source categories, and probabilities, never original prompt/response text.
+Arena does not give every prompt to all four selected models. Language, generation settings, task mix, and platform conventions can affect attribution. The prompt-only control measures some of that risk. The CNN reads 384 answer tokens; LSTM reads 192, so their comparison concerns complete recipes rather than architecture in isolation. Normalization also changes token composition and truncation. Test-group intervals condition on fitted models and do not capture all training, selection, or distribution-shift uncertainty.
 
-Classical baselines add 5 runs. Two validation-only pilots were used to measure runtime; they do not contribute test results. The main plan was fixed before neural evaluation; shuffled-label controls were added as post hoc diagnostics and documented separately. No test-based hyperparameter search was performed.
+The test set was untouched by model training and selection before the reported evaluation. Any future tuning using these published test scores must be identified as follow-up work and needs a new test set for confirmation.
 
-To run one condition:
+## Historical study
 
-```bash
-.venv/bin/python src/train.py --model cnn --mode output --seed 448
-.venv/bin/python src/train.py --model lstm --mode combined --seed 448
-```
+The earlier UltraFeedback experiments used 4,254 responses from Falcon/GPT/Llama. They remain in the repository as a separate historical three-class study. Their 80.91% CNN / 77.00% LSTM optimized accuracies are **not directly comparable** to this four-class Arena task.
 
-To demonstrate the optimized response-only CNN checkpoint (no retraining needed):
+[Initial report](report/archive/Who_Wrote_It_Haodong_Huang_v1.pdf) · [Optimized historical report](report/archive/Who_Wrote_It_Haodong_Huang_v2.pdf) · [Historical methods](docs/ITERATION_NOTES_ZH.md)
 
-```bash
-.venv/bin/python src/predict.py --response "Photosynthesis converts light energy into chemical energy in plants."
-```
-
-The printed probabilities are uncalibrated model outputs, not reliable forensic confidence.
-
-## Reproduce the optimization stage
-
-After reconstructing the data and initial results, run:
-
-```bash
-.venv/bin/python src/iterate.py search
-.venv/bin/python src/iterate.py confirm
-.venv/bin/python src/iterate.py evaluate
-.venv/bin/python src/analyze_v2.py
-.venv/bin/python src/verify_v2.py
-.venv/bin/python src/build_report.py
-```
-
-`search` trains only on train/validation data. It screens 12 candidates at seed 448, repeats the top two per architecture with seeds 449/450, then freezes the best mean validation macro-F1 selection. `confirm` fills in the input-only and combined conditions. `evaluate` requires all 18 selected runs to be fitted before it loads the test split. It does not evaluate rejected candidates on test. Frozen selections are checked on reruns: cross-platform changes that choose a different winner require a separate experiment directory rather than silently replacing the reported selection.
-
-The v2 models compare last-state versus masked mean/max pooling, single versus bidirectional recurrence, 192 versus 384 response tokens, embedding/hidden sizes, learning rates, and normalization. The bidirectional implementation is numerically checked against a packed PyTorch LSTM. Full candidate details and all seed results are retained in `docs/iteration_plan.json`, `docs/iteration_selection.json`, and `results/v2/run_ledger.csv`.
-
-The previously published test split is reused for follow-up evaluation. Configurations are selected solely on validation performance, but this is **not a fresh blind test**. The old test results motivated iteration, and selection among candidates can overfit validation. Original RQ3/RQ4 findings apply to the initial networks only. No global-optimum or state-of-the-art claim is made.
-
-[中文优化说明](docs/ITERATION_NOTES_ZH.md) · [Initial report archive](report/archive/Who_Wrote_It_Haodong_Huang_v1.pdf)
-
-## Data and controls
-
-Source: [OpenBMB/UltraFeedback](https://huggingface.co/datasets/openbmb/UltraFeedback). Exact original and converted-data revisions, checksums, and acquisition metadata appear in `docs/data_provenance.json`. The dataset card labels the release MIT; upstream source terms also apply. Raw data and response text are not redistributed here.
-
-- Families: Falcon-40B-Instruct; GPT-3.5/GPT-4; Llama-2-7B/13B/70B-Chat.
-- One seeded response per family for each eligible prompt; no quality-based selection.
-- ShareGPT records are excluded; a narrow email/key-pattern filter removes five additional complete prompts. This is not a comprehensive privacy audit.
-- Prompt clusters remain disjoint across train/validation/test, including detected near duplicates and long exact shared responses.
-- Splits contain 992 / 213 / 213 prompts; each contains exactly equal family counts.
-- Identity names are replaced with a common marker. Only text enters predictive models.
-- Predictive vocabularies/scalers are fitted on training data only.
-- All neural checkpoints are chosen using validation macro-F1, with validation loss as tie-breaker.
-- Combined inputs reserve separate prompt and response budgets.
-- Tests check padding invariance, grouped splitting, balance, vocabulary leakage, and response preservation.
-- `verify_results.py` recomputes 31 metric sets from predictions and replays a saved checkpoint.
-
-## Files
+## Repository guide
 
 | Path | Purpose |
 |---|---|
-| `src/prepare_data.py` | Matched-prompt construction, filtering, duplication controls, splitting |
-| `src/models.py` | CNN and LSTM implementations |
-| `src/train.py` | Initial training, validation selection, evaluation, checkpointing |
-| `src/models_v2.py`; `src/iterate.py` | Optimization models and validation-only selection protocol |
-| `src/analyze_v2.py`; `src/verify_v2.py` | Follow-up comparisons and independent result audit |
-| `src/run_experiments.py` | Fixed experiment matrix and restart handling |
-| `src/baselines.py` | TF-IDF and structural baselines |
-| `src/analyze.py` | Grouped bootstrap, paired contrasts, figures |
-| `src/verify_results.py` | Metric and checkpoint verification |
-| `src/build_report.py` | Rebuild PDF and editable Markdown from measured results |
-| `tests/` | Experimental-integrity tests |
-| `models/` | Initial and optimized seed-448 response-only CNN/LSTM weights |
-| `data/processed/split_manifest.json` | Non-text IDs, labels, versions, and fixed split assignments |
-| `results/` | Metrics, logs, audit, and figures |
-| `report/` | PDF report and Markdown counterpart |
+| `src/arena_data.py` | Pinned acquisition, filtering, grouping, and split generation |
+| `src/arena_train.py` | Validation selection, core/diagnostic fitting, frozen test evaluation |
+| `src/models_v2.py` | CNN and pooled LSTM, with explicit four-class output support |
+| `src/arena_analyze.py` | Independent audits, grouped intervals, figures, and checkpoint replay |
+| `tests/` | Thirteen checks of leakage, attribution, padding, and sequence handling |
+| `results/arena/` | Complete metrics, validation probabilities, non-text test predictions |
+| `docs/arena_*.json` | Data provenance, curation repair, plans, selection, and freeze records |
+| `data/arena/split_manifest.json` | Non-text published split assignments |
+| `models/arena_*.pt` | Two locally usable demonstration checkpoints |
+| `report/` | Current report plus archived earlier reports |
 
-The supplied lecture and assignment PDFs stay local and are excluded from version control. Course grounding: Chapter 4 (convolution/pooling and LSTM), Chapter 9 (loss functions, mini-batches, and Adam). Implementation choices such as vocabulary size and token budgets are project decisions, not claims about prescribed course settings.
-
-## Interpretation limits and assistance
-
-Generation principles and custom system prompts can influence response style even though their metadata are not used as features. Matching user prompts does not remove this confound. Version coverage, shared-prompt selection, truncation, a single split, and a short fixed training budget limit generalization. Auxiliary neural experiments use one seed. Cluster-bootstrap intervals condition on fitted models and are not adjusted for multiple exploratory comparisons.
-
-ChatGPT assisted with design, code, debugging, analysis, and drafting. Metrics are from actual local executions. The student remains responsible for reviewing, understanding, and explaining the work.
+Course grounding: Chapter 4 (CNN/pooling/LSTM) and Chapter 9 (loss/mini-batches/Adam). Specific budgets, filters, and hyperparameters are project design decisions. ChatGPT/Codex assisted with code, debugging, analysis, and drafting; the student is responsible for understanding and verifying the submission. The submission deliverable is this repository URL and its PDF; publishing it does not submit it to Canvas.

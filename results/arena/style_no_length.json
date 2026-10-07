@@ -1,0 +1,89 @@
+{
+  "tag": "style_no_length",
+  "kind": "baseline",
+  "best_val_macro_f1": 0.6216017713064346,
+  "training_seconds": 2.411069374997169,
+  "test_accessed": true,
+  "split_manifest_sha256": "7264352f4a869d731c088dea5d230c1de89beb0696ae5c46d723290a84459e9a",
+  "features": [
+    "mean_word_length",
+    "lexical_diversity",
+    "newline_rate",
+    "punctuation_rate",
+    "digit_rate",
+    "uppercase_rate",
+    "list_line_rate",
+    "code_fence_count"
+  ],
+  "test": {
+    "accuracy": 0.6425648021828103,
+    "balanced_accuracy": 0.638382353109194,
+    "macro_f1": 0.6323452165022414,
+    "confusion_matrix": [
+      [
+        337,
+        33,
+        23,
+        28
+      ],
+      [
+        73,
+        160,
+        42,
+        89
+      ],
+      [
+        34,
+        26,
+        252,
+        18
+      ],
+      [
+        44,
+        70,
+        44,
+        193
+      ]
+    ],
+    "classification_report": {
+      "Claude": {
+        "precision": 0.6905737704918032,
+        "recall": 0.8004750593824228,
+        "f1-score": 0.7414741474147415,
+        "support": 421.0
+      },
+      "GPT": {
+        "precision": 0.5536332179930796,
+        "recall": 0.43956043956043955,
+        "f1-score": 0.4900459418070444,
+        "support": 364.0
+      },
+      "Grok": {
+        "precision": 0.6980609418282548,
+        "recall": 0.7636363636363637,
+        "f1-score": 0.7293777134587555,
+        "support": 330.0
+      },
+      "DeepSeek": {
+        "precision": 0.5884146341463414,
+        "recall": 0.5498575498575499,
+        "f1-score": 0.5684830633284241,
+        "support": 351.0
+      },
+      "accuracy": 0.6425648021828103,
+      "macro avg": {
+        "precision": 0.6326706411148698,
+        "recall": 0.638382353109194,
+        "f1-score": 0.6323452165022414,
+        "support": 1466.0
+      },
+      "weighted avg": {
+        "precision": 0.6337978827525376,
+        "recall": 0.6425648021828103,
+        "f1-score": 0.6349041879597794,
+        "support": 1466.0
+      }
+    }
+  },
+  "training_complete_sha256": "3df012d1b348b15bbdd88056e85df77734af1846382aeff38df491d9c53f6075"
+}

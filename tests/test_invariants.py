@@ -17,13 +17,20 @@ class Invariants(unittest.TestCase):
             with torch.inference_mode():
                 torch.testing.assert_close(model(short,lengths),model(padded,lengths),atol=2e-6,rtol=2e-5)
     def test_group_disjoint_and_prompt_balanced(self):
-        splits={s:load_rows(s) for s in ['train','val','test']}
+        root=Path(__file__).resolve().parents[1]
+        # A fresh Arena clone still includes the historical non-text manifest.
+        if all((root/f'data/processed/{s}.jsonl').exists() for s in ['train','val','test']):
+            splits={s:load_rows(s) for s in ['train','val','test']}
+        else:
+            manifest=json.loads((root/'data/processed/split_manifest.json').read_text())
+            splits={s:[r for r in manifest if r['split']==s] for s in ['train','val','test']}
         for s,rows in splits.items():
             groups=defaultdict(list)
             for row in rows:groups[row['prompt_id']].append(row)
             for rows_for_prompt in groups.values():
                 self.assertEqual(Counter(r['family'] for r in rows_for_prompt),{'Falcon':1,'GPT':1,'Llama':1})
-                self.assertEqual(len(set(r['LLM_Input'] for r in rows_for_prompt)),1)
+                if 'LLM_Input' in rows_for_prompt[0]:
+                    self.assertEqual(len(set(r['LLM_Input'] for r in rows_for_prompt)),1)
             for other in splits:
                 if other!=s:
                     self.assertFalse(set(r['duplicate_group'] for r in rows)&set(r['duplicate_group'] for r in splits[other]))

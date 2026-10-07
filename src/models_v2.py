@@ -15,14 +15,14 @@ def masked_mean_max(states,lengths):
     return torch.cat([mean,maximum],dim=1)
 
 class PooledLSTM(nn.Module):
-    def __init__(self,vocab_size,emb=64,hidden=64,dropout=.3,bidirectional=False,pooling='meanmax',**unused):
+    def __init__(self,vocab_size,emb=64,hidden=64,dropout=.3,bidirectional=False,pooling='meanmax',num_classes=3,**unused):
         super().__init__();self.bidirectional=bidirectional;self.pooling=pooling
         self.embedding=nn.Embedding(vocab_size,emb,padding_idx=0)
         self.embedding_dropout=nn.Dropout(.10)
         self.forward_lstm=nn.LSTM(emb,hidden,batch_first=True)
         if bidirectional:self.backward_lstm=nn.LSTM(emb,hidden,batch_first=True)
         features=hidden*(2 if bidirectional else 1)*(2 if pooling=='meanmax' else 1)
-        self.dropout=nn.Dropout(dropout);self.classifier=nn.Linear(features,3)
+        self.dropout=nn.Dropout(dropout);self.classifier=nn.Linear(features,num_classes)
     def forward(self,tokens,lengths):
         embedded=self.embedding_dropout(self.embedding(tokens))
         forward,_=self.forward_lstm(embedded)
@@ -40,11 +40,11 @@ class PooledLSTM(nn.Module):
         return self.classifier(self.dropout(summary))
 
 class SearchCNN(nn.Module):
-    def __init__(self,vocab_size,emb=64,hidden=64,dropout=.3,**unused):
+    def __init__(self,vocab_size,emb=64,hidden=64,dropout=.3,num_classes=3,**unused):
         super().__init__();self.embedding=nn.Embedding(vocab_size,emb,padding_idx=0)
         self.embedding_dropout=nn.Dropout(.10)
         self.convs=nn.ModuleList([nn.Conv1d(emb,hidden,k) for k in [3,4,5]])
-        self.dropout=nn.Dropout(dropout);self.classifier=nn.Linear(hidden*3,3)
+        self.dropout=nn.Dropout(dropout);self.classifier=nn.Linear(hidden*3,num_classes)
     def forward(self,tokens,lengths):
         x=self.embedding_dropout(self.embedding(tokens)).transpose(1,2);pooled=[]
         for conv in self.convs:

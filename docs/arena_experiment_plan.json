@@ -1,0 +1,76 @@
+{
+  "dataset_revision": "6322995ab34d7c2693e3f47dd13fa5caa0789a74",
+  "split_manifest_sha256": "7264352f4a869d731c088dea5d230c1de89beb0696ae5c46d723290a84459e9a",
+  "candidates": {
+    "c1": {
+      "emb": 64,
+      "hidden": 64,
+      "dropout": 0.3,
+      "lr": 0.001,
+      "max_tokens": 384,
+      "normalized": false,
+      "bidirectional": false,
+      "pooling": "meanmax",
+      "epochs": 20,
+      "patience": 4,
+      "batch": 128,
+      "num_classes": 4,
+      "architecture": "cnn"
+    },
+    "c2": {
+      "emb": 128,
+      "hidden": 96,
+      "dropout": 0.4,
+      "lr": 0.001,
+      "max_tokens": 384,
+      "normalized": false,
+      "bidirectional": false,
+      "pooling": "meanmax",
+      "epochs": 20,
+      "patience": 4,
+      "batch": 128,
+      "num_classes": 4,
+      "architecture": "cnn"
+    },
+    "r1": {
+      "emb": 64,
+      "hidden": 64,
+      "dropout": 0.3,
+      "lr": 0.001,
+      "max_tokens": 192,
+      "normalized": false,
+      "bidirectional": false,
+      "pooling": "meanmax",
+      "epochs": 20,
+      "patience": 4,
+      "batch": 128,
+      "num_classes": 4,
+      "architecture": "lstm"
+    },
+    "r2": {
+      "emb": 64,
+      "hidden": 64,
+      "dropout": 0.3,
+      "lr": 0.001,
+      "max_tokens": 192,
+      "normalized": false,
+      "bidirectional": true,
+      "pooling": "meanmax",
+      "epochs": 20,
+      "patience": 4,
+      "batch": 128,
+      "num_classes": 4,
+      "architecture": "lstm"
+    }
+  },
+  "seeds": [
+    1448,
+    1449,
+    1450
+  ],
+  "selection": "Output-only screen of two CNN and two LSTM recipes at seed 1448. Select each architecture by validation macro-F1, then loss, then ID. Repeat selected configurations on all three input modes and three seeds.",
+  "test_policy": "No test text loaded by training, candidate selection, or baseline fitting. Freeze all planned checkpoints before test evaluation.",
+  "diagnostics": "Selected output CNN and LSTM word-only normalization at seed 1448; shuffled-training-label CNN control; six fixed classical baselines.",
+  "primary_metric": "macro-F1; also accuracy, balanced accuracy, per-class recall; cluster bootstrap over duplicate/session groups",
+  "scope": "Four fixed non-reasoning model IDs; no claim about entire families or later releases."
+}

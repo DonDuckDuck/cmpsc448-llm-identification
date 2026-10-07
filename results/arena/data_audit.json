@@ -1,0 +1,98 @@
+{
+  "revision": "6322995ab34d7c2693e3f47dd13fa5caa0789a74",
+  "seed": 1448,
+  "models": {
+    "claude-sonnet-4-20250514": "Claude",
+    "gpt-4.1-2025-04-14": "GPT",
+    "grok-3-preview-02-24": "Grok",
+    "deepseek-v3-0324": "DeepSeek"
+  },
+  "filters": {
+    "raw_battles": 135634,
+    "other_model": 244276,
+    "not_english": 12666,
+    "later_evaluation": 2702,
+    "not_single_turn": 1749,
+    "short": 149,
+    "email_or_key_pattern": 57,
+    "extreme_length": 10,
+    "duplicate_prompt_model_answer": 16
+  },
+  "selected_before_filter": {
+    "Grok": 6040,
+    "Claude": 8295,
+    "GPT": 6540,
+    "DeepSeek": 6117
+  },
+  "retained_rows": 9643,
+  "family_counts": {
+    "DeepSeek": 2280,
+    "Claude": 2774,
+    "Grok": 2201,
+    "GPT": 2388
+  },
+  "unique_prompts": 9031,
+  "groups": 8880,
+  "largest_group": 12,
+  "duplicate_links": {
+    "session": 387,
+    "prompt": 612,
+    "answer": 12,
+    "near_prompt": 221
+  },
+  "splits": {
+    "train": {
+      "rows": 6735,
+      "groups": 6216,
+      "family_counts": {
+        "DeepSeek": 1592,
+        "Claude": 1946,
+        "GPT": 1668,
+        "Grok": 1529
+      }
+    },
+    "val": {
+      "rows": 1442,
+      "groups": 1332,
+      "family_counts": {
+        "Grok": 342,
+        "GPT": 356,
+        "Claude": 407,
+        "DeepSeek": 337
+      }
+    },
+    "test": {
+      "rows": 1466,
+      "groups": 1332,
+      "family_counts": {
+        "Grok": 330,
+        "DeepSeek": 351,
+        "GPT": 364,
+        "Claude": 421
+      }
+    }
+  },
+  "mask_affected_outputs": 516,
+  "response_words_by_family": {
+    "Claude": {
+      "median": 209.0
+    },
+    "GPT": {
+      "median": 327.0
+    },
+    "Grok": {
+      "median": 821.0
+    },
+    "DeepSeek": {
+      "median": 315.0
+    }
+  },
+  "code_by_family": {
+    "Claude": 0.29704397981254504,
+    "GPT": 0.30067001675041877,
+    "Grok": 0.32894139027714675,
+    "DeepSeek": 0.3192982456140351
+  },
+  "split_manifest_sha256": "7264352f4a869d731c088dea5d230c1de89beb0696ae5c46d723290a84459e9a",
+  "note": "Natural class counts retained; training uses inverse-frequency class weights. Full corpus duplicate detection is unsupervised. Test predictions are not accessed during curation."
+}

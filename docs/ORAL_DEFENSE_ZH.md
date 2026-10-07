@@ -1,3 +1,5 @@
+> 历史 UltraFeedback 实验说明。当前主实验已切换至 Arena；请先阅读 [Arena 方法与答辩说明](ARENA_PROTOCOL_ZH.md)。
+
 # 项目中文讲解：你需要能解释的内容
 
 这份文件帮助你理解项目，不替代英文提交报告。署名：Haodong Huang，个人项目。
