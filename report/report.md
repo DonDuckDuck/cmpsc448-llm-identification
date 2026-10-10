@@ -290,7 +290,32 @@ Curation changes the research question: a 135k-battle corpus becomes a 9.6k-resp
 AI assistance: ChatGPT/Codex assisted with implementation, debugging, experiment orchestration, analysis, and report drafting. The named student is responsible for understanding, verifying, and explaining the submitted work. No claim is made that an automated result establishes student understanding.
 
 
-## 12. Reproduction and submission
+## 12. Project evolution and dataset choice
+
+The project developed in three stages. Earlier code, measured results, demonstration weights, and PDF reports remain available so that the final study can be traced back to its initial implementation. The table reports response-only accuracy, averaged over three seeds within each stage.
+
+| Stage | Data / author classes | Responses | CNN | LSTM |
+| --- | --- | --- | --- | --- |
+| Initial implementation | UltraFeedback: Falcon, GPT, Llama | 4,254 | 77.52% | 64.01% |
+| Same-data optimization | Same UltraFeedback data and split | 4,254 | 80.91% | 77.00% |
+| Current study | Arena: Claude, GPT, Grok, DeepSeek | 9,643 | 86.79% | 83.04% |
+
+### Why change the dataset?
+
+1. More recognizable model families. The project owner wanted to study Claude, GPT, Grok, and DeepSeek. Arena contains identifiable releases from all four, making the target authors more relevant to that interest than the original Falcon/GPT/Llama subset. This is a relevance motivation, not a measured ranking of dataset popularity or model market share. The selected records are from 2025, not the latest 2026 releases.
+
+2. More usable examples. After curation, the sample increases from 4,254 to 9,643 responses (2.27 times as many). The motivation was to give the models more training evidence and test whether performance could improve. The dataset name "140k" describes the source release, not the number of responses used for training.
+
+### What improved, and what can we conclude?
+
+On the same UltraFeedback task and split, bounded validation search, a longer CNN answer budget, and pooled LSTM states produced accuracy gains of 3.39 and 12.99 percentage points respectively. This was exploratory follow-up after the original test results had been seen, rather than a new independent confirmation.
+
+The Arena study adds a four-class target, explicit release selection, session/near-duplicate grouping, a frozen validation screen before test evaluation, and matched-size domain controls. Its higher accuracy is an observed result on a different task. Changes in author classes, text distribution, and split design prevent attributing the difference to sample size. A fixed-Arena-split learning curve would be needed to isolate the benefit of more training examples; that experiment has not been run.
+
+Archive: report/archive/Who_Wrote_It_Haodong_Huang_v1.pdf and _v2.pdf; historical methods: docs/ITERATION_NOTES_ZH.md; metrics: results/ and results/v2/; current metrics: results/arena/. See docs/PROJECT_EVOLUTION_ZH.md for a Chinese explanation.
+
+
+## 13. Reproduction and submission
 
 Install Python 3.12 and the exact dependencies in requirements-lock.txt. The recorded runs use PyTorch 2.14.1 with Apple MPS. CPU inference replay verifies the two distributed demonstration weights; training on other devices can yield numerical differences.
 
@@ -308,10 +333,6 @@ Install Python 3.12 and the exact dependencies in requirements-lock.txt. The rec
 The prepare command refuses to overwrite existing split text and verifies published assignments in a fresh clone. Reproduce from a fresh clone and preserve the archived results. Training caches require matching configuration and split hashes. The domain phase must precede first test evaluation. Two selected response-only weights are included for a local demonstration; other checkpoints remain local and can be regenerated.
 
 Retained final-study fit/validation time totals 12.5 minutes for this experiment collection. This excludes the roughly 1.61 GB download, curation, analysis, report generation, and manual review, and superseded development fits; it is not an end-to-end runtime promise.
-
-### Historical comparison retained separately
-
-The earlier UltraFeedback study uses 4,254 responses from Falcon, GPT, and Llama, with a completely matched three-author prompt design. Its optimized CNN/LSTM accuracies were 80.91%/77.00%. That is a different dataset, label space, and protocol; a numerical difference from Arena is not evidence of an apples-to-apples improvement. Original reports, metrics, and code remain archived for traceability.
 
 Submission: GitHub repository URL containing code, this PDF, author name, manifests, non-text predictions, and measured results. Raw Arena conversations and course handouts are not published. This report does not indicate that a Canvas submission has been made.
 

@@ -88,11 +88,21 @@ Arena does not give every prompt to all four selected models. Language, generati
 
 The test set was untouched by model training and selection before the reported evaluation. Any future tuning using these published test scores must be identified as follow-up work and needs a new test set for confirmation.
 
-## Historical study
+## Project evolution and dataset-change rationale
 
-The earlier UltraFeedback experiments used 4,254 responses from Falcon/GPT/Llama. They remain in the repository as a separate historical three-class study. Their 80.91% CNN / 77.00% LSTM optimized accuracies are **not directly comparable** to this four-class Arena task.
+We changed datasets for two reasons: **(1) study the more recognizable Claude/GPT/Grok/DeepSeek model families requested for this project; (2) increase the usable sample, hoping that more training evidence would improve accuracy.** The second is a hypothesis, not a demonstrated causal result. Model-family relevance does not imply a measured ranking of dataset popularity; this release contains 2025 data.
+
+| Stage | Dataset / classes | Curated responses | CNN accuracy | LSTM accuracy |
+|---|---|---:|---:|---:|
+| Initial implementation | UltraFeedback / Falcon, GPT, Llama | 4,254 | 77.52% | 64.01% |
+| Same-data optimization | Same UltraFeedback data and split | 4,254 | 80.91% | 77.00% |
+| Current study | Arena / Claude, GPT, Grok, DeepSeek | 9,643 | 86.79% | 83.04% |
+
+All scores are response-only, three-seed means within each stage. Same-data optimization increased CNN/LSTM accuracy by **3.39/12.99 percentage points**, but was exploratory follow-up on an already evaluated test set. Arena provides **2.27 times as many curated responses**, with explicit model-release selection, session/duplicate grouping, frozen validation selection, and matched-size domain controls. Its scores are **not directly comparable** to the earlier three-class task: author classes, distributions, and split designs changed. A fixed-split Arena learning curve would be needed to isolate the effect of training-set size; it has not been run.
 
 [Initial report](report/archive/Who_Wrote_It_Haodong_Huang_v1.pdf) · [Optimized historical report](report/archive/Who_Wrote_It_Haodong_Huang_v2.pdf) · [Historical methods](docs/ITERATION_NOTES_ZH.md)
+
+[中文：三阶段记录与换数据集的原因](docs/PROJECT_EVOLUTION_ZH.md)
 
 ## Repository guide
 
