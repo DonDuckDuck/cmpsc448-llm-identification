@@ -1,0 +1,38 @@
+{
+  "plan": {
+    "status": "Follow-up after the main frozen test evaluation; the test split has been seen, so results are exploratory and are reported separately from the main study.",
+    "frozen_inputs": "docs/arena_selection.json chooses the CNN and LSTM recipes; no new candidates, epochs, or hyperparameters are searched.",
+    "learning_curve": {
+      "fractions": [
+        0.125,
+        0.25,
+        0.5
+      ],
+      "seeds": [
+        1448,
+        1449,
+        1450
+      ],
+      "models": [
+        "selected CNN",
+        "selected LSTM",
+        "char TF-IDF 3-5 grams"
+      ],
+      "sampling": "Per-class random subset of the training split, drawn with numpy default_rng([seed, fraction*1000]); validation and test are the unchanged full splits.",
+      "full_data_point": "Reuses the existing main-study fits (seeds 1448-1450; char TF-IDF single fit) at fraction 1.0."
+    },
+    "posthoc": {
+      "length_strata": "Neural-tokenizer answer length <192, 192-383, >=384 tokens.",
+      "matched_pairs": "Test battles whose two sides were both retained: identical prompt, two different authors.",
+      "mask_free": "Test rows whose answer contains no [MODEL] placeholder.",
+      "equal_length": "Frozen models read exactly the first 128 answer tokens of every test answer with at least 128 tokens.",
+      "window_position": "Frozen models read 192-token first, middle, and last windows of test answers with at least 576 tokens.",
+      "ensemble": "Average class probabilities of CNN (3-seed mean), LSTM (3-seed mean), and char TF-IDF. Weights on a 0.05 simplex grid maximize validation macro-F1; the equal-weight average is reported too.",
+      "cnn_ngrams": "Seed-1448 CNN on training answers only: n-grams at the max-pooled position of the filters that contribute most to the correct class."
+    },
+    "uncertainty": "2,000 paired resamples of test duplicate groups, seed 1448, matching the main study."
+  },
+  "frozen_utc": "2026-10-11T02:40:51Z",
+  "selection_sha256": "23e33adcde854fa14692c70037d2d90ae8bb237babd66e0bba6d61d3de552082",
+  "split_manifest_sha256": "7264352f4a869d731c088dea5d230c1de89beb0696ae5c46d723290a84459e9a"
+}

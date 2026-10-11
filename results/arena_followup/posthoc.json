@@ -1,0 +1,479 @@
+{
+  "note": "Follow-up after the main frozen test evaluation; the test split has been seen, so results are exploratory and are reported separately from the main study.",
+  "length_strata": {
+    "<192": {
+      "rows": 222,
+      "family_counts": {
+        "Claude": 96,
+        "GPT": 63,
+        "DeepSeek": 34,
+        "Grok": 29
+      },
+      "cnn": {
+        "accuracy": 0.7717717717717717,
+        "macro_f1": 0.7139522144207584
+      },
+      "lstm": {
+        "accuracy": 0.7567567567567567,
+        "macro_f1": 0.6971688999290827
+      },
+      "char": {
+        "accuracy": 0.7837837837837838,
+        "macro_f1": 0.724554918137579
+      }
+    },
+    "192-383": {
+      "rows": 357,
+      "family_counts": {
+        "DeepSeek": 61,
+        "Claude": 216,
+        "Grok": 18,
+        "GPT": 62
+      },
+      "cnn": {
+        "accuracy": 0.9206349206349206,
+        "macro_f1": 0.8369449603633319
+      },
+      "lstm": {
+        "accuracy": 0.865546218487395,
+        "macro_f1": 0.7494810201528125
+      },
+      "char": {
+        "accuracy": 0.9327731092436975,
+        "macro_f1": 0.8777884615733689
+      }
+    },
+    ">=384": {
+      "rows": 887,
+      "family_counts": {
+        "Grok": 283,
+        "GPT": 239,
+        "Claude": 109,
+        "DeepSeek": 256
+      },
+      "cnn": {
+        "accuracy": 0.8707252912438933,
+        "macro_f1": 0.86895062912021
+      },
+      "lstm": {
+        "accuracy": 0.8346486283352124,
+        "macro_f1": 0.831073317628923
+      },
+      "char": {
+        "accuracy": 0.8771138669673055,
+        "macro_f1": 0.8720335910106132
+      }
+    }
+  },
+  "matched_pairs": {
+    "pairs": 76,
+    "family_pairs": {
+      "Claude/Grok": 15,
+      "Claude/GPT": 16,
+      "GPT/Grok": 11,
+      "DeepSeek/GPT": 7,
+      "Claude/DeepSeek": 15,
+      "DeepSeek/Grok": 12
+    },
+    "cnn": {
+      "pairwise_assignment": 0.9912280701754387,
+      "both_sides_correct": 0.8201754385964911
+    },
+    "lstm": {
+      "pairwise_assignment": 0.9912280701754387,
+      "both_sides_correct": 0.6929824561403509
+    },
+    "char": {
+      "pairwise_assignment": 1.0,
+      "both_sides_correct": 0.8289473684210527
+    },
+    "cnn_prompt_only": {
+      "pairwise_assignment": 0.5
+    }
+  },
+  "mask_free": {
+    "rows": 1395,
+    "excluded": 71,
+    "cnn": {
+      "accuracy": 0.8652329749103943,
+      "macro_f1": 0.8619508384314485
+    },
+    "lstm": {
+      "accuracy": 0.8284348864994026,
+      "macro_f1": 0.8228156037695348
+    },
+    "char": {
+      "accuracy": 0.8724014336917563,
+      "macro_f1": 0.8685456216201235
+    }
+  },
+  "equal_length": {
+    "cnn": {
+      "accuracy": 0.8223880597014924,
+      "macro_f1": 0.8185974072862909,
+      "balanced_accuracy": 0.8212531588516172
+    },
+    "lstm": {
+      "accuracy": 0.8238805970149254,
+      "macro_f1": 0.8206453833316175,
+      "balanced_accuracy": 0.8233168070720159
+    },
+    "char": {
+      "accuracy": 0.817910447761194,
+      "macro_f1": 0.8120722661427062,
+      "balanced_accuracy": 0.8166219180357359
+    },
+    "rows": 1340,
+    "family_counts": {
+      "Grok": 311,
+      "DeepSeek": 335,
+      "GPT": 332,
+      "Claude": 362
+    }
+  },
+  "window_position": {
+    "cnn": {
+      "first": {
+        "accuracy": 0.8459633481921743,
+        "macro_f1": 0.822667636589097,
+        "balanced_accuracy": 0.8285737789004054
+      },
+      "middle": {
+        "accuracy": 0.642397226349678,
+        "macro_f1": 0.6203925634595159,
+        "balanced_accuracy": 0.6506893030998074
+      },
+      "last": {
+        "accuracy": 0.7711738484398216,
+        "macro_f1": 0.7533201110831559,
+        "balanced_accuracy": 0.7974870720385049
+      }
+    },
+    "lstm": {
+      "first": {
+        "accuracy": 0.8395245170876672,
+        "macro_f1": 0.8161301993267953,
+        "balanced_accuracy": 0.8300283560278334
+      },
+      "middle": {
+        "accuracy": 0.5373947498761763,
+        "macro_f1": 0.528931737878657,
+        "balanced_accuracy": 0.6147826360460277
+      },
+      "last": {
+        "accuracy": 0.6433878157503715,
+        "macro_f1": 0.6380252261612415,
+        "balanced_accuracy": 0.7089929174449251
+      }
+    },
+    "rows": 673,
+    "family_counts": {
+      "Grok": 267,
+      "GPT": 172,
+      "DeepSeek": 180,
+      "Claude": 54
+    }
+  },
+  "ensemble": {
+    "weights": {
+      "cnn": 0.55,
+      "lstm": 0.35,
+      "char": 0.1
+    },
+    "val_macro_f1": 0.8982388303238505,
+    "weighted": {
+      "accuracy": 0.8874488403819918,
+      "macro_f1": 0.8847117847788967,
+      "balanced_accuracy": 0.8846367771842831,
+      "minus_char_ci95": [
+        -0.004489516582485536,
+        0.027924858825726172
+      ],
+      "minus_char": 0.011413408485856924,
+      "recall": {
+        "Claude": 0.9477434679334917,
+        "GPT": 0.8818681318681318,
+        "Grok": 0.896969696969697,
+        "DeepSeek": 0.811965811965812
+      }
+    },
+    "equal": {
+      "accuracy": 0.897680763983629,
+      "macro_f1": 0.8948126986087672,
+      "balanced_accuracy": 0.8948564917092232,
+      "minus_char_ci95": [
+        0.0067034963385271176,
+        0.036522796700495026
+      ],
+      "minus_char": 0.021514322315727474,
+      "recall": {
+        "Claude": 0.9619952494061758,
+        "GPT": 0.8846153846153846,
+        "Grok": 0.9151515151515152,
+        "DeepSeek": 0.8176638176638177
+      }
+    }
+  },
+  "cnn_ngrams": {
+    "Claude": {
+      "correct_training_docs": 1933,
+      "top": [
+        {
+          "ngram": ". ↵ ↵ * *",
+          "docs": 484,
+          "share_of_docs": 0.25038799793067773,
+          "class_purity": 0.9979381443298969
+        },
+        {
+          "ngram": "↵ ↵ the",
+          "docs": 317,
+          "share_of_docs": 0.16399379203310915,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "i ' d recommend",
+          "docs": 115,
+          "share_of_docs": 0.059493016037247805,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "↵ ↵ what",
+          "docs": 105,
+          "share_of_docs": 0.05431971029487843,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "i ' d be",
+          "docs": 93,
+          "share_of_docs": 0.04811174340403518,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "` ↵ ↵ * *",
+          "docs": 66,
+          "share_of_docs": 0.03414381789963787,
+          "class_purity": 0.9850746268656716
+        },
+        {
+          "ngram": ". ↵ ↵ is there",
+          "docs": 60,
+          "share_of_docs": 0.031039834454216243,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "\" ↵ ↵ * *",
+          "docs": 48,
+          "share_of_docs": 0.024831867563372995,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "? that would help",
+          "docs": 37,
+          "share_of_docs": 0.019141231246766685,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "? that might help",
+          "docs": 32,
+          "share_of_docs": 0.016554578375581996,
+          "class_purity": 1.0
+        }
+      ]
+    },
+    "GPT": {
+      "correct_training_docs": 1637,
+      "top": [
+        {
+          "ngram": "- - - ↵ ↵",
+          "docs": 403,
+          "share_of_docs": 0.24618204031765425,
+          "class_purity": 0.7589453860640302
+        },
+        {
+          "ngram": "certainly ! here",
+          "docs": 151,
+          "share_of_docs": 0.09224190592547343,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "↵ # # *",
+          "docs": 142,
+          "share_of_docs": 0.08674404398289554,
+          "class_purity": 0.9861111111111112
+        },
+        {
+          "ngram": "absolutely ! here",
+          "docs": 137,
+          "share_of_docs": 0.08368967623701894,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "great question !",
+          "docs": 132,
+          "share_of_docs": 0.08063530849114234,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "certainly ! here ’",
+          "docs": 122,
+          "share_of_docs": 0.07452657299938913,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": ". here ’ s",
+          "docs": 118,
+          "share_of_docs": 0.07208307880268784,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "absolutely ! here ’",
+          "docs": 117,
+          "share_of_docs": 0.07147220525351253,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "here ’ s",
+          "docs": 91,
+          "share_of_docs": 0.055589492974954184,
+          "class_purity": 0.6594202898550725
+        },
+        {
+          "ngram": "↵ # # 3",
+          "docs": 69,
+          "share_of_docs": 0.042150274893097125,
+          "class_purity": 0.92
+        }
+      ]
+    },
+    "Grok": {
+      "correct_training_docs": 1493,
+      "top": [
+        {
+          "ngram": "# # # 1",
+          "docs": 291,
+          "share_of_docs": 0.19490957803081044,
+          "class_purity": 0.9965753424657534
+        },
+        {
+          "ngram": "below is a",
+          "docs": 287,
+          "share_of_docs": 0.19223040857334225,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "↵ 1 . *",
+          "docs": 110,
+          "share_of_docs": 0.07367716008037509,
+          "class_purity": 0.8870967741935484
+        },
+        {
+          "ngram": "below , i",
+          "docs": 103,
+          "share_of_docs": 0.06898861352980576,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "below is a detailed",
+          "docs": 98,
+          "share_of_docs": 0.06563965170797052,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "below , i ’",
+          "docs": 71,
+          "share_of_docs": 0.047555257870060284,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "# # # step",
+          "docs": 68,
+          "share_of_docs": 0.04554588077695914,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "below is a step",
+          "docs": 51,
+          "share_of_docs": 0.03415941058271936,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "below is a step -",
+          "docs": 51,
+          "share_of_docs": 0.03415941058271936,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "below is an",
+          "docs": 50,
+          "share_of_docs": 0.033489618218352314,
+          "class_purity": 1.0
+        }
+      ]
+    },
+    "DeepSeek": {
+      "correct_training_docs": 1570,
+      "top": [
+        {
+          "ngram": "# # #",
+          "docs": 874,
+          "share_of_docs": 0.556687898089172,
+          "class_purity": 0.8323809523809523
+        },
+        {
+          "ngram": "# # * * 2",
+          "docs": 374,
+          "share_of_docs": 0.23821656050955414,
+          "class_purity": 0.9396984924623115
+        },
+        {
+          "ngram": "# # * * 3",
+          "docs": 225,
+          "share_of_docs": 0.14331210191082802,
+          "class_purity": 0.9911894273127754
+        },
+        {
+          "ngram": "* ↵ 1 .",
+          "docs": 186,
+          "share_of_docs": 0.11847133757961784,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "↵ would you",
+          "docs": 125,
+          "share_of_docs": 0.07961783439490445,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "↵ ↵ would you like",
+          "docs": 121,
+          "share_of_docs": 0.07707006369426751,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": ": ↵ 1 .",
+          "docs": 120,
+          "share_of_docs": 0.07643312101910828,
+          "class_purity": 0.9375
+        },
+        {
+          "ngram": "# 3 . * *",
+          "docs": 81,
+          "share_of_docs": 0.05159235668789809,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "↵ here ' s a",
+          "docs": 65,
+          "share_of_docs": 0.041401273885350316,
+          "class_purity": 1.0
+        },
+        {
+          "ngram": "would you like",
+          "docs": 57,
+          "share_of_docs": 0.03630573248407643,
+          "class_purity": 0.8507462686567164
+        }
+      ]
+    }
+  }
+}

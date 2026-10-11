@@ -6,7 +6,7 @@
 
 The main study now uses **Arena Human Preference 140k**: **9,643 curated English, single-turn responses** from four specific model releases. Required CNN and RNN/LSTM models are trained, selected on validation data, and evaluated across three seeds.
 
-[Read the current PDF](report/Who_Wrote_It_Haodong_Huang.pdf) · [Editable report](report/report.md) · [中文结果](docs/ARENA_RESULTS_ZH.md) · [中文方法与答辩](docs/ARENA_PROTOCOL_ZH.md)
+[Read the current PDF](report/Who_Wrote_It_Haodong_Huang.pdf) · [Editable report](report/report.md)
 
 ![Arena neural results](results/figures/arena_results.png)
 
@@ -26,6 +26,20 @@ Means across seeds 1448, 1449, and 1450 on the same 1,466-response test split. M
 The character TF-IDF baseline scores **87.65% accuracy / 87.33% macro-F1**. Its point estimate is slightly higher than the CNN mean; it is retained as a strong, inexpensive comparator.
 
 The majority-class accuracy is **28.72%**. Uniform random accuracy and constant-class balanced accuracy are 25%. Prompt-only macro-F1 is not mathematically fixed at 25% in this unpaired four-source subset.
+
+## Follow-up experiments (after the main evaluation)
+
+Run after the frozen main study, under a plan written first ([docs/arena_followup_plan.json](docs/arena_followup_plan.json)); no setting was chosen with test labels. Report Section 11 has details.
+
+| Question | Finding |
+|---|---|
+| Does more training data help? | CNN macro-F1 75.59% → 86.51% and LSTM 65.99% → 82.52% going from 841 to 6,735 training responses (fixed split). |
+| Is it just length? | With every answer cut to exactly 128 tokens: CNN 81.86%, LSTM 82.06% macro-F1. |
+| Same prompt, two authors? | On 76 identical-prompt test pairs the CNN assigns both authors correctly 99.12% of the time; prompt-only is exactly 50%. |
+| Where is the fingerprint? | Opening window ≫ middle; CNN keys on openers like "Certainly! Here's" (GPT), "Below is a detailed" (Grok), "I'd recommend" (Claude), bold numbered headers and "Would you like" (DeepSeek). |
+| Ensemble? | Equal-weight CNN+LSTM+char TF-IDF: 89.48% macro-F1 (+2.15 pp over char TF-IDF). |
+
+![Learning curve](results/figures/followup_learning_curve.png)
 
 ## What data are actually used?
 
@@ -66,6 +80,9 @@ python src/arena_train.py train
 python src/arena_train.py domain
 python src/arena_train.py evaluate
 python src/arena_analyze.py
+python src/arena_followup.py plan
+python src/arena_followup.py posthoc
+python src/arena_followup.py curve
 python -m unittest discover -s tests -v
 python src/build_report.py
 python src/build_readme.py
@@ -102,8 +119,6 @@ All scores are response-only, three-seed means within each stage. Same-data opti
 
 [Initial report](report/archive/Who_Wrote_It_Haodong_Huang_v1.pdf) · [Optimized historical report](report/archive/Who_Wrote_It_Haodong_Huang_v2.pdf) · [Historical methods](docs/ITERATION_NOTES_ZH.md)
 
-[中文：三阶段记录与换数据集的原因](docs/PROJECT_EVOLUTION_ZH.md)
-
 ## Repository guide
 
 | Path | Purpose |
@@ -112,11 +127,13 @@ All scores are response-only, three-seed means within each stage. Same-data opti
 | `src/arena_train.py` | Validation selection, core/diagnostic fitting, frozen test evaluation |
 | `src/models_v2.py` | CNN and pooled LSTM, with explicit four-class output support |
 | `src/arena_analyze.py` | Independent audits, grouped intervals, figures, and checkpoint replay |
-| `tests/` | Thirteen checks of leakage, attribution, padding, and sequence handling |
+| `src/arena_followup.py` | Follow-up: learning curve, length/position/matched-prompt diagnostics, ensemble, CNN n-grams |
+| `results/arena_followup/` | Follow-up metrics and logs |
+| `tests/` | Fifteen checks of leakage, attribution, padding, sequence handling, and follow-up subsetting |
 | `results/arena/` | Complete metrics, validation probabilities, non-text test predictions |
 | `docs/arena_*.json` | Data provenance, curation repair, plans, selection, and freeze records |
 | `data/arena/split_manifest.json` | Non-text published split assignments |
 | `models/arena_*.pt` | Two locally usable demonstration checkpoints |
 | `report/` | Current report plus archived earlier reports |
 
-Course grounding: Chapter 4 (CNN/pooling/LSTM) and Chapter 9 (loss/mini-batches/Adam). Specific budgets, filters, and hyperparameters are project design decisions. ChatGPT/Codex assisted with code, debugging, analysis, and drafting; the student is responsible for understanding and verifying the submission. The submission deliverable is this repository URL and its PDF; publishing it does not submit it to Canvas.
+Course grounding: Chapter 4 (CNN/pooling/LSTM) and Chapter 9 (loss/mini-batches/Adam). Specific budgets, filters, and hyperparameters are project design decisions. ChatGPT/Codex and Claude assisted with code, debugging, analysis, and drafting; the student is responsible for understanding and verifying the submission. The submission deliverable is this repository URL and its PDF; publishing it does not submit it to Canvas.

@@ -1,0 +1,463 @@
+START c2_output_s1448 rows 841 1442 device mps
+c2_output_s1448 1 valF1 0.3008 seconds 0.7
+c2_output_s1448 2 valF1 0.4137 seconds 0.4
+c2_output_s1448 3 valF1 0.5553 seconds 0.3
+c2_output_s1448 4 valF1 0.5648 seconds 0.3
+c2_output_s1448 5 valF1 0.6841 seconds 0.4
+c2_output_s1448 6 valF1 0.6342 seconds 0.4
+c2_output_s1448 7 valF1 0.7422 seconds 0.3
+c2_output_s1448 8 valF1 0.7216 seconds 0.3
+c2_output_s1448 9 valF1 0.6981 seconds 0.3
+c2_output_s1448 10 valF1 0.7369 seconds 0.3
+c2_output_s1448 11 valF1 0.7357 seconds 0.3
+FIT c2_output_s1448 valF1 0.7422 epoch 7
+START r2_output_s1448 rows 841 1442 device mps
+r2_output_s1448 1 valF1 0.3356 seconds 0.4
+r2_output_s1448 2 valF1 0.3837 seconds 0.3
+r2_output_s1448 3 valF1 0.4844 seconds 0.3
+r2_output_s1448 4 valF1 0.5351 seconds 0.3
+r2_output_s1448 5 valF1 0.4976 seconds 0.3
+r2_output_s1448 6 valF1 0.5793 seconds 0.3
+r2_output_s1448 7 valF1 0.5676 seconds 0.3
+r2_output_s1448 8 valF1 0.49 seconds 0.4
+r2_output_s1448 9 valF1 0.6162 seconds 0.3
+r2_output_s1448 10 valF1 0.6067 seconds 0.3
+r2_output_s1448 11 valF1 0.5417 seconds 0.3
+r2_output_s1448 12 valF1 0.5951 seconds 0.3
+r2_output_s1448 13 valF1 0.6197 seconds 0.3
+r2_output_s1448 14 valF1 0.6398 seconds 0.3
+r2_output_s1448 15 valF1 0.6197 seconds 0.3
+r2_output_s1448 16 valF1 0.6505 seconds 0.3
+r2_output_s1448 17 valF1 0.6744 seconds 0.3
+r2_output_s1448 18 valF1 0.6644 seconds 0.3
+r2_output_s1448 19 valF1 0.6741 seconds 0.3
+r2_output_s1448 20 valF1 0.6735 seconds 0.3
+FIT r2_output_s1448 valF1 0.6744 epoch 17
+CURVE 0.125 1448 {'cnn': 0.7316, 'lstm': 0.6675, 'char': 0.7883}
+START c2_output_s1449 rows 841 1442 device mps
+c2_output_s1449 1 valF1 0.4899 seconds 0.4
+c2_output_s1449 2 valF1 0.6336 seconds 0.3
+c2_output_s1449 3 valF1 0.624 seconds 0.4
+c2_output_s1449 4 valF1 0.6757 seconds 0.4
+c2_output_s1449 5 valF1 0.6942 seconds 0.4
+c2_output_s1449 6 valF1 0.7183 seconds 0.4
+c2_output_s1449 7 valF1 0.7371 seconds 0.3
+c2_output_s1449 8 valF1 0.732 seconds 0.4
+c2_output_s1449 9 valF1 0.751 seconds 0.4
+c2_output_s1449 10 valF1 0.7533 seconds 0.4
+c2_output_s1449 11 valF1 0.7675 seconds 0.4
+c2_output_s1449 12 valF1 0.7563 seconds 0.3
+c2_output_s1449 13 valF1 0.7639 seconds 0.4
+c2_output_s1449 14 valF1 0.7696 seconds 0.3
+c2_output_s1449 15 valF1 0.7661 seconds 0.4
+c2_output_s1449 16 valF1 0.7897 seconds 0.4
+c2_output_s1449 17 valF1 0.7862 seconds 0.4
+c2_output_s1449 18 valF1 0.7921 seconds 0.4
+c2_output_s1449 19 valF1 0.7996 seconds 0.4
+c2_output_s1449 20 valF1 0.7847 seconds 0.3
+FIT c2_output_s1449 valF1 0.7996 epoch 19
+START r2_output_s1449 rows 841 1442 device mps
+r2_output_s1449 1 valF1 0.3673 seconds 0.3
+r2_output_s1449 2 valF1 0.2473 seconds 0.3
+r2_output_s1449 3 valF1 0.4753 seconds 0.3
+r2_output_s1449 4 valF1 0.4138 seconds 0.3
+r2_output_s1449 5 valF1 0.525 seconds 0.3
+r2_output_s1449 6 valF1 0.5025 seconds 0.3
+r2_output_s1449 7 valF1 0.5363 seconds 0.3
+r2_output_s1449 8 valF1 0.545 seconds 0.3
+r2_output_s1449 9 valF1 0.5543 seconds 0.3
+r2_output_s1449 10 valF1 0.5656 seconds 0.3
+r2_output_s1449 11 valF1 0.5818 seconds 0.3
+r2_output_s1449 12 valF1 0.6053 seconds 0.3
+r2_output_s1449 13 valF1 0.6275 seconds 0.3
+r2_output_s1449 14 valF1 0.6485 seconds 0.3
+r2_output_s1449 15 valF1 0.6329 seconds 0.3
+r2_output_s1449 16 valF1 0.6641 seconds 0.3
+r2_output_s1449 17 valF1 0.646 seconds 0.3
+r2_output_s1449 18 valF1 0.6665 seconds 0.3
+r2_output_s1449 19 valF1 0.6534 seconds 0.3
+r2_output_s1449 20 valF1 0.6264 seconds 0.3
+FIT r2_output_s1449 valF1 0.6665 epoch 18
+CURVE 0.125 1449 {'cnn': 0.7715, 'lstm': 0.6555, 'char': 0.7686}
+START c2_output_s1450 rows 841 1442 device mps
+c2_output_s1450 1 valF1 0.2838 seconds 0.4
+c2_output_s1450 2 valF1 0.437 seconds 0.3
+c2_output_s1450 3 valF1 0.6731 seconds 0.4
+c2_output_s1450 4 valF1 0.665 seconds 0.4
+c2_output_s1450 5 valF1 0.6989 seconds 0.4
+c2_output_s1450 6 valF1 0.7347 seconds 0.3
+c2_output_s1450 7 valF1 0.7457 seconds 0.4
+c2_output_s1450 8 valF1 0.744 seconds 0.4
+c2_output_s1450 9 valF1 0.7563 seconds 0.4
+c2_output_s1450 10 valF1 0.7581 seconds 0.4
+c2_output_s1450 11 valF1 0.7682 seconds 0.3
+c2_output_s1450 12 valF1 0.7691 seconds 0.4
+c2_output_s1450 13 valF1 0.7637 seconds 0.4
+c2_output_s1450 14 valF1 0.7828 seconds 0.4
+c2_output_s1450 15 valF1 0.7657 seconds 0.3
+c2_output_s1450 16 valF1 0.783 seconds 0.3
+c2_output_s1450 17 valF1 0.7859 seconds 0.4
+c2_output_s1450 18 valF1 0.7793 seconds 0.3
+c2_output_s1450 19 valF1 0.7908 seconds 0.3
+c2_output_s1450 20 valF1 0.7865 seconds 0.3
+FIT c2_output_s1450 valF1 0.7908 epoch 19
+START r2_output_s1450 rows 841 1442 device mps
+r2_output_s1450 1 valF1 0.2616 seconds 0.3
+r2_output_s1450 2 valF1 0.5752 seconds 0.3
+r2_output_s1450 3 valF1 0.5588 seconds 0.3
+r2_output_s1450 4 valF1 0.4414 seconds 0.3
+r2_output_s1450 5 valF1 0.5423 seconds 0.3
+r2_output_s1450 6 valF1 0.587 seconds 0.3
+r2_output_s1450 7 valF1 0.4999 seconds 0.3
+r2_output_s1450 8 valF1 0.5315 seconds 0.3
+r2_output_s1450 9 valF1 0.5819 seconds 0.3
+r2_output_s1450 10 valF1 0.5903 seconds 0.3
+r2_output_s1450 11 valF1 0.5993 seconds 0.3
+r2_output_s1450 12 valF1 0.6076 seconds 0.3
+r2_output_s1450 13 valF1 0.6255 seconds 0.3
+r2_output_s1450 14 valF1 0.6122 seconds 0.3
+r2_output_s1450 15 valF1 0.5862 seconds 0.3
+r2_output_s1450 16 valF1 0.6356 seconds 0.3
+r2_output_s1450 17 valF1 0.5841 seconds 0.3
+r2_output_s1450 18 valF1 0.6235 seconds 0.3
+r2_output_s1450 19 valF1 0.6398 seconds 0.3
+r2_output_s1450 20 valF1 0.6317 seconds 0.3
+FIT r2_output_s1450 valF1 0.6398 epoch 19
+CURVE 0.125 1450 {'cnn': 0.7645, 'lstm': 0.6567, 'char': 0.7724}
+START c2_output_s1448 rows 1683 1442 device mps
+c2_output_s1448 1 valF1 0.5515 seconds 0.7
+c2_output_s1448 2 valF1 0.6089 seconds 0.6
+c2_output_s1448 3 valF1 0.6758 seconds 0.6
+c2_output_s1448 4 valF1 0.6989 seconds 0.6
+c2_output_s1448 5 valF1 0.7215 seconds 0.6
+c2_output_s1448 6 valF1 0.743 seconds 0.6
+c2_output_s1448 7 valF1 0.7718 seconds 0.6
+c2_output_s1448 8 valF1 0.7671 seconds 0.6
+c2_output_s1448 9 valF1 0.786 seconds 0.6
+c2_output_s1448 10 valF1 0.7863 seconds 0.6
+c2_output_s1448 11 valF1 0.7786 seconds 0.6
+c2_output_s1448 12 valF1 0.7789 seconds 0.6
+c2_output_s1448 13 valF1 0.7974 seconds 0.6
+c2_output_s1448 14 valF1 0.7963 seconds 0.6
+c2_output_s1448 15 valF1 0.7975 seconds 0.6
+c2_output_s1448 16 valF1 0.8114 seconds 0.6
+c2_output_s1448 17 valF1 0.8004 seconds 0.6
+c2_output_s1448 18 valF1 0.7851 seconds 0.6
+c2_output_s1448 19 valF1 0.822 seconds 0.6
+c2_output_s1448 20 valF1 0.8183 seconds 0.6
+FIT c2_output_s1448 valF1 0.822 epoch 19
+START r2_output_s1448 rows 1683 1442 device mps
+r2_output_s1448 1 valF1 0.4015 seconds 0.5
+r2_output_s1448 2 valF1 0.5552 seconds 0.5
+r2_output_s1448 3 valF1 0.5728 seconds 0.5
+r2_output_s1448 4 valF1 0.4834 seconds 0.5
+r2_output_s1448 5 valF1 0.6016 seconds 0.5
+r2_output_s1448 6 valF1 0.6167 seconds 0.5
+r2_output_s1448 7 valF1 0.6208 seconds 0.5
+r2_output_s1448 8 valF1 0.652 seconds 0.5
+r2_output_s1448 9 valF1 0.6135 seconds 0.5
+r2_output_s1448 10 valF1 0.658 seconds 0.5
+r2_output_s1448 11 valF1 0.673 seconds 0.5
+r2_output_s1448 12 valF1 0.6698 seconds 0.5
+r2_output_s1448 13 valF1 0.6818 seconds 0.5
+r2_output_s1448 14 valF1 0.6872 seconds 0.5
+r2_output_s1448 15 valF1 0.6881 seconds 0.5
+r2_output_s1448 16 valF1 0.6959 seconds 0.5
+r2_output_s1448 17 valF1 0.6996 seconds 0.5
+r2_output_s1448 18 valF1 0.6972 seconds 0.5
+r2_output_s1448 19 valF1 0.7039 seconds 0.5
+r2_output_s1448 20 valF1 0.695 seconds 0.5
+FIT r2_output_s1448 valF1 0.7039 epoch 19
+CURVE 0.25 1448 {'cnn': 0.8014, 'lstm': 0.7094, 'char': 0.7935}
+START c2_output_s1449 rows 1683 1442 device mps
+c2_output_s1449 1 valF1 0.4752 seconds 0.6
+c2_output_s1449 2 valF1 0.5252 seconds 0.6
+c2_output_s1449 3 valF1 0.6757 seconds 0.6
+c2_output_s1449 4 valF1 0.7241 seconds 0.6
+c2_output_s1449 5 valF1 0.7354 seconds 0.6
+c2_output_s1449 6 valF1 0.7101 seconds 0.6
+c2_output_s1449 7 valF1 0.755 seconds 0.6
+c2_output_s1449 8 valF1 0.7885 seconds 0.6
+c2_output_s1449 9 valF1 0.7773 seconds 0.6
+c2_output_s1449 10 valF1 0.7743 seconds 0.6
+c2_output_s1449 11 valF1 0.7736 seconds 0.6
+c2_output_s1449 12 valF1 0.8039 seconds 0.6
+c2_output_s1449 13 valF1 0.7861 seconds 0.6
+c2_output_s1449 14 valF1 0.7977 seconds 0.6
+c2_output_s1449 15 valF1 0.7913 seconds 0.6
+c2_output_s1449 16 valF1 0.8109 seconds 0.6
+c2_output_s1449 17 valF1 0.8011 seconds 0.6
+c2_output_s1449 18 valF1 0.807 seconds 0.6
+c2_output_s1449 19 valF1 0.8152 seconds 0.6
+c2_output_s1449 20 valF1 0.8169 seconds 0.6
+FIT c2_output_s1449 valF1 0.8169 epoch 20
+START r2_output_s1449 rows 1683 1442 device mps
+r2_output_s1449 1 valF1 0.3096 seconds 0.5
+r2_output_s1449 2 valF1 0.5626 seconds 0.5
+r2_output_s1449 3 valF1 0.5536 seconds 0.5
+r2_output_s1449 4 valF1 0.5216 seconds 0.5
+r2_output_s1449 5 valF1 0.6141 seconds 0.5
+r2_output_s1449 6 valF1 0.5758 seconds 0.5
+r2_output_s1449 7 valF1 0.6427 seconds 0.5
+r2_output_s1449 8 valF1 0.6456 seconds 0.5
+r2_output_s1449 9 valF1 0.6699 seconds 0.5
+r2_output_s1449 10 valF1 0.6754 seconds 0.5
+r2_output_s1449 11 valF1 0.6896 seconds 0.5
+r2_output_s1449 12 valF1 0.7033 seconds 0.5
+r2_output_s1449 13 valF1 0.6996 seconds 0.5
+r2_output_s1449 14 valF1 0.7185 seconds 0.5
+r2_output_s1449 15 valF1 0.6674 seconds 0.5
+r2_output_s1449 16 valF1 0.7109 seconds 0.5
+r2_output_s1449 17 valF1 0.686 seconds 0.5
+r2_output_s1449 18 valF1 0.6717 seconds 0.5
+FIT r2_output_s1449 valF1 0.7185 epoch 14
+CURVE 0.25 1449 {'cnn': 0.8106, 'lstm': 0.7124, 'char': 0.8013}
+START c2_output_s1450 rows 1683 1442 device mps
+c2_output_s1450 1 valF1 0.4601 seconds 0.6
+c2_output_s1450 2 valF1 0.6194 seconds 0.6
+c2_output_s1450 3 valF1 0.7039 seconds 0.6
+c2_output_s1450 4 valF1 0.6676 seconds 0.6
+c2_output_s1450 5 valF1 0.6759 seconds 0.6
+c2_output_s1450 6 valF1 0.7329 seconds 0.6
+c2_output_s1450 7 valF1 0.7519 seconds 0.6
+c2_output_s1450 8 valF1 0.7645 seconds 0.6
+c2_output_s1450 9 valF1 0.763 seconds 0.6
+c2_output_s1450 10 valF1 0.784 seconds 0.6
+c2_output_s1450 11 valF1 0.7865 seconds 0.6
+c2_output_s1450 12 valF1 0.7826 seconds 0.6
+c2_output_s1450 13 valF1 0.7966 seconds 0.6
+c2_output_s1450 14 valF1 0.7825 seconds 0.6
+c2_output_s1450 15 valF1 0.7903 seconds 0.6
+c2_output_s1450 16 valF1 0.7987 seconds 0.6
+c2_output_s1450 17 valF1 0.7937 seconds 0.6
+c2_output_s1450 18 valF1 0.7981 seconds 0.6
+c2_output_s1450 19 valF1 0.8067 seconds 0.6
+c2_output_s1450 20 valF1 0.8169 seconds 0.6
+FIT c2_output_s1450 valF1 0.8169 epoch 20
+START r2_output_s1450 rows 1683 1442 device mps
+r2_output_s1450 1 valF1 0.3255 seconds 0.6
+r2_output_s1450 2 valF1 0.5386 seconds 0.5
+r2_output_s1450 3 valF1 0.5615 seconds 0.5
+r2_output_s1450 4 valF1 0.5714 seconds 0.5
+r2_output_s1450 5 valF1 0.5447 seconds 0.5
+r2_output_s1450 6 valF1 0.6308 seconds 0.5
+r2_output_s1450 7 valF1 0.6395 seconds 0.5
+r2_output_s1450 8 valF1 0.6432 seconds 0.5
+r2_output_s1450 9 valF1 0.6549 seconds 0.5
+r2_output_s1450 10 valF1 0.6733 seconds 0.5
+r2_output_s1450 11 valF1 0.6883 seconds 0.5
+r2_output_s1450 12 valF1 0.6902 seconds 0.5
+r2_output_s1450 13 valF1 0.7059 seconds 0.5
+r2_output_s1450 14 valF1 0.6932 seconds 0.5
+r2_output_s1450 15 valF1 0.6971 seconds 0.5
+r2_output_s1450 16 valF1 0.6977 seconds 0.5
+r2_output_s1450 17 valF1 0.7136 seconds 0.5
+r2_output_s1450 18 valF1 0.7114 seconds 0.5
+r2_output_s1450 19 valF1 0.7109 seconds 0.5
+r2_output_s1450 20 valF1 0.7087 seconds 0.5
+FIT r2_output_s1450 valF1 0.7136 epoch 17
+CURVE 0.25 1450 {'cnn': 0.7954, 'lstm': 0.7176, 'char': 0.7937}
+START c2_output_s1448 rows 3367 1442 device mps
+c2_output_s1448 1 valF1 0.6169 seconds 1.4
+c2_output_s1448 2 valF1 0.7281 seconds 1.0
+c2_output_s1448 3 valF1 0.7378 seconds 1.0
+c2_output_s1448 4 valF1 0.7623 seconds 1.0
+c2_output_s1448 5 valF1 0.7921 seconds 1.0
+c2_output_s1448 6 valF1 0.7927 seconds 1.0
+c2_output_s1448 7 valF1 0.7956 seconds 1.1
+c2_output_s1448 8 valF1 0.7777 seconds 1.0
+c2_output_s1448 9 valF1 0.793 seconds 1.0
+c2_output_s1448 10 valF1 0.833 seconds 1.0
+c2_output_s1448 11 valF1 0.8384 seconds 1.1
+c2_output_s1448 12 valF1 0.8375 seconds 1.0
+c2_output_s1448 13 valF1 0.8376 seconds 1.0
+c2_output_s1448 14 valF1 0.8386 seconds 1.0
+c2_output_s1448 15 valF1 0.8375 seconds 1.0
+c2_output_s1448 16 valF1 0.8402 seconds 1.1
+c2_output_s1448 17 valF1 0.8341 seconds 1.0
+c2_output_s1448 18 valF1 0.8382 seconds 1.0
+c2_output_s1448 19 valF1 0.8346 seconds 1.0
+c2_output_s1448 20 valF1 0.844 seconds 1.0
+FIT c2_output_s1448 valF1 0.844 epoch 20
+START r2_output_s1448 rows 3367 1442 device mps
+r2_output_s1448 1 valF1 0.3576 seconds 0.9
+r2_output_s1448 2 valF1 0.6028 seconds 0.8
+r2_output_s1448 3 valF1 0.6556 seconds 0.8
+r2_output_s1448 4 valF1 0.65 seconds 0.8
+r2_output_s1448 5 valF1 0.692 seconds 0.8
+r2_output_s1448 6 valF1 0.6773 seconds 0.8
+r2_output_s1448 7 valF1 0.6873 seconds 0.8
+r2_output_s1448 8 valF1 0.6995 seconds 0.8
+r2_output_s1448 9 valF1 0.7016 seconds 0.8
+r2_output_s1448 10 valF1 0.7102 seconds 0.8
+r2_output_s1448 11 valF1 0.7233 seconds 0.8
+r2_output_s1448 12 valF1 0.7183 seconds 0.8
+r2_output_s1448 13 valF1 0.7181 seconds 0.8
+r2_output_s1448 14 valF1 0.7258 seconds 0.8
+r2_output_s1448 15 valF1 0.7249 seconds 0.8
+r2_output_s1448 16 valF1 0.749 seconds 0.8
+r2_output_s1448 17 valF1 0.7534 seconds 0.8
+r2_output_s1448 18 valF1 0.7593 seconds 0.8
+r2_output_s1448 19 valF1 0.7404 seconds 0.8
+r2_output_s1448 20 valF1 0.7535 seconds 0.8
+FIT r2_output_s1448 valF1 0.7593 epoch 18
+CURVE 0.5 1448 {'cnn': 0.8349, 'lstm': 0.7789, 'char': 0.8332}
+START c2_output_s1449 rows 3367 1442 device mps
+c2_output_s1449 1 valF1 0.6923 seconds 1.1
+c2_output_s1449 2 valF1 0.7307 seconds 1.0
+c2_output_s1449 3 valF1 0.708 seconds 1.0
+c2_output_s1449 4 valF1 0.7801 seconds 1.0
+c2_output_s1449 5 valF1 0.8032 seconds 1.1
+c2_output_s1449 6 valF1 0.7943 seconds 1.0
+c2_output_s1449 7 valF1 0.8024 seconds 1.0
+c2_output_s1449 8 valF1 0.8147 seconds 1.0
+c2_output_s1449 9 valF1 0.8391 seconds 1.0
+c2_output_s1449 10 valF1 0.8348 seconds 1.0
+c2_output_s1449 11 valF1 0.8404 seconds 1.1
+c2_output_s1449 12 valF1 0.8373 seconds 1.0
+c2_output_s1449 13 valF1 0.8329 seconds 1.0
+c2_output_s1449 14 valF1 0.8351 seconds 1.0
+c2_output_s1449 15 valF1 0.8432 seconds 1.0
+c2_output_s1449 16 valF1 0.8365 seconds 1.0
+c2_output_s1449 17 valF1 0.8368 seconds 1.1
+c2_output_s1449 18 valF1 0.8312 seconds 1.0
+c2_output_s1449 19 valF1 0.8605 seconds 1.0
+c2_output_s1449 20 valF1 0.8538 seconds 1.0
+FIT c2_output_s1449 valF1 0.8605 epoch 19
+START r2_output_s1449 rows 3367 1442 device mps
+r2_output_s1449 1 valF1 0.464 seconds 0.9
+r2_output_s1449 2 valF1 0.4548 seconds 0.8
+r2_output_s1449 3 valF1 0.6245 seconds 0.8
+r2_output_s1449 4 valF1 0.658 seconds 0.8
+r2_output_s1449 5 valF1 0.648 seconds 0.8
+r2_output_s1449 6 valF1 0.6924 seconds 0.8
+r2_output_s1449 7 valF1 0.6825 seconds 0.8
+r2_output_s1449 8 valF1 0.7244 seconds 0.8
+r2_output_s1449 9 valF1 0.7256 seconds 0.8
+r2_output_s1449 10 valF1 0.7459 seconds 0.8
+r2_output_s1449 11 valF1 0.7368 seconds 0.8
+r2_output_s1449 12 valF1 0.7452 seconds 0.8
+r2_output_s1449 13 valF1 0.7447 seconds 0.9
+r2_output_s1449 14 valF1 0.7522 seconds 0.8
+r2_output_s1449 15 valF1 0.7671 seconds 0.8
+r2_output_s1449 16 valF1 0.7664 seconds 0.8
+r2_output_s1449 17 valF1 0.7663 seconds 0.8
+r2_output_s1449 18 valF1 0.7632 seconds 0.8
+r2_output_s1449 19 valF1 0.7501 seconds 0.8
+FIT r2_output_s1449 valF1 0.7671 epoch 15
+CURVE 0.5 1449 {'cnn': 0.8383, 'lstm': 0.7559, 'char': 0.8386}
+START c2_output_s1450 rows 3367 1442 device mps
+c2_output_s1450 1 valF1 0.5355 seconds 1.1
+c2_output_s1450 2 valF1 0.7044 seconds 1.1
+c2_output_s1450 3 valF1 0.7424 seconds 1.1
+c2_output_s1450 4 valF1 0.7783 seconds 1.1
+c2_output_s1450 5 valF1 0.7882 seconds 1.1
+c2_output_s1450 6 valF1 0.8067 seconds 1.1
+c2_output_s1450 7 valF1 0.8052 seconds 1.1
+c2_output_s1450 8 valF1 0.8091 seconds 1.0
+c2_output_s1450 9 valF1 0.8002 seconds 1.0
+c2_output_s1450 10 valF1 0.822 seconds 1.1
+c2_output_s1450 11 valF1 0.8228 seconds 1.0
+c2_output_s1450 12 valF1 0.8256 seconds 1.0
+c2_output_s1450 13 valF1 0.8358 seconds 1.0
+c2_output_s1450 14 valF1 0.817 seconds 1.0
+c2_output_s1450 15 valF1 0.8379 seconds 1.0
+c2_output_s1450 16 valF1 0.8339 seconds 1.1
+c2_output_s1450 17 valF1 0.8367 seconds 1.0
+c2_output_s1450 18 valF1 0.8409 seconds 1.0
+c2_output_s1450 19 valF1 0.8292 seconds 1.0
+c2_output_s1450 20 valF1 0.8399 seconds 1.0
+FIT c2_output_s1450 valF1 0.8409 epoch 18
+START r2_output_s1450 rows 3367 1442 device mps
+r2_output_s1450 1 valF1 0.3312 seconds 0.9
+r2_output_s1450 2 valF1 0.5879 seconds 0.9
+r2_output_s1450 3 valF1 0.5511 seconds 0.9
+r2_output_s1450 4 valF1 0.6145 seconds 0.8
+r2_output_s1450 5 valF1 0.6665 seconds 0.8
+r2_output_s1450 6 valF1 0.6863 seconds 0.8
+r2_output_s1450 7 valF1 0.7096 seconds 0.8
+r2_output_s1450 8 valF1 0.7082 seconds 0.8
+r2_output_s1450 9 valF1 0.713 seconds 0.9
+r2_output_s1450 10 valF1 0.7246 seconds 0.8
+r2_output_s1450 11 valF1 0.7414 seconds 0.8
+r2_output_s1450 12 valF1 0.7408 seconds 0.8
+r2_output_s1450 13 valF1 0.7393 seconds 0.8
+r2_output_s1450 14 valF1 0.7408 seconds 0.8
+r2_output_s1450 15 valF1 0.7551 seconds 0.8
+r2_output_s1450 16 valF1 0.7599 seconds 0.8
+r2_output_s1450 17 valF1 0.77 seconds 0.9
+r2_output_s1450 18 valF1 0.7604 seconds 0.8
+r2_output_s1450 19 valF1 0.7717 seconds 0.8
+r2_output_s1450 20 valF1 0.791 seconds 0.8
+FIT r2_output_s1450 valF1 0.791 epoch 20
+CURVE 0.5 1450 {'cnn': 0.8173, 'lstm': 0.786, 'char': 0.8331}
+{
+ "0.125": {
+  "cnn": {
+   "macro_f1_mean": 0.7558784751607072,
+   "macro_f1_sd": 0.021283259697204245,
+   "accuracy_mean": 0.7637562528422009
+  },
+  "lstm": {
+   "macro_f1_mean": 0.6599101938903482,
+   "macro_f1_sd": 0.006578968970771711,
+   "accuracy_mean": 0.6721236925875398
+  },
+  "char": {
+   "macro_f1_mean": 0.7764241208918943,
+   "macro_f1_sd": 0.010452526121021504,
+   "accuracy_mean": 0.782855843565257
+  }
+ },
+ "0.25": {
+  "cnn": {
+   "macro_f1_mean": 0.8024905680194682,
+   "macro_f1_sd": 0.007647622978358116,
+   "accuracy_mean": 0.806730331969077
+  },
+  "lstm": {
+   "macro_f1_mean": 0.7131239619911768,
+   "macro_f1_sd": 0.0041662445307900624,
+   "accuracy_mean": 0.7207821737153252
+  },
+  "char": {
+   "macro_f1_mean": 0.7961497892368353,
+   "macro_f1_sd": 0.004439238330523071,
+   "accuracy_mean": 0.8021828103683494
+  }
+ },
+ "0.5": {
+  "cnn": {
+   "macro_f1_mean": 0.8301453209061397,
+   "macro_f1_sd": 0.011241435418338021,
+   "accuracy_mean": 0.8349249658935881
+  },
+  "lstm": {
+   "macro_f1_mean": 0.7736200271065989,
+   "macro_f1_sd": 0.01570819388227124,
+   "accuracy_mean": 0.7792178262846748
+  },
+  "char": {
+   "macro_f1_mean": 0.8349552684194009,
+   "macro_f1_sd": 0.0031354419558271263,
+   "accuracy_mean": 0.839699863574352
+  }
+ },
+ "1": {
+  "cnn": {
+   "macro_f1_mean": 0.8650795584849966,
+   "macro_f1_sd": 0.003870595735890185,
+   "accuracy_mean": 0.8678944974988632
+  },
+  "lstm": {
+   "macro_f1_mean": 0.8252495707996103,
+   "macro_f1_sd": 0.008452130232492186,
+   "accuracy_mean": 0.8303774442928603
+  },
+  "char": {
+   "macro_f1_mean": 0.8732983762930397,
+   "macro_f1_sd": 0.0,
+   "accuracy_mean": 0.8765347885402456
+  }
+ }
+}

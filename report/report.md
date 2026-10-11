@@ -13,11 +13,11 @@ This project identifies four LLM sources using a convolutional neural network (C
 | Question | Evidence |
 | --- | --- |
 | RQ1: Identify the author? | CNN accuracy 86.8%; LSTM accuracy 83.0%. Macro-F1 and class recall accompany accuracy. |
-| RQ2: Does the prompt help? | Combined-minus-output macro-F1: CNN -0.33 pp; LSTM -1.73 pp. |
+| RQ2: Does the prompt help? | Combined-minus-output macro-F1: CNN -0.33 pp; LSTM -1.73 pp. Follow-up: on 76 identical-prompt pairs the CNN assigns both authors correctly 99.1% of the time. |
 | RQ3: Transfer to coding? | Train on non-code and evaluate coding; compare with a mixed-domain control matched by training class counts. |
-| RQ4: Which signals matter? | Word-only normalization and explicit structural-feature classifiers probe lexical and formatting signals. |
+| RQ4: Which signals matter? | Word-only normalization, structural classifiers, equal-length inputs (CNN 81.9% F1 with length hidden), window position, and the n-grams the CNN relies on. |
 
-Scope: 9,643 responses; four classes; 27 neural fits and 6 classical fits; 31 test prediction files; 2,000 group-bootstrap resamples. The earlier UltraFeedback study is preserved separately, not pooled into these scores.
+Scope: 9,643 responses; four classes; 27 neural fits and 6 classical fits; 31 test prediction files; 2,000 group-bootstrap resamples. The earlier UltraFeedback study is preserved separately, not pooled into these scores. Section 11 adds follow-up experiments run after the main evaluation; they are reported separately and never replace main-study numbers.
 
 
 ## 1. Dataset and model provenance
@@ -262,10 +262,69 @@ Lexical baselines test whether word and character patterns are sufficient for at
 
 ### What would strengthen a later study?
 
-A future independent experiment could collect the same prompts from all four models under matched generation settings, compare exact equal-length text windows, and hold out newer model versions. That would separate provider, prompt distribution, generation settings, and length more directly. Such follow-up work needs a new evaluation set, because this test set has now been used for the reported study.
+A future independent experiment could collect the same prompts from all four models under matched generation settings and hold out newer model versions. Section 11 takes first steps with equal-length inputs and the identical-prompt pairs Arena already contains. That would separate provider, prompt distribution, generation settings, and length more directly. Such follow-up work needs a new evaluation set, because this test set has now been used for the reported study.
 
 
-## 11. Checks, limitations, and lessons
+## 11. Follow-up experiments after the main evaluation
+
+The main study above was frozen and evaluated once. This section asks four questions the main study left open: does more training data help, is the classifier only reading answer length, does the fingerprint survive when the prompt is identical, and where in an answer does it live? The plan, fractions, seeds, and ensemble rule were written to docs/arena_followup_plan.json before any follow-up result was produced, and no configuration was chosen using test labels. Because the test split had already been seen, these are follow-up analyses, not a second confirmation. One disclosure: the length strata and matched-pair counts were previewed from saved predictions before the plan was written; nothing was changed as a result.
+
+### A. Learning curve: does more training data help?
+
+| Training responses | CNN macro-F1 | LSTM macro-F1 | Char TF-IDF macro-F1 |
+| --- | --- | --- | --- |
+| 841 (12.5%) | 75.6% ± 2.1 | 66.0% ± 0.7 | 77.6% ± 1.0 |
+| 1,683 (25%) | 80.2% ± 0.8 | 71.3% ± 0.4 | 79.6% ± 0.4 |
+| 3,367 (50%) | 83.0% ± 1.1 | 77.4% ± 1.6 | 83.5% ± 0.3 |
+| 6,735 (100%) | 86.5% ± 0.4 | 82.5% ± 0.8 | 87.3% |
+
+Selected CNN/LSTM recipes and the char TF-IDF baseline retrained on class-stratified subsets of the same training split; validation and test are unchanged. Points: mean ± SD over seeds 1448-1450 (the full-data char baseline is a single fit).
+
+![Selected CNN/LSTM recipes and the char TF-IDF baseline retrained on class-stratified subsets of the same training split; validation and test are unchanged. Points: mean ± SD over seeds 1448-1450 (the full-data char baseline is a single fit).](../results/figures/followup_learning_curve.png)
+
+Going from one eighth of the training data to all of it adds 10.9 points of macro-F1 for the CNN, 16.5 for the LSTM, and 9.7 for char TF-IDF. No curve has flattened at the right edge, so more data would likely help further. The CNN tracks char TF-IDF closely at every size, while the LSTM, which learns its sequence representation from scratch, gains the most from data and is still well behind at full size. This is the experiment Section 13 needed: within one fixed task, more examples did improve attribution.
+
+### B. Is the classifier just measuring length?
+
+Grok answers are long (median about 1,480 neural tokens in test) and Claude answers short (about 300), so a model could in principle count padding. Two checks argue against length as the main cue. First, on answers of at least 384 tokens, where the CNN window is completely full and contains no padding, CNN macro-F1 is 86.9% (887 answers). Second, the frozen models were re-run with every test answer cut to exactly its first 128 tokens, dropping the 126 shorter answers, so all inputs have identical length: CNN 81.9%, LSTM 82.1%, char TF-IDF 81.2% macro-F1.
+
+Response-only macro-F1 by answer length (CNN and LSTM: three-seed means). Short answers are hardest: they carry fewer distinctive tokens.
+
+![Response-only macro-F1 by answer length (CNN and LSTM: three-seed means). Short answers are hardest: they carry fewer distinctive tokens.](../results/figures/followup_length.png)
+
+About 82% macro-F1 with length hidden is lower than the full-input score, so length and later tokens carry some signal, but most of the attribution survives without them.
+
+### C. Same prompt, two authors (RQ2)
+
+For 76 test battles both responses survived curation, giving identical prompts answered by two different models. A prompt-only classifier cannot separate them: the CNN prompt-only model scores exactly 50.0% on the pairwise task. Given the two answers and the two candidate authors, the response-only CNN assigns them correctly 99.1% of the time (LSTM 99.1%, char TF-IDF 100.0%); the CNN labels both sides correctly among all four classes 82.0% of the time. With the topic held fixed, the answer still identifies its author. The sample is small, so treat these as a direction rather than a precise rate.
+
+### D. Where is the fingerprint? (RQ4)
+
+| 192-token window | CNN macro-F1 | LSTM macro-F1 |
+| --- | --- | --- |
+| First | 82.3% | 81.6% |
+| Middle | 62.0% | 52.9% |
+| Last | 75.3% | 63.8% |
+
+On the 673 test answers of at least 576 tokens, frozen models read a first, middle, or last 192-token window. Accuracy is highest on the opening, collapses in the middle, and partly recovers at the end. Both models were trained on answer prefixes, which favors the first window, but the end recovering without any training on endings points to real openers and sign-offs. Claude has only 54 answers this long.
+
+| Author | Most decisive CNN n-grams (training answers, share of correctly classified answers) |
+| --- | --- |
+| Claude | . ↵ ↵ ** (25%); ↵ ↵ the (16%); i'd recommend (6%); ↵ ↵ what (5%); i'd be (5%); ` ↵ ↵ ** (3%) |
+| GPT | --- ↵ ↵ (25%); certainly! here (9%); ↵ ## * (9%); absolutely! here (8%); great question! (8%); certainly! here ’ (7%) |
+| Grok | ### 1 (19%); below is a (19%); ↵ 1. * (7%); below, i (7%); below is a detailed (7%); below, i ’ (5%) |
+| DeepSeek | ### (56%); ## ** 2 (24%); ## ** 3 (14%); * ↵ 1. (12%); ↵ would you (8%); ↵ ↵ would you like (8%) |
+
+For each correctly classified training answer, the five convolution filters that push hardest toward the true class were traced back to the n-gram at their max-pooled position. Shown are n-grams appearing for at least 15 answers and at least 60% of the time for one class (↵ is a newline). The pattern is readable: GPT opens with "Certainly! Here's", "Absolutely! Here's", or "Great question!"; Grok with "Below is a detailed…"; Claude says "I'd recommend" and closes by asking a question ("Is there…? That would help"); DeepSeek uses bolded numbered headers and closes with "Would you like…". The fingerprint is largely conversational framing and Markdown habits, which explains why the opening window is most informative and why removing punctuation and newlines (Section 9) costs so much.
+
+### E. Two more checks
+
+Identity placeholder. Removing the 71 test answers that contain a [MODEL] mask leaves CNN macro-F1 at 86.2% and LSTM at 82.3%, essentially unchanged, so masked self-references are not a shortcut.
+
+Ensemble. Averaging the probabilities of the CNN (three seeds), the LSTM (three seeds), and char TF-IDF combines different views of the text. Weights chosen on validation (CNN 0.55, LSTM 0.35, char 0.10) reach 88.5% test macro-F1, +1.14 pp over char TF-IDF, 95% CI [-0.45, 2.79]. The pre-specified equal-weight average reaches 89.5%, +2.15 pp, CI [0.67, 3.65]. Validation-tuned weights did not beat the simple average here, a reminder that 1,442 validation answers make weight tuning noisy. The equal-weight result suggests the CNN and LSTM capture information that char TF-IDF misses; the validation-weighted interval includes zero, so the size of that gain is uncertain.
+
+
+## 12. Checks, limitations, and lessons
 
 The shuffled-training-label CNN has test accuracy 23.3% and macro-F1 21.8%. Labels are permuted only in training; validation and test labels remain unchanged. This is a pipeline sanity check, not a proof that all confounding is eliminated.
 
@@ -275,7 +334,7 @@ The shuffled-training-label CNN has test accuracy 23.3% and macro-F1 21.8%. Labe
 | Validation-only model choice | 33 validation prediction files recomputed; selected IDs reproduced |
 | Reported test scores | 31 prediction files independently rescored |
 | Saved-model inference | CNN/LSTM checkpoint replay against stored probabilities |
-| Implementation invariants | 13 unit tests: masking, attribution, vocabulary, padding, recurrent states, class count |
+| Implementation invariants | 15 unit tests: masking, attribution, vocabulary, padding, recurrent states, class count, follow-up subsetting |
 
 ### Material limitations
 
@@ -287,10 +346,10 @@ Question or answer truncation may discard useful evidence. Softmax values are un
 
 Curation changes the research question: a 135k-battle corpus becomes a 9.6k-response controlled subset. A recurrent network must handle sequence padding and pooling correctly. Model selection needs a separate validation set. A simple lexical baseline can be an informative competitor, and test accuracy alone does not explain which cues drive attribution.
 
-AI assistance: ChatGPT/Codex assisted with implementation, debugging, experiment orchestration, analysis, and report drafting. The named student is responsible for understanding, verifying, and explaining the submitted work. No claim is made that an automated result establishes student understanding.
+AI assistance: ChatGPT/Codex and Claude assisted with implementation, debugging, experiment orchestration, analysis, and report drafting. The named student is responsible for understanding, verifying, and explaining the submitted work. No claim is made that an automated result establishes student understanding.
 
 
-## 12. Project evolution and dataset choice
+## 13. Project evolution and dataset choice
 
 The project developed in three stages. Earlier code, measured results, demonstration weights, and PDF reports remain available so that the final study can be traced back to its initial implementation. The table reports response-only accuracy, averaged over three seeds within each stage.
 
@@ -310,12 +369,12 @@ The project developed in three stages. Earlier code, measured results, demonstra
 
 On the same UltraFeedback task and split, bounded validation search, a longer CNN answer budget, and pooled LSTM states produced accuracy gains of 3.39 and 12.99 percentage points respectively. This was exploratory follow-up after the original test results had been seen, rather than a new independent confirmation.
 
-The Arena study adds a four-class target, explicit release selection, session/near-duplicate grouping, a frozen validation screen before test evaluation, and matched-size domain controls. Its higher accuracy is an observed result on a different task. Changes in author classes, text distribution, and split design prevent attributing the difference to sample size. A fixed-Arena-split learning curve would be needed to isolate the benefit of more training examples; that experiment has not been run.
+The Arena study adds a four-class target, explicit release selection, session/near-duplicate grouping, a frozen validation screen before test evaluation, and matched-size domain controls. Its higher accuracy is an observed result on a different task. Changes in author classes, text distribution, and split design prevent attributing the difference to sample size. The follow-up learning curve in Section 11 isolates training size on the fixed Arena split: with the same recipes, validation set, and test set, CNN macro-F1 rises from 75.6% with 841 training responses to 86.5% with 6,735. More examples did help within Arena; the curve still says nothing about the cross-dataset jump.
 
 Archive: report/archive/Who_Wrote_It_Haodong_Huang_v1.pdf and _v2.pdf; historical methods: docs/ITERATION_NOTES_ZH.md; metrics: results/ and results/v2/; current metrics: results/arena/. See docs/PROJECT_EVOLUTION_ZH.md for a Chinese explanation.
 
 
-## 13. Reproduction and submission
+## 14. Reproduction and submission
 
 Install Python 3.12 and the exact dependencies in requirements-lock.txt. The recorded runs use PyTorch 2.14.1 with Apple MPS. CPU inference replay verifies the two distributed demonstration weights; training on other devices can yield numerical differences.
 
@@ -328,6 +387,7 @@ Install Python 3.12 and the exact dependencies in requirements-lock.txt. The rec
 | Evaluate frozen models | python src/arena_train.py evaluate |
 | Verify metrics and build figures | python src/arena_analyze.py |
 | Run implementation checks | python -m unittest discover -s tests -v |
+| Follow-up plan, diagnostics, learning curve | python src/arena_followup.py plan | posthoc | curve |
 | Build this report | python src/build_report.py |
 
 The prepare command refuses to overwrite existing split text and verifies published assignments in a fresh clone. Reproduce from a fresh clone and preserve the archived results. Training caches require matching configuration and split hashes. The domain phase must precede first test evaluation. Two selected response-only weights are included for a local demonstration; other checkpoints remain local and can be regenerated.
