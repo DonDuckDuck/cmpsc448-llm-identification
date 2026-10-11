@@ -15,7 +15,7 @@
   "src/baselines.py": "ea305d32f0431bb8b647cd078bcf8ca59559bca8496b1e563d0f469be7e26616",
   "src/build_legacy_report.py": "3de29db14d0bbb527cbd05eeba56bc2d37f9d8296b352076887b5fa75f124fe3",
   "src/build_lessons_figures.py": "0a3e5d6325dc2d29f75bc13a807412029c9390c3d8ee4c667bbac433a9d7c989",
-  "src/build_readme.py": "871cf50083aacc8a3ea4b9fbbeb802e351b727d23da4581f6b4bf37130507708",
+  "src/build_readme.py": "fba575b944fe1d3ed85d1b325d2adb2cd3cc7de9b6366c06e7a6d2b738cc8783",
   "src/build_report.py": "2701fd84c48951f686331b6ed07864e82f44db188bf2d83d2ac01ac1e0c7b4f5",
   "src/download_data.py": "f84eda5aa2ef5497791c627d87e577e3ac0b6c3c5331a19a61a28ec9d545b53b",
   "src/iterate.py": "4ab745499e858c811dcfe6ce7db5015e7741f682a3905c9644d3eef18170ed09",
