@@ -2,7 +2,8 @@
 
 Identifying LLMs from Their Responses
 
-Haodong Huang | Individual projectCMPSC 448 | October 11, 2026
+Haodong Huang | Individual project
+CMPSC 448 | October 11, 2026
 
 ### Abstract
 
@@ -12,7 +13,7 @@ This project asks whether a neural classifier can tell which LLM wrote a respons
 
 | Rubric criterion | Sections |
 | --- | --- |
-| Problem definition and dataset curation | 1 (data and provenance), 2 (splits and leakage control) |
+| Problem definition and dataset curation | 1 (problem definition, data, provenance), 2 (splits and leakage control) |
 | CNN/RNN implementation and training | 3 (architectures), 4 (training and model selection) |
 | Results and presentation | 5 (main results), 6 (per-class errors), 7 (prompt effect) |
 | In-depth analyses and experiments | 8 (RQ3 domain transfer), 9-10 (RQ4 signals), 11 (follow-up experiments), 12 (checks) |
@@ -28,9 +29,15 @@ This project asks whether a neural classifier can tell which LLM wrote a respons
 | RQ4: Which signals matter? | Word-only normalization, structural classifiers, equal-length inputs (CNN 81.9% F1 with length hidden), window position, and the n-grams the CNN relies on. |
 
 
-## 1. Dataset and model provenance
+## 1. Problem definition and dataset
 
-The official Arena release contains 135,634 battles collected in April-July 2025 [1,2]. Each side provides a model ID and a conversation. We convert a retained side into (LLM_name, LLM_Input, LLM_output). Human preference votes are not author labels and never become input features. The source revision and seven file hashes are recorded in docs/arena_data_provenance.json.
+### Problem definition
+
+Given an LLM response, and for RQ2 also the user's prompt, the task is to predict which of four fixed model releases wrote it: closed-set, four-class text classification. Each example is a triple (LLM_name, LLM_Input, LLM_output); the input x is the masked prompt and/or response, and the label y is Claude, GPT, Grok, or DeepSeek. A CNN and an LSTM learn f(x) → y from labeled examples. Macro-F1, the unweighted mean of per-class F1, is the primary metric because it weighs every author equally; accuracy and balanced accuracy are also reported. The question matters because more and more online text is machine-written: if LLMs leave measurable fingerprints, a classifier can recover them, and what it relies on shows how the models differ.
+
+### Data source
+
+The official Arena release contains 135,634 battles collected in April-July 2025 [1,2]. Each side provides a model ID and a conversation. I convert each retained side into (LLM_name, LLM_Input, LLM_output). Human preference votes are not author labels and never become input features. The source revision and seven file hashes are recorded in docs/arena_data_provenance.json.
 
 | Class | Exact model ID | Before filters | Retained |
 | --- | --- | --- | --- |
@@ -147,7 +154,7 @@ Bars: means over three seeds. Error bars: 95% percentile intervals from 2,000 re
 
 ![Bars: means over three seeds. Error bars: 95% percentile intervals from 2,000 resamples of held-out session/duplicate groups.](../results/figures/arena_results.png)
 
-For response-only attribution, the CNN-minus-LSTM macro-F1 difference is +3.98 pp; 95% CI [2.52, 5.42] The interval excludes zero. Both architectures are evaluated against the same rows and grouped resampling draws.
+For response-only attribution, the CNN-minus-LSTM macro-F1 difference is +3.98 pp; 95% CI [2.52, 5.42]. The interval excludes zero. Both architectures are evaluated against the same rows and grouped resampling draws.
 
 The intervals capture uncertainty from which test questions happened to be sampled; they do not cover retraining, model selection, or future model releases.
 
@@ -181,11 +188,11 @@ These slices use models trained on mixed tasks. They are descriptive performance
 
 ### CNN
 
-Question-only macro-F1 is 26.3%, response-only is 86.5%, and combined is 86.2%. The paired combined-minus-response difference is -0.33 pp; 95% CI [-1.44, 0.78] The interval includes zero; the direction is not resolved.
+Question-only macro-F1 is 26.3%, response-only is 86.5%, and combined is 86.2%. The paired combined-minus-response difference is -0.33 pp; 95% CI [-1.44, 0.78]. The interval includes zero; the direction is not resolved.
 
 ### LSTM
 
-Question-only macro-F1 is 24.1%, response-only is 82.5%, and combined is 80.8%. The paired combined-minus-response difference is -1.73 pp; 95% CI [-2.89, -0.54] The interval excludes zero.
+Question-only macro-F1 is 24.1%, response-only is 82.5%, and combined is 80.8%. The paired combined-minus-response difference is -1.73 pp; 95% CI [-2.89, -0.54]. The interval excludes zero.
 
 ### How to interpret input-only prediction
 
@@ -244,9 +251,9 @@ Structural baselines use full-answer statistics: log character/word counts, aver
 | CNN | 86.2% | 78.6% | -7.61 pp |
 | LSTM | 81.6% | 66.3% | -15.29 pp |
 
-CNN normalization contrast: -7.61 pp; 95% CI [-9.78, -5.39]
+CNN normalization contrast: -7.61 pp; 95% CI [-9.78, -5.39].
 
-LSTM normalization contrast: -15.29 pp; 95% CI [-18.07, -12.51]
+LSTM normalization contrast: -15.29 pp; 95% CI [-18.07, -12.51].
 
 Removing punctuation and newlines costs the CNN 7.6 points and the LSTM 15.3. Because the word-only version also fits more words into the same token budget, this measures the value of formatting tokens as a group, not of any single feature.
 
@@ -272,7 +279,7 @@ Word and character patterns alone are enough to identify authors well (char TF-I
 
 ### What would strengthen a later study?
 
-A future independent experiment could collect the same prompts from all four models under matched generation settings and hold out newer model versions. Section 11 takes first steps with equal-length inputs and the identical-prompt pairs Arena already contains. That would separate provider, prompt distribution, generation settings, and length more directly. Such follow-up work needs a new evaluation set, because this test set has now been used for the reported study.
+A future independent experiment could collect the same prompts from all four models under matched generation settings and hold out newer model versions. That would separate provider, prompt distribution, generation settings, and length more directly, and it would need a new evaluation set, because this test set has now been used. Section 11 takes first steps in that direction with equal-length inputs and the identical-prompt pairs Arena already contains.
 
 
 ## 11. Follow-up experiments after the main evaluation
@@ -395,7 +402,7 @@ The project developed in three stages. Earlier code, measured results, and demon
 
 2. More usable examples. After curation, the sample increases from 4,254 to 9,643 responses (2.27 times as many). The motivation was to give the models more training evidence and test whether performance could improve. The dataset name "140k" describes the source release, not the number of responses used for training.
 
-### What improved, and what can we conclude?
+### What improved, and what does it show?
 
 On the same UltraFeedback task and split, bounded validation search, a longer CNN answer budget, and pooled LSTM states produced accuracy gains of 3.39 and 12.99 percentage points respectively. This was exploratory follow-up after the original test results had been seen, rather than a new independent confirmation.
 
@@ -480,7 +487,7 @@ Looking back, switching was definitely worth it. ChatGPT, Claude, and Grok are u
 | Stage-2 tuning happened after seeing stage-1 test scores. | Reviewing the protocol. | Stage 2 labelled exploratory; Arena selection frozen on validation before any test access. | Clean main study. |
 | Three answers still contained model-version suffixes after masking. | Audit before test evaluation. | Masking repaired; every fit rerun from scratch. | No identity strings left. |
 | Near-duplicate prompts could leak across splits. | Popular prompts recur across Arena battles. | Group by session, prompt, answer, and TF-IDF similarity of at least 0.90. | No group crosses splits. |
-| The classifier might just count answer length. | Grok answers are about five times longer than Claude's. | Equal 128-token inputs; length strata. | CNN still 81.9% F1. |
+| The classifier might just count answer length. | Grok's median answer is four to five times as long as Claude's. | Equal 128-token inputs; length strata. | CNN still 81.9% F1. |
 | [MODEL] placeholders might act as a shortcut. | Placeholder rates differ slightly by class. | Score answers without any placeholder. | CNN 86.2% F1, unchanged. |
 
 Most of these were not visible in the accuracy number. A model can score well for the wrong reason, so each risk needed its own targeted check. Writing the plan and freezing the model choice before looking at test results also turned out to matter: once a test set has been seen, every later change becomes exploratory.
@@ -509,7 +516,7 @@ Install Python 3.12 and the exact dependencies in requirements-lock.txt. The rec
 | Evaluate frozen models | python src/arena_train.py evaluate |
 | Verify metrics and build figures | python src/arena_analyze.py |
 | Run implementation checks | python -m unittest discover -s tests -v |
-| Follow-up plan, diagnostics, learning curve, RQ3 extension | python src/arena_followup.py plan | posthoc | curve | domain |
+| Follow-up plan, diagnostics, learning curve, RQ3 extension | python src/arena_followup.py plan, then posthoc, curve, domain |
 | Lessons figures | python src/build_lessons_figures.py |
 | Build this report | python src/build_report.py |
 

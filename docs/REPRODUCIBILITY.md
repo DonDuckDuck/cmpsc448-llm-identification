@@ -13,9 +13,17 @@ python src/arena_train.py train
 python src/arena_train.py domain
 python src/arena_train.py evaluate
 python src/arena_analyze.py
+python src/arena_followup.py plan
+python src/arena_followup.py posthoc
+python src/arena_followup.py curve
+python src/arena_followup.py domain
 python -m unittest discover -s tests -v
+python src/build_lessons_figures.py
 python src/build_report.py
+python src/build_readme.py
 ```
+
+The follow-up phases write only to `results/arena_followup/` and their own checkpoint folder; they never modify the frozen main-study results in `results/arena/`.
 
 The published non-text split manifest is included for auditing. In a fresh clone, `prepare` regenerates the ignored split text and requires the new manifest to match the published assignments exactly. It refuses to overwrite existing local split text; use a separate clone for full reproduction.
 

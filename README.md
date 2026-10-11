@@ -36,7 +36,7 @@ Run after the frozen main study, under plans recorded before the runs in `docs/a
 | Same prompt, two authors? | On 76 identical-prompt test pairs the CNN assigns both authors correctly 99.12% of the time; prompt-only is exactly 50%. |
 | Where is the fingerprint? | Opening window ≫ middle; CNN keys on openers like "Certainly! Here's" (GPT), "Below is a detailed" (Grok), "I'd recommend" (Claude), bold numbered headers and "Would you like" (DeepSeek). |
 | Transfer to unseen task types (RQ3, 3 seeds)? | Trained without coding, CNN macro-F1 on coding is 73.42% vs. 81.15% with matched mixed training; trained without creative writing (the assignment's example), 75.41% vs. 79.08% on writing. |
-| Ensemble? | Equal-weight CNN+LSTM+char TF-IDF: 89.48% macro-F1 (+2.15 pp over char TF-IDF). |
+| Ensemble? | Equal-weight CNN+LSTM+char TF-IDF: 89.48% macro-F1 (+2.15 pp over char TF-IDF); with validation-chosen weights, 88.47%. |
 
 ![Learning curve](results/figures/followup_learning_curve.png)
 
@@ -59,7 +59,7 @@ The target is **four fixed releases**, not every member of their families or the
 - Training-only vocabularies, TF-IDF, scalers, and inverse-frequency class weights.
 - Four validation-screen candidates; selected CNN/LSTM recipes repeated across all three input conditions and three seeds.
 - **RQ1:** response-only author classification. **RQ2:** prompt vs. response vs. combined input.
-- **RQ3:** non-code training and coding test, compared with a mixed-domain control matched by each training-class count; one seed per diagnostic condition.
+- **RQ3:** train without a task type and test on it (coding; creative writing), each against a mixed-domain control matched by per-class training count; three seeds in the follow-up.
 - **RQ4:** six lexical/structural baselines and neural word-only normalization ablations.
 - Shuffled-training-label CNN negative control; independent validation/test rescoring and saved-model replay.
 
@@ -108,7 +108,7 @@ The test set was untouched by model training and selection before the reported e
 
 ## Project evolution and dataset-change rationale
 
-We changed datasets for two reasons: **(1) study the more recognizable Claude/GPT/Grok/DeepSeek model families requested for this project; (2) increase the usable sample, hoping that more training evidence would improve accuracy.** The second is a hypothesis, not a demonstrated causal result. Model-family relevance does not imply a measured ranking of dataset popularity; this release contains 2025 data.
+We changed datasets for two reasons: **(1) study the more recognizable Claude/GPT/Grok/DeepSeek model families; (2) increase the usable sample, hoping that more training evidence would improve accuracy.** This release contains 2025 data.
 
 | Stage | Dataset / classes | Curated responses | CNN accuracy | LSTM accuracy |
 |---|---|---:|---:|---:|
@@ -116,7 +116,7 @@ We changed datasets for two reasons: **(1) study the more recognizable Claude/GP
 | Same-data optimization | Same UltraFeedback data and split | 4,254 | 80.91% | 77.00% |
 | Current study | Arena / Claude, GPT, Grok, DeepSeek | 9,643 | 86.79% | 83.04% |
 
-All scores are response-only, three-seed means within each stage. Same-data optimization increased CNN/LSTM accuracy by **3.39/12.99 percentage points**, but was exploratory follow-up on an already evaluated test set. Arena provides **2.27 times as many curated responses**, with explicit model-release selection, session/duplicate grouping, frozen validation selection, and matched-size domain controls. Its scores are **not directly comparable** to the earlier three-class task: author classes, distributions, and split designs changed. A fixed-split Arena learning curve would be needed to isolate the effect of training-set size; it has not been run.
+All scores are response-only, three-seed means within each stage. Same-data optimization increased CNN/LSTM accuracy by **3.39/12.99 percentage points**, but was exploratory follow-up on an already evaluated test set. Arena provides **2.27 times as many curated responses**, with explicit model-release selection, session/duplicate grouping, frozen validation selection, and matched-size domain controls. Its scores are **not directly comparable** to the earlier three-class task: author classes, distributions, and split designs changed. The follow-up learning curve on the fixed Arena split (report Section 11A) isolates training size: with the same recipes and test set, CNN macro-F1 rises from 75.59% with 841 training responses to 86.51% with 6,735.
 
 ## Repository guide
 
@@ -135,4 +135,4 @@ All scores are response-only, three-seed means within each stage. Same-data opti
 | `models/arena_*.pt` | Two locally usable demonstration checkpoints |
 | `report/` | Current report (PDF and text version) |
 
-Course grounding: Chapter 4 (CNN/pooling/LSTM) and Chapter 9 (loss/mini-batches/Adam). Specific budgets, filters, and hyperparameters are project design decisions. The submission deliverable is this repository URL and its PDF; publishing it does not submit it to Canvas.
+Course grounding: Chapter 4 (CNN/pooling/LSTM) and Chapter 9 (loss/mini-batches/Adam). Specific budgets, filters, and hyperparameters are project design decisions.

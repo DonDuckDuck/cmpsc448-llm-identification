@@ -27,7 +27,7 @@ TEAL=colors.HexColor('#0B7774');INK=colors.HexColor('#172C3B');GRAY=colors.HexCo
 styles=getSampleStyleSheet()
 styles.add(ParagraphStyle(name='TitleCustom',fontName='Bold',fontSize=29,leading=35,textColor=INK,spaceAfter=15))
 styles.add(ParagraphStyle(name='HeadingCustom',fontName='Bold',fontSize=18,leading=23,textColor=INK,spaceAfter=13))
-styles.add(ParagraphStyle(name='SubCustom',fontName='Bold',fontSize=11,leading=15,textColor=TEAL,spaceBefore=8,spaceAfter=5))
+styles.add(ParagraphStyle(name='SubCustom',fontName='Bold',fontSize=11,leading=15,textColor=TEAL,spaceBefore=8,spaceAfter=5,keepWithNext=1))
 styles.add(ParagraphStyle(name='BodyCustom',fontName='Body',fontSize=9.4,leading=14,textColor=INK,spaceAfter=8))
 styles.add(ParagraphStyle(name='SmallCustom',fontName='Body',fontSize=8,leading=11.3,textColor=GRAY,spaceAfter=6))
 styles.add(ParagraphStyle(name='CellCustom',fontName='Body',fontSize=8.1,leading=11,textColor=INK))
@@ -36,13 +36,13 @@ story=[];md=[];W=516
 
 def p(text,small=False):
     story.append(Paragraph(text,styles['SmallCustom' if small else 'BodyCustom']))
-    md.append(re.sub('<[^>]+>','',html.unescape(text))+'\n')
+    md.append(re.sub('<[^>]+>','',html.unescape(text.replace('<br/>','\n')))+'\n')
 def sub(text):
     story.append(Paragraph(text,styles['SubCustom']));md.append('### '+text+'\n')
 def page(title):
     if story:story.append(PageBreak())
     story.append(Paragraph(title,styles['HeadingCustom']));md.append('\n## '+title+'\n')
-def table(headers,rows,widths=None,small=False):
+def table(headers,rows,widths=None,small=False,keep=False):
     widths=[x*W for x in widths] if widths else [W/len(headers)]*len(headers)
     cells=[[Paragraph(html.escape(str(c)),styles['TableHeadCustom']) for c in headers]]
     cells += [[Paragraph(html.escape(str(c)),styles['CellCustom']) for c in row] for row in rows]
@@ -52,7 +52,7 @@ def table(headers,rows,widths=None,small=False):
                           ('LEFTPADDING',(0,0),(-1,-1),7),('RIGHTPADDING',(0,0),(-1,-1),7),
                           ('TOPPADDING',(0,0),(-1,-1),4 if small else 6),('BOTTOMPADDING',(0,0),(-1,-1),4 if small else 6),
                           ('LINEBELOW',(0,-1),(-1,-1),.4,colors.HexColor('#CFDEDF'))]))
-    story.extend([t,Spacer(1,9)])
+    story.extend([KeepTogether([t]) if keep else t,Spacer(1,9)])
     md.extend(['| '+' | '.join(headers)+' |','| '+' | '.join(['---']*len(headers))+' |'])
     md.extend('| '+' | '.join(map(str,row))+' |' for row in rows);md.append('')
 def fig(name,caption,maxheight=215):
@@ -64,7 +64,7 @@ def fig(name,caption,maxheight=215):
 from arena_train import LABELS,CANDIDATES,tag
 core=S['core']
 def f1(arch,mode='output'):return pct(core[arch+'_'+mode]['macro_f1_mean'])
-def change(c):return f"{pp(c['macro_f1_difference'])} pp; 95% CI {interval(c['ci95'])}"
+def change(c):return f"{pp(c['macro_f1_difference'])} pp; 95% CI {interval(c['ci95'])}."
 def yesno(c):return 'The interval excludes zero.' if c['ci95'][0]>0 or c['ci95'][1]<0 else 'The interval includes zero; the direction is not resolved.'
 
 story.append(Spacer(1,4));story.append(Paragraph('WHO WROTE IT?',styles['TitleCustom']))
@@ -74,7 +74,7 @@ md.insert(0,'# Who Wrote It? Identifying LLMs from Their Responses\n')
 story.append(Spacer(1,2));sub('Abstract')
 p(f'This project asks whether a neural classifier can tell which LLM wrote a response. From a pinned Arena Human Preference 140k release I curate {A["retained_rows"]:,} English, single-turn responses from four fixed releases (Claude Sonnet 4, GPT-4.1, Grok 3, DeepSeek V3), with model names masked and no prompt or session shared across splits. A validation screen selects one CNN and one LSTM recipe, each trained with three seeds on prompt-only, response-only, and combined input. Response-only macro-F1 is {f1("cnn")} for the CNN and {f1("lstm")} for the LSTM; prompts alone are near chance, and adding them does not help. Follow-up experiments show that accuracy keeps rising with training data, survives when length is hidden and when two models answer the identical prompt, comes mainly from how responses open, and largely transfers to task types removed from training. An equal-weight ensemble with character TF-IDF reaches {pct(F["ensemble"]["equal"]["macro_f1"])} ({pct(F["ensemble"]["weighted"]["macro_f1"])} with validation-chosen weights). The results describe four specific releases, not universal authorship attribution.')
 sub('Where to find each grading criterion')
-table(['Rubric criterion','Sections'],[['Problem definition and dataset curation','1 (data and provenance), 2 (splits and leakage control)'],['CNN/RNN implementation and training','3 (architectures), 4 (training and model selection)'],['Results and presentation','5 (main results), 6 (per-class errors), 7 (prompt effect)'],['In-depth analyses and experiments','8 (RQ3 domain transfer), 9-10 (RQ4 signals), 11 (follow-up experiments), 12 (checks)'],['Lessons and experience learned','14 (also 13: how the project evolved)']],[.40,.60],small=True)
+table(['Rubric criterion','Sections'],[['Problem definition and dataset curation','1 (problem definition, data, provenance), 2 (splits and leakage control)'],['CNN/RNN implementation and training','3 (architectures), 4 (training and model selection)'],['Results and presentation','5 (main results), 6 (per-class errors), 7 (prompt effect)'],['In-depth analyses and experiments','8 (RQ3 domain transfer), 9-10 (RQ4 signals), 11 (follow-up experiments), 12 (checks)'],['Lessons and experience learned','14 (also 13: how the project evolved)']],[.40,.60],small=True)
 sub('Research questions and evidence')
 table(['Question','Evidence'],[
 ['RQ1: Identify the author?',f'CNN accuracy {pct(core["cnn_output"]["accuracy_mean"])}; LSTM accuracy {pct(core["lstm_output"]["accuracy_mean"])}. Macro-F1 and class recall accompany accuracy.'],
@@ -82,8 +82,11 @@ table(['Question','Evidence'],[
 ['RQ3: Transfer to new tasks?', f'Without coding in training, CNN coding F1 falls from {pct(DM["code"]["cnn"]["control_macro_f1_mean"])} to {pct(DM["code"]["cnn"]["holdout_macro_f1_mean"])}; without creative writing (the assignment\'s example), from {pct(DM["writing"]["cnn"]["control_macro_f1_mean"])} to {pct(DM["writing"]["cnn"]["holdout_macro_f1_mean"])}. Both far above 25% chance.'],
 ['RQ4: Which signals matter?', f'Word-only normalization, structural classifiers, equal-length inputs (CNN {pct(F["equal_length"]["cnn"]["macro_f1"])} F1 with length hidden), window position, and the n-grams the CNN relies on.']],[.31,.69])
 
-page('1. Dataset and model provenance')
-p('The official Arena release contains 135,634 battles collected in April-July 2025 [1,2]. Each side provides a model ID and a conversation. We convert a retained side into (LLM_name, LLM_Input, LLM_output). Human preference votes are not author labels and never become input features. The source revision and seven file hashes are recorded in docs/arena_data_provenance.json.')
+page('1. Problem definition and dataset')
+sub('Problem definition')
+p('Given an LLM response, and for RQ2 also the user\'s prompt, the task is to predict which of four fixed model releases wrote it: closed-set, four-class text classification. Each example is a triple (LLM_name, LLM_Input, LLM_output); the input x is the masked prompt and/or response, and the label y is Claude, GPT, Grok, or DeepSeek. A CNN and an LSTM learn f(x) \u2192 y from labeled examples. Macro-F1, the unweighted mean of per-class F1, is the primary metric because it weighs every author equally; accuracy and balanced accuracy are also reported. The question matters because more and more online text is machine-written: if LLMs leave measurable fingerprints, a classifier can recover them, and what it relies on shows how the models differ.')
+sub('Data source')
+p('The official Arena release contains 135,634 battles collected in April-July 2025 [1,2]. Each side provides a model ID and a conversation. I convert each retained side into (LLM_name, LLM_Input, LLM_output). Human preference votes are not author labels and never become input features. The source revision and seven file hashes are recorded in docs/arena_data_provenance.json.')
 table(['Class','Exact model ID','Before filters','Retained'],[[f,next(k for k,v in A['models'].items() if v==f),A['selected_before_filter'][f],A['family_counts'][f]] for f in LABELS],[.13,.43,.21,.23])
 p('One explicit, non-thinking model variant per family controls a major source of confounding. Grok 4 has only 1,561 sides in the complete release, whereas Grok 3 has 6,040; the study selects Grok 3 for sample support. Therefore class names are convenient abbreviations for these four fixed IDs. Later releases and alternative reasoning settings remain outside the measured scope.')
 sub('Curation sequence')
@@ -176,7 +179,7 @@ p('Response length is itself a source signal: Grok\'s median answer is about fou
 sub('What the analyses establish')
 p(f'Word and character patterns alone are enough to identify authors well (char TF-IDF {pct(S["baselines"]["char_output"]["accuracy"])}). A handful of formatting and length summaries reaches {pct(S["baselines"]["style_all"]["accuracy"])}. Removing punctuation and newlines hurts both networks. None of these shows the network\'s internal decision rule directly; Section 11D traces the CNN\'s decisions to specific phrases.')
 sub('What would strengthen a later study?')
-p('A future independent experiment could collect the same prompts from all four models under matched generation settings and hold out newer model versions. Section 11 takes first steps with equal-length inputs and the identical-prompt pairs Arena already contains. That would separate provider, prompt distribution, generation settings, and length more directly. Such follow-up work needs a new evaluation set, because this test set has now been used for the reported study.')
+p('A future independent experiment could collect the same prompts from all four models under matched generation settings and hold out newer model versions. That would separate provider, prompt distribution, generation settings, and length more directly, and it would need a new evaluation set, because this test set has now been used. Section 11 takes first steps in that direction with equal-length inputs and the identical-prompt pairs Arena already contains.')
 
 page('11. Follow-up experiments after the main evaluation')
 p('The main study above was frozen and evaluated once. This section asks four questions the main study left open: does more training data help, is the classifier only reading answer length, does the fingerprint survive when the prompt is identical, and where in an answer does it live? Part F then extends RQ3. The fractions, seeds, and ensemble rule were fixed in code and recorded in docs/arena_followup_plan.json before the runs, and no configuration was chosen using test labels. Because the test split had already been seen, these are follow-up analyses, not a second confirmation. One disclosure: the length strata and matched-pair counts were previewed from saved predictions before the plan was written; nothing was changed as a result.')
@@ -202,7 +205,7 @@ def show(g):
     for c in '#*-':g=re.sub(rf'(?<=\{c}) (?=\{c})','',g)
     g=re.sub(r"(?<=\w) ([’']) (?=\w)",r'\1',g);g=re.sub(r" ([’']) ",r'\1',g);g=re.sub(r' ([.,!?:])',r'\1',g);return g
 NG=F['cnn_ngrams']
-table(['Author','Most decisive CNN n-grams (training answers, share of correctly classified answers)'],[[f,'; '.join(f'{show(x["ngram"])} ({100*x["share_of_docs"]:.0f}%)' for x in NG[f]['top'][:6])] for f in LABELS],[.15,.85],small=True)
+table(['Author','Most decisive CNN n-grams (training answers, share of correctly classified answers)'],[[f,'; '.join(f'{show(x["ngram"])} ({100*x["share_of_docs"]:.0f}%)' for x in NG[f]['top'][:6])] for f in LABELS],[.15,.85],small=True,keep=True)
 p('For each correctly classified training answer, the five convolution filters that push hardest toward the true class were traced back to the n-gram at their max-pooled position. Shown are n-grams appearing for at least 15 answers and at least 60% of the time for one class (↵ is a newline). The pattern is readable: GPT opens with "Certainly! Here\'s", "Absolutely! Here\'s", or "Great question!"; Grok with "Below is a detailed…"; Claude says "I\'d recommend" and closes by asking a question ("Is there…? That would help"); DeepSeek uses bolded numbered headers and closes with "Would you like…". The fingerprint is largely conversational framing and Markdown habits, which explains why the opening window is most informative and why removing punctuation and newlines (Section 9) costs so much.')
 sub('E. Two more checks')
 K=F['ensemble']
@@ -233,7 +236,7 @@ table(['Stage','Data / author classes','Responses','CNN','LSTM'],[
 sub('Why change the dataset?')
 p('<b>1. More recognizable model families.</b> I wanted to study Claude, GPT, Grok, and DeepSeek. Arena contains identifiable releases from all four, which makes the target authors more relevant than the original Falcon/GPT/Llama subset. The selected records are from 2025, not the latest 2026 releases.')
 p(f'<b>2. More usable examples.</b> After curation, the sample increases from 4,254 to {A["retained_rows"]:,} responses ({A["retained_rows"]/4254:.2f} times as many). The motivation was to give the models more training evidence and test whether performance could improve. The dataset name "140k" describes the source release, not the number of responses used for training.')
-sub('What improved, and what can we conclude?')
+sub('What improved, and what does it show?')
 p('On the same UltraFeedback task and split, bounded validation search, a longer CNN answer budget, and pooled LSTM states produced accuracy gains of 3.39 and 12.99 percentage points respectively. This was exploratory follow-up after the original test results had been seen, rather than a new independent confirmation.')
 p(f'The Arena study adds a four-class target, explicit release selection, session/near-duplicate grouping, a frozen validation screen before test evaluation, and matched-size domain controls. Its higher accuracy is an observed result on a different task. Changes in author classes, text distribution, and split design prevent attributing the difference to sample size. The follow-up learning curve in Section 11 isolates training size on the fixed Arena split: with the same recipes, validation set, and test set, CNN macro-F1 rises from {pct(C['summary']['0.125']['cnn']['macro_f1_mean'])} with {C['rows']['0.125']:,} training responses to {pct(C['summary']['1']['cnn']['macro_f1_mean'])} with {C['rows']['1']:,}. More examples did help within Arena; the curve still says nothing about the cross-dataset jump.')
 
@@ -277,7 +280,7 @@ fig('lessons_signatures','Phrases at the max-pooled positions of the CNN filters
 p('GPT opens with enthusiasm ("Certainly! Here\'s", "Great question!"), Grok announces structure ("Below is a detailed…"), Claude gives a personal recommendation and asks a follow-up ("I\'d recommend", "Is there…"), and DeepSeek offers more help ("Would you like…"). This matches the window experiment: identification is easiest on the first 192 tokens and hardest in the middle of a long answer. What I learned is that an LLM "fingerprint" in this data is mostly a habit of presentation, which also suggests it could change quickly when providers update their models.')
 
 sub('5. Was switching to Arena worth it?')
-table(['','UltraFeedback (stages 1-2)','Arena (stage 3)'],[['Authors','Falcon, GPT, Llama','Claude, GPT, Grok, DeepSeek'],['Relevance','Older or less widely used models','Mainstream models that keep releasing new versions'],['Usable responses','4,254',f'{A["retained_rows"]:,}'],['Room to grow','Few datasets contain the same releases','Large public release with exact model IDs']],[.22,.39,.39],small=True)
+table(['','UltraFeedback (stages 1-2)','Arena (stage 3)'],[['Authors','Falcon, GPT, Llama','Claude, GPT, Grok, DeepSeek'],['Relevance','Older or less widely used models','Mainstream models that keep releasing new versions'],['Usable responses','4,254',f'{A["retained_rows"]:,}'],['Room to grow','Few datasets contain the same releases','Large public release with exact model IDs']],[.22,.39,.39],small=True,keep=True)
 p('Looking back, switching was definitely worth it. ChatGPT, Claude, and Grok are used far more than Falcon, so studying them answers a question about text people actually read today. A reminder for my future self: before starting, search for the best and most current dataset for the question and understand what it contains, instead of picking a dataset more or less at random and starting work right away.')
 
 sub('6. Mistakes, risks, and how they were fixed')
@@ -286,7 +289,7 @@ table(['Problem or risk','How it was noticed','Fix','Result'],[
 ['Stage-2 tuning happened after seeing stage-1 test scores.','Reviewing the protocol.','Stage 2 labelled exploratory; Arena selection frozen on validation before any test access.','Clean main study.'],
 ['Three answers still contained model-version suffixes after masking.','Audit before test evaluation.','Masking repaired; every fit rerun from scratch.','No identity strings left.'],
 ['Near-duplicate prompts could leak across splits.','Popular prompts recur across Arena battles.','Group by session, prompt, answer, and TF-IDF similarity of at least 0.90.','No group crosses splits.'],
-['The classifier might just count answer length.','Grok answers are about five times longer than Claude\'s.','Equal 128-token inputs; length strata.',f'CNN still {pct(F["equal_length"]["cnn"]["macro_f1"])} F1.'],
+['The classifier might just count answer length.','Grok\'s median answer is four to five times as long as Claude\'s.','Equal 128-token inputs; length strata.',f'CNN still {pct(F["equal_length"]["cnn"]["macro_f1"])} F1.'],
 ['[MODEL] placeholders might act as a shortcut.','Placeholder rates differ slightly by class.','Score answers without any placeholder.',f'CNN {pct(F["mask_free"]["cnn"]["macro_f1"])} F1, unchanged.']],[.27,.22,.30,.21],small=True)
 p('Most of these were not visible in the accuracy number. A model can score well for the wrong reason, so each risk needed its own targeted check. Writing the plan and freezing the model choice before looking at test results also turned out to matter: once a test set has been seen, every later change becomes exploratory.')
 
@@ -295,7 +298,7 @@ table(['Step','What I would do','Why'],[['1','Search for the best, most current 
 
 page('15. Reproduction')
 p('Install Python 3.12 and the exact dependencies in requirements-lock.txt. The recorded runs use PyTorch '+result(tag(S['selection']['cnn']['candidate'],'output',1448))['torch_version']+' with Apple MPS. CPU inference replay verifies the two distributed demonstration weights; training on other devices can yield numerical differences.')
-table(['Step','Command'],[['Download pinned data','python src/arena_data.py download'],['Create the fixed split once','python src/arena_data.py prepare'],['Screen, select, and fit core models','python src/arena_train.py train'],['Fit planned domain-transfer checks','python src/arena_train.py domain'],['Evaluate frozen models','python src/arena_train.py evaluate'],['Verify metrics and build figures','python src/arena_analyze.py'],['Run implementation checks','python -m unittest discover -s tests -v'],['Follow-up plan, diagnostics, learning curve, RQ3 extension','python src/arena_followup.py plan | posthoc | curve | domain'],['Lessons figures','python src/build_lessons_figures.py'],['Build this report','python src/build_report.py']],[.40,.60],small=True)
+table(['Step','Command'],[['Download pinned data','python src/arena_data.py download'],['Create the fixed split once','python src/arena_data.py prepare'],['Screen, select, and fit core models','python src/arena_train.py train'],['Fit planned domain-transfer checks','python src/arena_train.py domain'],['Evaluate frozen models','python src/arena_train.py evaluate'],['Verify metrics and build figures','python src/arena_analyze.py'],['Run implementation checks','python -m unittest discover -s tests -v'],['Follow-up plan, diagnostics, learning curve, RQ3 extension','python src/arena_followup.py plan, then posthoc, curve, domain'],['Lessons figures','python src/build_lessons_figures.py'],['Build this report','python src/build_report.py']],[.40,.60],small=True)
 p('Run the commands in this order in a fresh clone. The two seed-1448 response-only models (CNN and LSTM) are included for demonstration; all other checkpoints can be regenerated with these commands.')
 p(f'Training and validating all main-study models took {S["fit_seconds"]/60:.1f} minutes in total on Apple MPS, not counting the roughly 1.61 GB data download.')
 
