@@ -27,7 +27,7 @@ The majority-class accuracy is **28.72%**. Uniform random accuracy and constant-
 
 ## Follow-up experiments (after the main evaluation)
 
-Run after the frozen main study, under a plan written first ([docs/arena_followup_plan.json](docs/arena_followup_plan.json)); no setting was chosen with test labels. Report Section 11 has details.
+Run after the frozen main study, under plans recorded before the runs in `docs/arena_followup_plan.json` and `docs/arena_followup_domain_plan.json`; no setting was chosen with test labels. Report Section 11 has details.
 
 | Question | Finding |
 |---|---|
@@ -118,7 +118,7 @@ We changed datasets for two reasons: **(1) study the more recognizable Claude/GP
 
 All scores are response-only, three-seed means within each stage. Same-data optimization increased CNN/LSTM accuracy by **3.39/12.99 percentage points**, but was exploratory follow-up on an already evaluated test set. Arena provides **2.27 times as many curated responses**, with explicit model-release selection, session/duplicate grouping, frozen validation selection, and matched-size domain controls. Its scores are **not directly comparable** to the earlier three-class task: author classes, distributions, and split designs changed. A fixed-split Arena learning curve would be needed to isolate the effect of training-set size; it has not been run.
 
-[Initial report](report/archive/Who_Wrote_It_Haodong_Huang_v1.pdf) · [Optimized historical report](report/archive/Who_Wrote_It_Haodong_Huang_v2.pdf) · [Historical methods](docs/ITERATION_NOTES_ZH.md)
+Earlier reports are kept in `report/archive/`.
 
 ## Repository guide
 

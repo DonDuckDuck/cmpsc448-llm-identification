@@ -1,4 +1,4 @@
-"""Refresh the repository landing page and Chinese result sheet from audited metrics."""
+"""Refresh the repository landing page from audited metrics."""
 from pathlib import Path
 import json
 ROOT=Path(__file__).resolve().parents[1]
@@ -34,7 +34,7 @@ The majority-class accuracy is **{pct(S['majority_accuracy'])}**. Uniform random
 
 ## Follow-up experiments (after the main evaluation)
 
-Run after the frozen main study, under a plan written first ([docs/arena_followup_plan.json](docs/arena_followup_plan.json)); no setting was chosen with test labels. Report Section 11 has details.
+Run after the frozen main study, under plans recorded before the runs in `docs/arena_followup_plan.json` and `docs/arena_followup_domain_plan.json`; no setting was chosen with test labels. Report Section 11 has details.
 
 | Question | Finding |
 |---|---|
@@ -123,7 +123,7 @@ We changed datasets for two reasons: **(1) study the more recognizable Claude/GP
 
 All scores are response-only, three-seed means within each stage. Same-data optimization increased CNN/LSTM accuracy by **3.39/12.99 percentage points**, but was exploratory follow-up on an already evaluated test set. Arena provides **2.27 times as many curated responses**, with explicit model-release selection, session/duplicate grouping, frozen validation selection, and matched-size domain controls. Its scores are **not directly comparable** to the earlier three-class task: author classes, distributions, and split designs changed. A fixed-split Arena learning curve would be needed to isolate the effect of training-set size; it has not been run.
 
-[Initial report](report/archive/Who_Wrote_It_Haodong_Huang_v1.pdf) · [Optimized historical report](report/archive/Who_Wrote_It_Haodong_Huang_v2.pdf) · [Historical methods](docs/ITERATION_NOTES_ZH.md)
+Earlier reports are kept in `report/archive/`.
 
 ## Repository guide
 
@@ -145,22 +145,4 @@ All scores are response-only, three-seed means within each stage. Same-data opti
 Course grounding: Chapter 4 (CNN/pooling/LSTM) and Chapter 9 (loss/mini-batches/Adam). Specific budgets, filters, and hyperparameters are project design decisions. The submission deliverable is this repository URL and its PDF; publishing it does not submit it to Canvas.
 '''
 (ROOT/'README.md').write_text(text)
-zh='# Arena 实验结果速览\n\n作者：Haodong Huang。主报告维持老师原题。以下数字由实际测试结果生成。\n\n'
-zh+='数据：9,643 条回答；训练/验证/测试 = 6,735/1,442/1,466；四个固定版本 Claude Sonnet 4、GPT-4.1、Grok 3、DeepSeek V3。\n\n'
-zh+='| 模型 | 输入 | 准确率 | Macro-F1 | Balanced accuracy |\n|---|---|---:|---:|---:|\n'+table+'\n\n'
-for a in ['cnn','lstm']:
- c=S['contrasts'][a+'_prompt_gain'];zh+=f'{a.upper()} 加入问题后的 macro-F1 差值：{100*c["macro_f1_difference"]:+.2f} 个百分点；95% 组重采样区间 [{100*c["ci95"][0]:+.2f}, {100*c["ci95"][1]:+.2f}]。\n\n'
-zh+='以上为三个种子的均值。跨领域、格式消融与打乱标签为单种子诊断。新旧数据集的标签数、版本和划分不同，不要把旧三分类与新四分类的分数直接解释为提升。完整解释与局限见英文报告及 ARENA_PROTOCOL_ZH.md。\n'
-zh+=f'''
-## 补充实验（主实验评估之后）
-
-计划先写入 docs/arena_followup_plan.json，再运行；没有用测试标签选择任何设置。测试集此前已用过，因此属于后续分析，不是第二次确认。
-
-- 学习曲线（固定划分）：训练数据从 {C['rows']['0.125']:,} 增加到 {C['rows']['1']:,} 条，CNN macro-F1 {pct(C['summary']['0.125']['cnn']['macro_f1_mean'])} → {pct(C['summary']['1']['cnn']['macro_f1_mean'])}，LSTM {pct(C['summary']['0.125']['lstm']['macro_f1_mean'])} → {pct(C['summary']['1']['lstm']['macro_f1_mean'])}。
-- 去掉长度信息（每条回答都截成正好 128 token）：CNN {pct(F['equal_length']['cnn']['macro_f1'])}，LSTM {pct(F['equal_length']['lstm']['macro_f1'])}。
-- 同一问题、两个作者的 {F['matched_pairs']['pairs']} 对：CNN 正确分配 {pct(F['matched_pairs']['cnn']['pairwise_assignment'])}；只看问题必然是 50%。
-- 指纹位置：开头窗口最强，中间最弱；CNN 依赖开场白与 Markdown 习惯。
-- 等权融合 CNN+LSTM+字符 TF-IDF：macro-F1 {pct(F['ensemble']['equal']['macro_f1'])}。
-'''
-(ROOT/'docs/ARENA_RESULTS_ZH.md').write_text(zh)
-print('README and Chinese results refreshed from audited Arena metrics')
+print('README refreshed from audited Arena metrics')

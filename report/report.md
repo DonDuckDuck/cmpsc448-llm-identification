@@ -401,7 +401,7 @@ On the same UltraFeedback task and split, bounded validation search, a longer CN
 
 The Arena study adds a four-class target, explicit release selection, session/near-duplicate grouping, a frozen validation screen before test evaluation, and matched-size domain controls. Its higher accuracy is an observed result on a different task. Changes in author classes, text distribution, and split design prevent attributing the difference to sample size. The follow-up learning curve in Section 11 isolates training size on the fixed Arena split: with the same recipes, validation set, and test set, CNN macro-F1 rises from 75.6% with 841 training responses to 86.5% with 6,735. More examples did help within Arena; the curve still says nothing about the cross-dataset jump.
 
-Archive: report/archive/Who_Wrote_It_Haodong_Huang_v1.pdf and _v2.pdf; historical methods: docs/ITERATION_NOTES_ZH.md; metrics: results/ and results/v2/; current metrics: results/arena/. See docs/PROJECT_EVOLUTION_ZH.md for a Chinese explanation.
+Archive: report/archive/Who_Wrote_It_Haodong_Huang_v1.pdf and _v2.pdf; metrics: results/ and results/v2/; current metrics: results/arena/.
 
 
 ## 14. Lessons and experience learned
