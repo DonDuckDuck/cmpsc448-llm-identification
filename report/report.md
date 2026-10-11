@@ -394,7 +394,6 @@ This section is written from my own notes on the project. The earlier sections r
 | 4 | The fingerprint is in the framing. | Openers such as "Certainly! Here's" and "Below is a detailed" drive decisions; the first window is easiest. |
 | 5 | Choose the data before the model. | Arena covers mainstream, actively updated models; Falcon-era data could not grow. |
 | 6 | Test for shortcuts before trusting a score. | Length, identity-mask, and same-prompt controls in Section 11 all held up. |
-| 7 | AI tools speed up the work but need checking. | Fast experiment turnaround; a mistake-finding second reader; numbers still traced to files. |
 
 ### 1. The data limited the first version more than the model did
 
@@ -472,17 +471,6 @@ Most of these were not visible in the accuracy number. A model can score well fo
 | 3 | Start with the simplest approach: a TF-IDF baseline. | Shows how strong simple patterns are (Lesson 3). |
 | 4 | Work up to the CNN and then the LSTM, comparing each with the step before. | Every gain from complexity becomes visible. |
 | 5 | Run shortcut checks (length, identity, same prompt) early. | Confirms the model learns style, not artifacts. |
-
-### 8. Working with AI coding assistants
-
-| Where the tools helped | What I still had to do |
-| --- | --- |
-| Turning an idea into a measured experiment very quickly | Decide which questions were worth asking |
-| Writing and debugging training, evaluation, and report code | Check that every reported number comes from a saved result file |
-| Finding mistakes and weak spots I had missed, such as the possible length shortcut | Understand each method well enough to explain and defend it |
-| Re-running audits after every change | Make the decisions: dataset, scope, and what to claim |
-
-ChatGPT/Codex and Claude Code made me far more productive. They let me test ideas in hours that would otherwise have taken days, so I could try many more hypotheses than I could have by hand. I was especially impressed that Claude Code found problems I had not caught myself, for example questioning whether the classifier was simply counting answer length, and then designing experiments to check. The tools still need supervision, and I remain responsible for understanding, verifying, and explaining every part of this submission.
 
 
 ## 15. Reproduction and submission
