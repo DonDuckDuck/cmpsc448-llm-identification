@@ -6,7 +6,17 @@ Haodong Huang | Individual projectCMPSC 448 | October 10, 2026
 
 ### Abstract
 
-This project identifies four LLM sources using a convolutional neural network (CNN) and an LSTM recurrent neural network (RNN). A pinned Arena Human Preference 140k release provides 9,643 curated English, single-turn responses from Claude Sonnet 4, GPT-4.1, Grok 3, and DeepSeek V3. Sessions, exact and near-duplicate prompts, and exact repeated answers remain within one split. Model identity tokens are masked. A four-candidate validation screen selects one CNN and one LSTM recipe, each evaluated on three random seeds and all three input conditions. Response-only macro-F1 is 86.5% for CNN and 82.5% for LSTM. Classical baselines, normalization ablations, shuffled labels, and a matched-size domain-transfer experiment probe what the models learn. These results concern four specific releases on a curated Arena distribution, not universal authorship attribution.
+This project asks whether a neural classifier can tell which LLM wrote a response. From a pinned Arena Human Preference 140k release I curate 9,643 English, single-turn responses from four fixed releases (Claude Sonnet 4, GPT-4.1, Grok 3, DeepSeek V3), with model names masked and sessions and near-duplicate prompts kept within one split. A validation screen selects one CNN and one LSTM recipe, each trained with three seeds on prompt-only, response-only, and combined input. Response-only macro-F1 is 86.5% for the CNN and 82.5% for the LSTM; prompts alone are near chance, and adding them does not help. Follow-up experiments show that accuracy keeps rising with training data, survives when length is hidden and when two models answer the identical prompt, and comes mainly from how responses open. An ensemble with character TF-IDF reaches 89.5%. The results describe four specific releases, not universal authorship attribution.
+
+### Where to find each grading criterion
+
+| Rubric criterion | Sections |
+| --- | --- |
+| Problem definition and dataset curation | 1 (data and provenance), 2 (splits and leakage control) |
+| CNN/RNN implementation and training | 3 (architectures), 4 (training and model selection) |
+| Results and presentation | 5 (main results), 6 (per-class errors), 7 (prompt effect) |
+| In-depth analyses and experiments | 8 (RQ3 domain transfer), 9-10 (RQ4 signals), 11 (follow-up experiments), 12 (checks) |
+| Lessons and experience learned | 14 (also 13: how the project evolved) |
 
 ### Research questions and evidence
 
@@ -324,7 +334,7 @@ Identity placeholder. Removing the 71 test answers that contain a [MODEL] mask l
 Ensemble. Averaging the probabilities of the CNN (three seeds), the LSTM (three seeds), and char TF-IDF combines different views of the text. Weights chosen on validation (CNN 0.55, LSTM 0.35, char 0.10) reach 88.5% test macro-F1, +1.14 pp over char TF-IDF, 95% CI [-0.45, 2.79]. The pre-specified equal-weight average reaches 89.5%, +2.15 pp, CI [0.67, 3.65]. Validation-tuned weights did not beat the simple average here, a reminder that 1,442 validation answers make weight tuning noisy. The equal-weight result suggests the CNN and LSTM capture information that char TF-IDF misses; the validation-weighted interval includes zero, so the size of that gain is uncertain.
 
 
-## 12. Checks, limitations, and lessons
+## 12. Checks and limitations
 
 The shuffled-training-label CNN has test accuracy 23.3% and macro-F1 21.8%. Labels are permuted only in training; validation and test labels remain unchanged. This is a pipeline sanity check, not a proof that all confounding is eliminated.
 
@@ -341,10 +351,6 @@ The shuffled-training-label CNN has test accuracy 23.3% and macro-F1 21.8%. Labe
 The study uses one Arena snapshot, four releases, English first turns, and filtered nontrivial answers. It excludes later model generations, reasoning variants, multilingual text, multi-turn conversations, and multimodal inputs. Automatic identity masking cannot remove all semantic self-identification. Model-side prompts may differ by author; prompt-only controls measure part of this concern but cannot erase it.
 
 Question or answer truncation may discard useful evidence. Softmax values are uncalibrated and should not be presented as trustworthy probabilities for arbitrary text. Future reuse of this test set for tuning would turn subsequent results into follow-up exploration, requiring another independent test for confirmation.
-
-### Lessons supported by the experiments
-
-Curation changes the research question: a 135k-battle corpus becomes a 9.6k-response controlled subset. A recurrent network must handle sequence padding and pooling correctly. Model selection needs a separate validation set. A simple lexical baseline can be an informative competitor, and test accuracy alone does not explain which cues drive attribution.
 
 AI assistance: ChatGPT/Codex and Claude assisted with implementation, debugging, experiment orchestration, analysis, and report drafting. The named student is responsible for understanding, verifying, and explaining the submitted work. No claim is made that an automated result establishes student understanding.
 
@@ -374,7 +380,112 @@ The Arena study adds a four-class target, explicit release selection, session/ne
 Archive: report/archive/Who_Wrote_It_Haodong_Huang_v1.pdf and _v2.pdf; historical methods: docs/ITERATION_NOTES_ZH.md; metrics: results/ and results/v2/; current metrics: results/arena/. See docs/PROJECT_EVOLUTION_ZH.md for a Chinese explanation.
 
 
-## 14. Reproduction and submission
+## 14. Lessons and experience learned
+
+This section is written from my own notes on the project. The earlier sections report what was measured; this one reports what I learned while measuring it, what surprised me, what went wrong and how it was fixed, and what I would do differently. Every number below comes from the saved result files used in the rest of the report.
+
+### Lessons at a glance
+
+| # | Lesson | Evidence in this project |
+| --- | --- | --- |
+| 1 | The dataset sets the ceiling. | Same-data tuning took the LSTM from 64.0% to 77.0%; only a new dataset moved it past 80%. |
+| 2 | More data beat more difficulty. | Four classes instead of three, yet LSTM accuracy reached 83.0%; the learning curve rises at every size. |
+| 3 | Always run a cheap baseline. | Char TF-IDF (87.3% F1) edged out the CNN (86.5%); combining them gave 89.5%. |
+| 4 | The fingerprint is in the framing. | Openers such as "Certainly! Here's" and "Below is a detailed" drive decisions; the first window is easiest. |
+| 5 | Choose the data before the model. | Arena covers mainstream, actively updated models; Falcon-era data could not grow. |
+| 6 | Test for shortcuts before trusting a score. | Length, identity-mask, and same-prompt controls in Section 11 all held up. |
+| 7 | AI tools speed up the work but need checking. | Fast experiment turnaround; a mistake-finding second reader; numbers still traced to files. |
+
+### 1. The data limited the first version more than the model did
+
+The hardest part of the project was the first version. On UltraFeedback (Falcon, GPT, Llama; 4,254 usable responses) the LSTM reached only 64.0% accuracy. I spent the second stage improving the model on the same data: a bounded validation search over twelve candidates, a longer CNN input, and LSTM pooling. That lifted the LSTM to 77.0% and the CNN to 80.9%, but I could not find a way past that level. I also could not simply add examples, because public datasets that contain those same model releases barely exist, especially for Falcon. To make a real breakthrough I had to change the dataset and essentially start again on Arena.
+
+Response-only test accuracy at each stage (three-seed means). Stages 1-2 share one dataset and three classes; stage 3 is a different, four-class task, so the jump is not a controlled comparison.
+
+![Response-only test accuracy at each stage (three-seed means). Stages 1-2 share one dataset and three classes; stage 3 is a different, four-class task, so the jump is not a controlled comparison.](../results/figures/lessons_journey.png)
+
+The lesson is that the dataset sets the ceiling. It decides how many examples exist, which authors can be studied, and therefore how far any later tuning can go. Model work in stage 2 was still valuable, since it is where I learned how much pooling matters for an LSTM, but it could not compensate for a small, fixed dataset.
+
+### 2. More classes, yet higher accuracy
+
+I expected four authors to be harder to separate than three, since chance accuracy drops from 33% to 25%. Instead, accuracy went up: the LSTM reached 83.0% and the CNN 86.8%, close to 90%. I believe a large part of the reason is simply more data. The follow-up learning curve tests this within Arena, holding the task, recipe, validation set, and test set fixed and changing only the number of training answers.
+
+Arena learning curve in test accuracy (three-seed means). Dotted lines mark where the UltraFeedback LSTM stopped; they come from a different three-class task and serve only as a visual reference.
+
+![Arena learning curve in test accuracy (three-seed means). Dotted lines mark where the UltraFeedback LSTM stopped; they come from a different three-class task and serve only as a visual reference.](../results/figures/lessons_data.png)
+
+With 841 training answers the Arena LSTM reaches 67.2% accuracy, close to where my first version was stuck. It needs about 3,367 answers to pass the tuned UltraFeedback LSTM, and reaches 83.0% with all 6,735. Had I stayed with a dataset of the old size, I would very likely still be stuck. The two datasets also differ in authors and prompts, so data size is a strong explanation but not the only one.
+
+### 3. Assumptions versus what happened
+
+| A natural assumption | What actually happened | Takeaway |
+| --- | --- | --- |
+| Four classes would be harder than three. | Accuracy rose to 86.8% (CNN). | Sample size can matter more than task difficulty. |
+| A deep model would beat a classical one. | Char TF-IDF scored 87.3% F1 vs. CNN 86.5%. | Always measure against a cheap baseline. |
+| Adding the prompt would help. | Combined input changed F1 by -0.33 pp (CNN) and -1.73 pp (LSTM). | The answer alone carries the fingerprint. |
+| Models would be told apart by content. | Openers, sign-offs, and Markdown habits drive decisions. | Style of presentation is the main signal. |
+| Long Grok answers might make length a shortcut. | Equal 128-token inputs still give 81.9% CNN F1. | Length helps a little, but is not the main cue. |
+| The LSTM would read text better than the CNN. | The CNN led by +3.98 pp F1. | Local n-gram detectors suit this task well. |
+
+The baseline surprise was the most useful one. Character TF-IDF with logistic regression trains in seconds, yet it slightly outscored my CNN. A deep model is not automatically better than a well-chosen classical one. The two are complementary, though: averaging the CNN, LSTM, and TF-IDF probabilities reached 89.5% macro-F1, the best result in the project.
+
+### 4. The fingerprint is in how a response starts
+
+The third surprise was where the evidence lives. When I traced the CNN's decisions back to the phrases that triggered them, they were mostly about how the model frames a response rather than what it says.
+
+Phrases at the max-pooled positions of the CNN filters that push hardest toward the correct author, on correctly classified training answers (Section 11D method; phrases with at least two words).
+
+![Phrases at the max-pooled positions of the CNN filters that push hardest toward the correct author, on correctly classified training answers (Section 11D method; phrases with at least two words).](../results/figures/lessons_signatures.png)
+
+GPT opens with enthusiasm ("Certainly! Here's", "Great question!"), Grok announces structure ("Below is a detailed…"), Claude gives a personal recommendation and asks a follow-up ("I'd recommend", "Is there…"), and DeepSeek offers more help ("Would you like…"). This matches the window experiment: identification is easiest on the first 192 tokens and hardest in the middle of a long answer. What I learned is that an LLM "fingerprint" in this data is mostly a habit of presentation, which also suggests it could change quickly when providers update their models.
+
+### 5. Was switching to Arena worth it?
+
+|  | UltraFeedback (stages 1-2) | Arena (stage 3) |
+| --- | --- | --- |
+| Authors | Falcon, GPT, Llama | Claude, GPT, Grok, DeepSeek |
+| Relevance | Older or less widely used models | Mainstream models that keep releasing new versions |
+| Usable responses | 4,254 | 9,643 |
+| Room to grow | Few datasets contain the same releases | Large public release with exact model IDs |
+
+Looking back, switching was definitely worth it. ChatGPT, Claude, and Grok are used far more than Falcon, so studying them answers a question about text people actually read today. A reminder for my future self: before starting, search for the best and most current dataset for the question and understand what it contains, instead of picking a dataset more or less at random and starting work right away.
+
+### 6. Mistakes, risks, and how they were fixed
+
+| Problem or risk | How it was noticed | Fix | Result |
+| --- | --- | --- | --- |
+| LSTM summarized the answer with only its final hidden state. | Weak LSTM scores in stage 1. | Masked mean and max pooling over all real tokens. | LSTM 64.0% to 77.0%. |
+| Stage-2 tuning happened after seeing stage-1 test scores. | Reviewing the protocol. | Stage 2 labelled exploratory; Arena selection frozen on validation before any test access. | Clean main study. |
+| Three answers still contained model-version suffixes after masking. | Audit before test evaluation. | Masking repaired; every fit rerun from scratch. | No identity strings left. |
+| Near-duplicate prompts could leak across splits. | Popular prompts recur across Arena battles. | Group by session, prompt, answer, and TF-IDF similarity of at least 0.90. | No group crosses splits. |
+| The classifier might just count answer length. | Grok answers are about five times longer than Claude's. | Equal 128-token inputs; length strata. | CNN still 81.9% F1. |
+| [MODEL] placeholders might act as a shortcut. | Placeholder rates differ slightly by class. | Score answers without any placeholder. | CNN 86.2% F1, unchanged. |
+
+Most of these were not visible in the accuracy number. A model can score well for the wrong reason, so each risk needed its own targeted check. Writing the plan and freezing the model choice before looking at test results also turned out to matter: once a test set has been seen, every later change becomes exploratory.
+
+### 7. What I would change if I started again
+
+| Step | What I would do | Why |
+| --- | --- | --- |
+| 1 | Search for the best, most current dataset and read its documentation first. | The dataset sets the ceiling (Lessons 1, 2, 5). |
+| 2 | Write down the split, metric, and test policy before training. | Avoids test reuse and leakage (Lesson 6). |
+| 3 | Start with the simplest approach: a TF-IDF baseline. | Shows how strong simple patterns are (Lesson 3). |
+| 4 | Work up to the CNN and then the LSTM, comparing each with the step before. | Every gain from complexity becomes visible. |
+| 5 | Run shortcut checks (length, identity, same prompt) early. | Confirms the model learns style, not artifacts. |
+
+### 8. Working with AI coding assistants
+
+| Where the tools helped | What I still had to do |
+| --- | --- |
+| Turning an idea into a measured experiment very quickly | Decide which questions were worth asking |
+| Writing and debugging training, evaluation, and report code | Check that every reported number comes from a saved result file |
+| Finding mistakes and weak spots I had missed, such as the possible length shortcut | Understand each method well enough to explain and defend it |
+| Re-running audits after every change | Make the decisions: dataset, scope, and what to claim |
+
+ChatGPT/Codex and Claude Code made me far more productive. They let me test ideas in hours that would otherwise have taken days, so I could try many more hypotheses than I could have by hand. I was especially impressed that Claude Code found problems I had not caught myself, for example questioning whether the classifier was simply counting answer length, and then designing experiments to check. The tools still need supervision, and I remain responsible for understanding, verifying, and explaining every part of this submission.
+
+
+## 15. Reproduction and submission
 
 Install Python 3.12 and the exact dependencies in requirements-lock.txt. The recorded runs use PyTorch 2.14.1 with Apple MPS. CPU inference replay verifies the two distributed demonstration weights; training on other devices can yield numerical differences.
 
@@ -388,6 +499,7 @@ Install Python 3.12 and the exact dependencies in requirements-lock.txt. The rec
 | Verify metrics and build figures | python src/arena_analyze.py |
 | Run implementation checks | python -m unittest discover -s tests -v |
 | Follow-up plan, diagnostics, learning curve | python src/arena_followup.py plan | posthoc | curve |
+| Lessons figures | python src/build_lessons_figures.py |
 | Build this report | python src/build_report.py |
 
 The prepare command refuses to overwrite existing split text and verifies published assignments in a fresh clone. Reproduce from a fresh clone and preserve the archived results. Training caches require matching configuration and split hashes. The domain phase must precede first test evaluation. Two selected response-only weights are included for a local demonstration; other checkpoints remain local and can be regenerated.

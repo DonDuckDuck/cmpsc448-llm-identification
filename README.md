@@ -84,6 +84,7 @@ python src/arena_followup.py plan
 python src/arena_followup.py posthoc
 python src/arena_followup.py curve
 python -m unittest discover -s tests -v
+python src/build_lessons_figures.py
 python src/build_report.py
 python src/build_readme.py
 ```
