@@ -10,10 +10,13 @@ Phases:
   curve    learning curve: selected CNN/LSTM and char TF-IDF on class-stratified training fractions
   posthoc  no training: length strata, matched-prompt pairs, mask-free subset,
            equal-length windows, validation-weighted ensemble, CNN n-gram evidence
+  domain   RQ3 extension: code holdout repeated over three seeds, plus the assignment's
+           own example (train without creative writing, test on creative writing)
 """
 import argparse,contextlib,itertools,json,re,time
 from collections import Counter,defaultdict
 import joblib,numpy as np,torch
+import pyarrow.parquet as pq
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -60,12 +63,12 @@ def subsample(rows,fraction,seed):
     return [rows[i] for i in sorted(keep)]
 
 @contextlib.contextmanager
-def redirected(folder,train_rows):
-    """Run arena_train.fit unchanged, but write to a follow-up folder and train on a subset."""
+def redirected(folder,train_rows,val_rows=None):
+    """Run arena_train.fit unchanged, but write to a follow-up folder and train (optionally validate) on supplied rows."""
     saved=arena_train.RESULT,arena_train.CHECK,arena_train.load
     check=FOLLOW_CHECK/folder.name;folder.mkdir(parents=True,exist_ok=True);check.mkdir(parents=True,exist_ok=True)
     arena_train.RESULT,arena_train.CHECK=folder,check
-    arena_train.load=lambda split:train_rows if split=='train' else saved[2](split)
+    arena_train.load=lambda split:train_rows if split=='train' else val_rows if split=='val' and val_rows is not None else saved[2](split)
     try:yield check
     finally:arena_train.RESULT,arena_train.CHECK,arena_train.load=saved
 
@@ -112,14 +115,16 @@ def curve():
 def preds(name):return [json.loads(l) for l in (RESULT/'predictions'/f'{name}.jsonl').read_text().splitlines()]
 def macro_f1(y,pred):
     cm=np.zeros((4,4));np.add.at(cm,(y,pred),1);return float(scores(cm)[1])
-def group_bootstrap_diff(groups,y,pred_a,pred_b):
-    """Paired macro-F1 difference a-b over resampled duplicate groups."""
-    names=sorted(set(groups));idx={g:i for i,g in enumerate(names)};gi=np.array([idx[g] for g in groups])
-    cms=np.zeros((2,len(names),4,4));np.add.at(cms[0],(gi,y,pred_a),1);np.add.at(cms[1],(gi,y,pred_b),1)
+def seed_bootstrap_diff(groups,y,preds_a,preds_b):
+    """Paired difference of seed-averaged macro-F1 (a minus b) over resampled duplicate groups."""
+    names=sorted(set(groups));idx={g:i for i,g in enumerate(names)};gi=np.array([idx[g] for g in groups]);k=len(preds_a)
+    cms=np.zeros((2,k,len(names),4,4))
+    for s in range(k):np.add.at(cms[0,s],(gi,y,preds_a[s]),1);np.add.at(cms[1,s],(gi,y,preds_b[s]),1)
     rng=np.random.default_rng(1448);out=[]
     for _ in range(2000):
-        ii=rng.integers(len(names),size=len(names));out.append(np.subtract(*scores(cms[:,ii].sum(1))[1]))
+        ii=rng.integers(len(names),size=len(names));f1=scores(cms[:,:,ii].sum(2))[1];out.append(f1[0].mean()-f1[1].mean())
     return np.percentile(out,[2.5,97.5]).tolist()
+def group_bootstrap_diff(groups,y,pred_a,pred_b):return seed_bootstrap_diff(groups,y,[pred_a],[pred_b])
 
 def posthoc():
     plan();selection=read(ROOT/'docs/arena_selection.json')['selection'];test=load('test');val=load('val')
@@ -224,6 +229,72 @@ def figures(out):
     ax.set_title('Response-only macro-F1 by answer length');ax.legend(frameon=False,ncol=3,loc='upper center');ax.grid(axis='y',alpha=.2)
     fig.tight_layout();fig.savefig(FIGURES/'followup_length.png',dpi=180);plt.close(fig)
 
+DOMAIN_PLAN_PATH=ROOT/'docs/arena_followup_domain_plan.json'
+DOMAIN_PLAN={'status':'Second follow-up, written after the first follow-up results were seen. Extends RQ3 only; the frozen main study and the first follow-up are unchanged.',
+             'code_holdout':'Repeat the main-study non-code training / coding test experiment with seeds 1449 and 1450; seed 1448 is the frozen main-study fit. Same recipes and the same per-class matched mixed-domain control.',
+             'writing_holdout':"The assignment's own RQ3 example: train without creative writing (coding, math, factual and other prompts remain), validate on non-writing rows, test on the creative-writing subset of the test split. Creative writing is Arena category_tag creative_writing_v0.1.creative_writing. Mixed-domain control matched by per-class training count. Seeds 1448-1450.",
+             'reporting':'Target-domain macro-F1 for holdout and control, seed-averaged paired group-bootstrap interval for the difference (2,000 resamples, seed 1448), and per-class recall.',
+             'no_selection':'No recipe, epoch budget, or threshold changes; nothing is chosen with test labels.'}
+def domain_plan():
+    if DOMAIN_PLAN_PATH.exists():assert read(DOMAIN_PLAN_PATH)['plan']==DOMAIN_PLAN,'Domain plan changed after it was frozen';return
+    write(DOMAIN_PLAN_PATH,{'plan':DOMAIN_PLAN,'frozen_utc':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),
+                            'selection_sha256':digest(ROOT/'docs/arena_selection.json'),'split_manifest_sha256':digest(DEST/'split_manifest.json')})
+
+def writing_battles():
+    """Battle IDs whose prompt the pinned Arena release tags as creative writing."""
+    ids=set()
+    for path in sorted((ROOT/'data/raw/arena').rglob('*.parquet')):
+        for r in pq.read_table(path,columns=['id','category_tag']).to_pylist():
+            if ((r['category_tag'] or {}).get('creative_writing_v0.1') or {}).get('creative_writing'):ids.add(r['id'])
+    return ids
+def as_domain(rows,flags):
+    """arena_train.fit holds out rows whose is_code is true; point that switch at another task type."""
+    return [dict(r,is_code=bool(f)) for r,f in zip(rows,flags)]
+def recall(y,pred):
+    cm=np.zeros((4,4));np.add.at(cm,(y,pred),1);return (np.diag(cm)/np.maximum(cm.sum(1),1)).tolist()
+
+def domain():
+    domain_plan();selection=read(ROOT/'docs/arena_selection.json')['selection']
+    train,val,test=load('train'),load('val'),load('test');writing=writing_battles()
+    flags={'code':lambda r:r['is_code'],'writing':lambda r:r['row_id'][:-2] in writing};out={'note':DOMAIN_PLAN['status'],'domains':{}}
+    for dom,f in flags.items():
+        tr,va=as_domain(train,[f(r) for r in train]),as_domain(val,[f(r) for r in val])
+        target=[r for r in test if f(r)];y=np.array([LABELS.index(r['family']) for r in target]);groups=[r['duplicate_group'] for r in target]
+        d=out['domains'][dom]={'test_rows':len(target),'test_family_counts':dict(Counter(r['family'] for r in target)),
+                               'train_rows_in_domain':sum(map(bool,map(f,train))),'val_rows_in_domain':sum(map(bool,map(f,val)))}
+        for arch,c in selection.items():
+            pred={'holdout':[],'control':[]};runs=[]
+            for seed in SEEDS:
+                counts={}
+                for kind,suffix in [('holdout','_domain'),('control','_domain_control')]:
+                    name=tag(c['candidate'],'output',seed,suffix)
+                    if dom=='code' and seed==1448:
+                        r=read(RESULT/f'{name}.json');saved={x['row_id']:x for x in preds(name)};p=np.array([saved[x['row_id']]['probs'] for x in target]);source='frozen main study'
+                    else:
+                        with redirected(OUT/'domain'/f'{dom}_s{seed}',tr,va) as check:
+                            r=arena_train.fit(c['candidate'],'output',seed,suffix);_,p=run_checkpoint(check/f'{name}.pt',target);source='follow-up'
+                    counts[kind]=r['training_family_counts'];pred[kind].append(p.argmax(1))
+                    runs.append({'seed':seed,'kind':kind,'source':source,'training_rows':r['training_rows'],'val_macro_f1':r['best_val_macro_f1'],
+                                 'test':short(metrics(y,p)),'recall':dict(zip(LABELS,recall(y,p.argmax(1))))})
+                assert counts['holdout']==counts['control'],'Control must match holdout class counts'
+            f1={k:[x['test']['macro_f1'] for x in runs if x['kind']==k] for k in pred}
+            d[arch]={'runs':runs,'holdout_macro_f1_mean':float(np.mean(f1['holdout'])),'holdout_macro_f1_sd':float(np.std(f1['holdout'],ddof=1)),
+                     'control_macro_f1_mean':float(np.mean(f1['control'])),'control_macro_f1_sd':float(np.std(f1['control'],ddof=1)),
+                     'difference':float(np.mean(f1['holdout'])-np.mean(f1['control'])),'difference_ci95':seed_bootstrap_diff(groups,y,pred['holdout'],pred['control']),
+                     'recall':{k:dict(zip(LABELS,np.mean([recall(y,q) for q in pred[k]],0).tolist())) for k in pred}}
+            print('DOMAIN',dom,arch,round(d[arch]['holdout_macro_f1_mean'],4),round(d[arch]['control_macro_f1_mean'],4),flush=True)
+    write(OUT/'domain.json',out);domain_figure(out);print(json.dumps({k:{a:{m:v[a][m] for m in ['holdout_macro_f1_mean','control_macro_f1_mean','difference','difference_ci95']} for a in ['cnn','lstm']} for k,v in out['domains'].items()},indent=1))
+
+def domain_figure(out):
+    fig,ax=plt.subplots(figsize=(7.6,3.6));cols=[(d,a) for d in ['code','writing'] for a in ['cnn','lstm']];x=np.arange(len(cols))
+    for i,(kind,label) in enumerate([('control','Mixed-domain training (control)'),('holdout','Target task removed from training')]):
+        m=[100*out['domains'][d][a][kind+'_macro_f1_mean'] for d,a in cols];e=[100*out['domains'][d][a][kind+'_macro_f1_sd'] for d,a in cols]
+        bars=ax.bar(x+(i-.5)*.36,m,.36,yerr=e,capsize=3,color=COLORS[[0,1][i]],label=label)
+        for b,v in zip(bars,m):ax.text(b.get_x()+b.get_width()/2,v+3,f'{v:.1f}',ha='center',fontsize=8)
+    ax.set_xticks(x,[f'{a.upper()}\n{"coding" if d=="code" else "creative writing"} (n={out["domains"][d]["test_rows"]})' for d,a in cols],fontsize=8.5)
+    ax.set_ylim(0,112);ax.set_yticks(range(0,101,20));ax.set_ylabel('Target-task test macro-F1 (%)');ax.set_title('RQ3: identifying authors on a task type removed from training (3 seeds)')
+    ax.legend(frameon=False,ncol=2,loc='upper center');ax.grid(axis='y',alpha=.2);fig.tight_layout();fig.savefig(FIGURES/'followup_domain.png',dpi=180);plt.close(fig)
+
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('phase',choices=['plan','curve','posthoc']);args=p.parse_args()
-    {'plan':plan,'curve':curve,'posthoc':posthoc}[args.phase]()
+    p=argparse.ArgumentParser();p.add_argument('phase',choices=['plan','curve','posthoc','domain']);args=p.parse_args()
+    {'plan':plan,'curve':curve,'posthoc':posthoc,'domain':domain}[args.phase]()

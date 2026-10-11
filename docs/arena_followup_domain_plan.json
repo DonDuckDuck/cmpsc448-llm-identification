@@ -1,0 +1,12 @@
+{
+  "plan": {
+    "status": "Second follow-up, written after the first follow-up results were seen. Extends RQ3 only; the frozen main study and the first follow-up are unchanged.",
+    "code_holdout": "Repeat the main-study non-code training / coding test experiment with seeds 1449 and 1450; seed 1448 is the frozen main-study fit. Same recipes and the same per-class matched mixed-domain control.",
+    "writing_holdout": "The assignment's own RQ3 example: train without creative writing (coding, math, factual and other prompts remain), validate on non-writing rows, test on the creative-writing subset of the test split. Creative writing is Arena category_tag creative_writing_v0.1.creative_writing. Mixed-domain control matched by per-class training count. Seeds 1448-1450.",
+    "reporting": "Target-domain macro-F1 for holdout and control, seed-averaged paired group-bootstrap interval for the difference (2,000 resamples, seed 1448), and per-class recall.",
+    "no_selection": "No recipe, epoch budget, or threshold changes; nothing is chosen with test labels."
+  },
+  "frozen_utc": "2026-10-11T03:16:03Z",
+  "selection_sha256": "23e33adcde854fa14692c70037d2d90ae8bb237babd66e0bba6d61d3de552082",
+  "split_manifest_sha256": "7264352f4a869d731c088dea5d230c1de89beb0696ae5c46d723290a84459e9a"
+}
