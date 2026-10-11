@@ -1,0 +1,567 @@
+{
+  "note": "Second follow-up, written after the first follow-up results were seen. Extends RQ3 only; the frozen main study and the first follow-up are unchanged.",
+  "domains": {
+    "code": {
+      "test_rows": 441,
+      "test_family_counts": {
+        "DeepSeek": 109,
+        "GPT": 101,
+        "Grok": 106,
+        "Claude": 125
+      },
+      "train_rows_in_domain": 2109,
+      "val_rows_in_domain": 444,
+      "cnn": {
+        "runs": [
+          {
+            "seed": 1448,
+            "kind": "holdout",
+            "source": "frozen main study",
+            "training_rows": 4626,
+            "val_macro_f1": 0.8753072814329358,
+            "test": {
+              "accuracy": 0.746031746031746,
+              "macro_f1": 0.7452553038475369,
+              "balanced_accuracy": 0.7445034457227963
+            },
+            "recall": {
+              "Claude": 0.824,
+              "GPT": 0.8118811881188119,
+              "Grok": 0.7641509433962265,
+              "DeepSeek": 0.5779816513761468
+            }
+          },
+          {
+            "seed": 1448,
+            "kind": "control",
+            "source": "frozen main study",
+            "training_rows": 4626,
+            "val_macro_f1": 0.8681708694008344,
+            "test": {
+              "accuracy": 0.81859410430839,
+              "macro_f1": 0.8230153614528065,
+              "balanced_accuracy": 0.8193546686501783
+            },
+            "recall": {
+              "Claude": 0.808,
+              "GPT": 0.8415841584158416,
+              "Grok": 0.8113207547169812,
+              "DeepSeek": 0.8165137614678899
+            }
+          },
+          {
+            "seed": 1449,
+            "kind": "holdout",
+            "source": "follow-up",
+            "training_rows": 4626,
+            "val_macro_f1": 0.876483415173906,
+            "test": {
+              "accuracy": 0.7392290249433107,
+              "macro_f1": 0.7342255376467844,
+              "balanced_accuracy": 0.7368151101071679
+            },
+            "recall": {
+              "Claude": 0.84,
+              "GPT": 0.7821782178217822,
+              "Grok": 0.8113207547169812,
+              "DeepSeek": 0.5137614678899083
+            }
+          },
+          {
+            "seed": 1449,
+            "kind": "control",
+            "source": "follow-up",
+            "training_rows": 4626,
+            "val_macro_f1": 0.8790008371203061,
+            "test": {
+              "accuracy": 0.8276643990929705,
+              "macro_f1": 0.8312479056337779,
+              "balanced_accuracy": 0.8273595171703426
+            },
+            "recall": {
+              "Claude": 0.848,
+              "GPT": 0.8613861386138614,
+              "Grok": 0.8018867924528302,
+              "DeepSeek": 0.7981651376146789
+            }
+          },
+          {
+            "seed": 1450,
+            "kind": "holdout",
+            "source": "follow-up",
+            "training_rows": 4626,
+            "val_macro_f1": 0.8827519079644831,
+            "test": {
+              "accuracy": 0.7278911564625851,
+              "macro_f1": 0.7231595113108263,
+              "balanced_accuracy": 0.7249708129026509
+            },
+            "recall": {
+              "Claude": 0.84,
+              "GPT": 0.7722772277227723,
+              "Grok": 0.7830188679245284,
+              "DeepSeek": 0.5045871559633027
+            }
+          },
+          {
+            "seed": 1450,
+            "kind": "control",
+            "source": "follow-up",
+            "training_rows": 4626,
+            "val_macro_f1": 0.8639896052727771,
+            "test": {
+              "accuracy": 0.7845804988662132,
+              "macro_f1": 0.7802279621497599,
+              "balanced_accuracy": 0.7820152191088938
+            },
+            "recall": {
+              "Claude": 0.888,
+              "GPT": 0.8415841584158416,
+              "Grok": 0.8113207547169812,
+              "DeepSeek": 0.5871559633027523
+            }
+          }
+        ],
+        "holdout_macro_f1_mean": 0.7342134509350493,
+        "holdout_macro_f1_sd": 0.011047901227056161,
+        "control_macro_f1_mean": 0.8114970764121147,
+        "control_macro_f1_sd": 0.027390907724773685,
+        "difference": -0.07728362547706535,
+        "difference_ci95": [
+          -0.10550527487054223,
+          -0.0518222868839176
+        ],
+        "recall": {
+          "holdout": {
+            "Claude": 0.8346666666666667,
+            "GPT": 0.7887788778877889,
+            "Grok": 0.7861635220125787,
+            "DeepSeek": 0.5321100917431192
+          },
+          "control": {
+            "Claude": 0.848,
+            "GPT": 0.8481848184818482,
+            "Grok": 0.8081761006289309,
+            "DeepSeek": 0.7339449541284404
+          }
+        }
+      },
+      "lstm": {
+        "runs": [
+          {
+            "seed": 1448,
+            "kind": "holdout",
+            "source": "frozen main study",
+            "training_rows": 4626,
+            "val_macro_f1": 0.813157416265985,
+            "test": {
+              "accuracy": 0.7142857142857143,
+              "macro_f1": 0.7070619325954483,
+              "balanced_accuracy": 0.711261189387071
+            },
+            "recall": {
+              "Claude": 0.84,
+              "GPT": 0.7821782178217822,
+              "Grok": 0.7641509433962265,
+              "DeepSeek": 0.45871559633027525
+            }
+          },
+          {
+            "seed": 1448,
+            "kind": "control",
+            "source": "frozen main study",
+            "training_rows": 4626,
+            "val_macro_f1": 0.8192505722564002,
+            "test": {
+              "accuracy": 0.7505668934240363,
+              "macro_f1": 0.7504709126710009,
+              "balanced_accuracy": 0.751694027356691
+            },
+            "recall": {
+              "Claude": 0.752,
+              "GPT": 0.7920792079207921,
+              "Grok": 0.8113207547169812,
+              "DeepSeek": 0.6513761467889908
+            }
+          },
+          {
+            "seed": 1449,
+            "kind": "holdout",
+            "source": "follow-up",
+            "training_rows": 4626,
+            "val_macro_f1": 0.7978877980060193,
+            "test": {
+              "accuracy": 0.6643990929705216,
+              "macro_f1": 0.6573127745432071,
+              "balanced_accuracy": 0.6571574920690961
+            },
+            "recall": {
+              "Claude": 0.864,
+              "GPT": 0.6633663366336634,
+              "Grok": 0.6792452830188679,
+              "DeepSeek": 0.42201834862385323
+            }
+          },
+          {
+            "seed": 1449,
+            "kind": "control",
+            "source": "follow-up",
+            "training_rows": 4626,
+            "val_macro_f1": 0.801510995812831,
+            "test": {
+              "accuracy": 0.7619047619047619,
+              "macro_f1": 0.7627256743128185,
+              "balanced_accuracy": 0.7585049110761864
+            },
+            "recall": {
+              "Claude": 0.84,
+              "GPT": 0.7425742574257426,
+              "Grok": 0.7358490566037735,
+              "DeepSeek": 0.7155963302752294
+            }
+          },
+          {
+            "seed": 1450,
+            "kind": "holdout",
+            "source": "follow-up",
+            "training_rows": 4626,
+            "val_macro_f1": 0.8138817155087539,
+            "test": {
+              "accuracy": 0.6780045351473923,
+              "macro_f1": 0.67516565262817,
+              "balanced_accuracy": 0.676695062530314
+            },
+            "recall": {
+              "Claude": 0.76,
+              "GPT": 0.7524752475247525,
+              "Grok": 0.7264150943396226,
+              "DeepSeek": 0.46788990825688076
+            }
+          },
+          {
+            "seed": 1450,
+            "kind": "control",
+            "source": "follow-up",
+            "training_rows": 4626,
+            "val_macro_f1": 0.8019289584571686,
+            "test": {
+              "accuracy": 0.7868480725623582,
+              "macro_f1": 0.7855914699480435,
+              "balanced_accuracy": 0.7866753376739786
+            },
+            "recall": {
+              "Claude": 0.832,
+              "GPT": 0.8514851485148515,
+              "Grok": 0.8301886792452831,
+              "DeepSeek": 0.6330275229357798
+            }
+          }
+        ],
+        "holdout_macro_f1_mean": 0.6798467865889418,
+        "holdout_macro_f1_sd": 0.025202766576226016,
+        "control_macro_f1_mean": 0.7662626856439543,
+        "control_macro_f1_sd": 0.01782543751861216,
+        "difference": -0.08641589905501246,
+        "difference_ci95": [
+          -0.1156246857726262,
+          -0.0578250852668341
+        ],
+        "recall": {
+          "holdout": {
+            "Claude": 0.8213333333333334,
+            "GPT": 0.7326732673267328,
+            "Grok": 0.7232704402515724,
+            "DeepSeek": 0.44954128440366975
+          },
+          "control": {
+            "Claude": 0.8079999999999999,
+            "GPT": 0.7953795379537953,
+            "Grok": 0.7924528301886792,
+            "DeepSeek": 0.6666666666666666
+          }
+        }
+      }
+    },
+    "writing": {
+      "test_rows": 119,
+      "test_family_counts": {
+        "GPT": 34,
+        "Grok": 19,
+        "Claude": 39,
+        "DeepSeek": 27
+      },
+      "train_rows_in_domain": 572,
+      "val_rows_in_domain": 120,
+      "cnn": {
+        "runs": [
+          {
+            "seed": 1448,
+            "kind": "holdout",
+            "source": "follow-up",
+            "training_rows": 6163,
+            "val_macro_f1": 0.8786911194891952,
+            "test": {
+              "accuracy": 0.8151260504201681,
+              "macro_f1": 0.799520537601933,
+              "balanced_accuracy": 0.8055489402238628
+            },
+            "recall": {
+              "Claude": 0.9487179487179487,
+              "GPT": 0.7647058823529411,
+              "Grok": 0.8421052631578947,
+              "DeepSeek": 0.6666666666666666
+            }
+          },
+          {
+            "seed": 1448,
+            "kind": "control",
+            "source": "follow-up",
+            "training_rows": 6163,
+            "val_macro_f1": 0.8590915497115019,
+            "test": {
+              "accuracy": 0.8151260504201681,
+              "macro_f1": 0.7943253381300941,
+              "balanced_accuracy": 0.8035566228290687
+            },
+            "recall": {
+              "Claude": 0.9487179487179487,
+              "GPT": 0.7352941176470589,
+              "Grok": 0.7894736842105263,
+              "DeepSeek": 0.7407407407407407
+            }
+          },
+          {
+            "seed": 1449,
+            "kind": "holdout",
+            "source": "follow-up",
+            "training_rows": 6163,
+            "val_macro_f1": 0.8728246338242655,
+            "test": {
+              "accuracy": 0.7647058823529411,
+              "macro_f1": 0.7314532520325203,
+              "balanced_accuracy": 0.7384044260979246
+            },
+            "recall": {
+              "Claude": 1.0,
+              "GPT": 0.7352941176470589,
+              "Grok": 0.7368421052631579,
+              "DeepSeek": 0.48148148148148145
+            }
+          },
+          {
+            "seed": 1449,
+            "kind": "control",
+            "source": "follow-up",
+            "training_rows": 6163,
+            "val_macro_f1": 0.8793313284176466,
+            "test": {
+              "accuracy": 0.8067226890756303,
+              "macro_f1": 0.7847265140151409,
+              "balanced_accuracy": 0.7952609968863837
+            },
+            "recall": {
+              "Claude": 0.9743589743589743,
+              "GPT": 0.6764705882352942,
+              "Grok": 0.7894736842105263,
+              "DeepSeek": 0.7407407407407407
+            }
+          },
+          {
+            "seed": 1450,
+            "kind": "holdout",
+            "source": "follow-up",
+            "training_rows": 6163,
+            "val_macro_f1": 0.8688110229023707,
+            "test": {
+              "accuracy": 0.7647058823529411,
+              "macro_f1": 0.731469298245614,
+              "balanced_accuracy": 0.7364981080151358
+            },
+            "recall": {
+              "Claude": 1.0,
+              "GPT": 0.7647058823529411,
+              "Grok": 0.7368421052631579,
+              "DeepSeek": 0.4444444444444444
+            }
+          },
+          {
+            "seed": 1450,
+            "kind": "control",
+            "source": "follow-up",
+            "training_rows": 6163,
+            "val_macro_f1": 0.8722866787073911,
+            "test": {
+              "accuracy": 0.8151260504201681,
+              "macro_f1": 0.7934382284382284,
+              "balanced_accuracy": 0.8007076199800659
+            },
+            "recall": {
+              "Claude": 0.9743589743589743,
+              "GPT": 0.7352941176470589,
+              "Grok": 0.7894736842105263,
+              "DeepSeek": 0.7037037037037037
+            }
+          }
+        ],
+        "holdout_macro_f1_mean": 0.7541476959600225,
+        "holdout_macro_f1_sd": 0.03929403432286709,
+        "control_macro_f1_mean": 0.7908300268611544,
+        "control_macro_f1_sd": 0.005304374863962749,
+        "difference": -0.03668233090113193,
+        "difference_ci95": [
+          -0.07739337710994057,
+          0.002422791183384401
+        ],
+        "recall": {
+          "holdout": {
+            "Claude": 0.982905982905983,
+            "GPT": 0.7549019607843137,
+            "Grok": 0.7719298245614036,
+            "DeepSeek": 0.5308641975308642
+          },
+          "control": {
+            "Claude": 0.9658119658119658,
+            "GPT": 0.715686274509804,
+            "Grok": 0.7894736842105262,
+            "DeepSeek": 0.7283950617283951
+          }
+        }
+      },
+      "lstm": {
+        "runs": [
+          {
+            "seed": 1448,
+            "kind": "holdout",
+            "source": "follow-up",
+            "training_rows": 6163,
+            "val_macro_f1": 0.8415751845459983,
+            "test": {
+              "accuracy": 0.7815126050420168,
+              "macro_f1": 0.7478281880720905,
+              "balanced_accuracy": 0.7590012613232426
+            },
+            "recall": {
+              "Claude": 1.0,
+              "GPT": 0.8235294117647058,
+              "Grok": 0.8421052631578947,
+              "DeepSeek": 0.37037037037037035
+            }
+          },
+          {
+            "seed": 1448,
+            "kind": "control",
+            "source": "follow-up",
+            "training_rows": 6163,
+            "val_macro_f1": 0.83296048986737,
+            "test": {
+              "accuracy": 0.8487394957983193,
+              "macro_f1": 0.8338165118055678,
+              "balanced_accuracy": 0.8426719765729054
+            },
+            "recall": {
+              "Claude": 0.9487179487179487,
+              "GPT": 0.8235294117647058,
+              "Grok": 0.8947368421052632,
+              "DeepSeek": 0.7037037037037037
+            }
+          },
+          {
+            "seed": 1449,
+            "kind": "holdout",
+            "source": "follow-up",
+            "training_rows": 6163,
+            "val_macro_f1": 0.8229586116506388,
+            "test": {
+              "accuracy": 0.7310924369747899,
+              "macro_f1": 0.7120374800637959,
+              "balanced_accuracy": 0.7116928192779586
+            },
+            "recall": {
+              "Claude": 0.8205128205128205,
+              "GPT": 0.8235294117647058,
+              "Grok": 0.6842105263157895,
+              "DeepSeek": 0.5185185185185185
+            }
+          },
+          {
+            "seed": 1449,
+            "kind": "control",
+            "source": "follow-up",
+            "training_rows": 6163,
+            "val_macro_f1": 0.8186979531547545,
+            "test": {
+              "accuracy": 0.8319327731092437,
+              "macro_f1": 0.8237511323091711,
+              "balanced_accuracy": 0.8231038254258068
+            },
+            "recall": {
+              "Claude": 0.9230769230769231,
+              "GPT": 0.8235294117647058,
+              "Grok": 0.8421052631578947,
+              "DeepSeek": 0.7037037037037037
+            }
+          },
+          {
+            "seed": 1450,
+            "kind": "holdout",
+            "source": "follow-up",
+            "training_rows": 6163,
+            "val_macro_f1": 0.8285000200052295,
+            "test": {
+              "accuracy": 0.7899159663865546,
+              "macro_f1": 0.7666061293816989,
+              "balanced_accuracy": 0.7729298422022881
+            },
+            "recall": {
+              "Claude": 0.9743589743589743,
+              "GPT": 0.7352941176470589,
+              "Grok": 0.7894736842105263,
+              "DeepSeek": 0.5925925925925926
+            }
+          },
+          {
+            "seed": 1450,
+            "kind": "control",
+            "source": "follow-up",
+            "training_rows": 6163,
+            "val_macro_f1": 0.8250267779742354,
+            "test": {
+              "accuracy": 0.7899159663865546,
+              "macro_f1": 0.7695175695175696,
+              "balanced_accuracy": 0.7797634798408792
+            },
+            "recall": {
+              "Claude": 0.9487179487179487,
+              "GPT": 0.7941176470588235,
+              "Grok": 0.8947368421052632,
+              "DeepSeek": 0.48148148148148145
+            }
+          }
+        ],
+        "holdout_macro_f1_mean": 0.7421572658391952,
+        "holdout_macro_f1_sd": 0.027722804535683817,
+        "control_macro_f1_mean": 0.8090284045441027,
+        "control_macro_f1_sd": 0.034585510397738335,
+        "difference": -0.06687113870490757,
+        "difference_ci95": [
+          -0.12067958012727177,
+          -0.02066609007889395
+        ],
+        "recall": {
+          "holdout": {
+            "Claude": 0.9316239316239315,
+            "GPT": 0.7941176470588235,
+            "Grok": 0.7719298245614036,
+            "DeepSeek": 0.49382716049382713
+          },
+          "control": {
+            "Claude": 0.94017094017094,
+            "GPT": 0.8137254901960783,
+            "Grok": 0.8771929824561404,
+            "DeepSeek": 0.6296296296296297
+          }
+        }
+      }
+    }
+  }
+}

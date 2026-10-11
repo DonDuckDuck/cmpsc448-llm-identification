@@ -3,7 +3,7 @@ from pathlib import Path
 import json
 ROOT=Path(__file__).resolve().parents[1]
 S=json.loads((ROOT/'results/arena/summary.json').read_text());A=json.loads((ROOT/'results/arena/data_audit.json').read_text())
-F=json.loads((ROOT/'results/arena_followup/posthoc.json').read_text());C=json.loads((ROOT/'results/arena_followup/curve.json').read_text())
+F=json.loads((ROOT/'results/arena_followup/posthoc.json').read_text());C=json.loads((ROOT/'results/arena_followup/curve.json').read_text());D=json.loads((ROOT/'results/arena_followup/domain.json').read_text())['domains']
 def pct(x):return f'{100*x:.2f}%'
 rows=[]
 for arch in ['cnn','lstm']:
@@ -44,6 +44,7 @@ Run after the frozen main study, under a plan written first ([docs/arena_followu
 | Is it just length? | With every answer cut to exactly 128 tokens: CNN {pct(F['equal_length']['cnn']['macro_f1'])}, LSTM {pct(F['equal_length']['lstm']['macro_f1'])} macro-F1. |
 | Same prompt, two authors? | On {F['matched_pairs']['pairs']} identical-prompt test pairs the CNN assigns both authors correctly {pct(F['matched_pairs']['cnn']['pairwise_assignment'])} of the time; prompt-only is exactly 50%. |
 | Where is the fingerprint? | Opening window ≫ middle; CNN keys on openers like "Certainly! Here's" (GPT), "Below is a detailed" (Grok), "I'd recommend" (Claude), bold numbered headers and "Would you like" (DeepSeek). |
+| Transfer to unseen task types (RQ3, 3 seeds)? | Trained without coding, CNN macro-F1 on coding is {pct(D['code']['cnn']['holdout_macro_f1_mean'])} vs. {pct(D['code']['cnn']['control_macro_f1_mean'])} with matched mixed training; trained without creative writing (the assignment's example), {pct(D['writing']['cnn']['holdout_macro_f1_mean'])} vs. {pct(D['writing']['cnn']['control_macro_f1_mean'])} on writing. |
 | Ensemble? | Equal-weight CNN+LSTM+char TF-IDF: {pct(F['ensemble']['equal']['macro_f1'])} macro-F1 ({100*F['ensemble']['equal']['minus_char']:+.2f} pp over char TF-IDF). |
 
 ![Learning curve](results/figures/followup_learning_curve.png)
@@ -88,6 +89,7 @@ python src/arena_analyze.py
 python src/arena_followup.py plan
 python src/arena_followup.py posthoc
 python src/arena_followup.py curve
+python src/arena_followup.py domain
 python -m unittest discover -s tests -v
 python src/build_lessons_figures.py
 python src/build_report.py
@@ -133,9 +135,9 @@ All scores are response-only, three-seed means within each stage. Same-data opti
 | `src/arena_train.py` | Validation selection, core/diagnostic fitting, frozen test evaluation |
 | `src/models_v2.py` | CNN and pooled LSTM, with explicit four-class output support |
 | `src/arena_analyze.py` | Independent audits, grouped intervals, figures, and checkpoint replay |
-| `src/arena_followup.py` | Follow-up: learning curve, length/position/matched-prompt diagnostics, ensemble, CNN n-grams |
+| `src/arena_followup.py` | Follow-up: learning curve, length/position/matched-prompt diagnostics, ensemble, CNN n-grams, RQ3 extension |
 | `results/arena_followup/` | Follow-up metrics and logs |
-| `tests/` | Fifteen checks of leakage, attribution, padding, sequence handling, and follow-up subsetting |
+| `tests/` | Sixteen checks of leakage, attribution, padding, sequence handling, and follow-up subsetting |
 | `results/arena/` | Complete metrics, validation probabilities, non-text test predictions |
 | `docs/arena_*.json` | Data provenance, curation repair, plans, selection, and freeze records |
 | `data/arena/split_manifest.json` | Non-text published split assignments |

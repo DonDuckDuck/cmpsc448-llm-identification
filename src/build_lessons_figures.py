@@ -30,8 +30,10 @@ fig,ax=plt.subplots(figsize=(7.6,3.5))
 for i,arch in enumerate(['cnn','lstm']):ax.plot(n,[100*curve['summary'][k][arch]['accuracy_mean'] for k in keys],marker='o',color=COLORS[i],label=f'{arch.upper()} on Arena subsets')
 for y,label in [(acc(v1,'lstm'),'first-version LSTM (UltraFeedback)'),(acc(v2,'lstm'),'tuned LSTM (UltraFeedback)')]:
     ax.axhline(y,color='#888',ls=':',lw=1.2);ax.text(n[0],y+.6,f'{label}: {y:.1f}%',ha='left',fontsize=8,color='#555')
+uf_train=sum(v1['source_sizes']['train'].values());ax.axvline(uf_train,color='#915E91',ls='--',lw=1.2)
+ax.text(uf_train*1.03,73.5,f'UltraFeedback\ntraining size\n({uf_train:,})',fontsize=8,color='#915E91',va='top')
 ax.set_xscale('log',base=2);ax.set_xticks(n,[f'{x:,}' for x in n]);ax.minorticks_off();ax.set_xlabel('Training responses (log scale)');ax.set_ylabel('Test accuracy (%)')
-ax.set_title('More training data moves the LSTM past where the first version stopped');ax.set_ylim(62,90);ax.legend(frameon=False,loc='upper left');ax.grid(alpha=.2)
+ax.set_title('The LSTM passes its old plateau only with more training data');ax.set_ylim(62,90);ax.legend(frameon=False,loc='upper left');ax.grid(alpha=.2)
 fig.tight_layout();fig.savefig(FIGURES/'lessons_data.png',dpi=180);plt.close(fig)
 
 # 3. Signature phrases the CNN relies on.

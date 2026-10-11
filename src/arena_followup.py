@@ -290,8 +290,9 @@ def domain_figure(out):
     for i,(kind,label) in enumerate([('control','Mixed-domain training (control)'),('holdout','Target task removed from training')]):
         m=[100*out['domains'][d][a][kind+'_macro_f1_mean'] for d,a in cols];e=[100*out['domains'][d][a][kind+'_macro_f1_sd'] for d,a in cols]
         bars=ax.bar(x+(i-.5)*.36,m,.36,yerr=e,capsize=3,color=COLORS[[0,1][i]],label=label)
-        for b,v in zip(bars,m):ax.text(b.get_x()+b.get_width()/2,v+3,f'{v:.1f}',ha='center',fontsize=8)
+        for b,v in zip(bars,m):ax.text(b.get_x()+b.get_width()/2,v-7,f'{v:.1f}',ha='center',fontsize=8,color='white')
     ax.set_xticks(x,[f'{a.upper()}\n{"coding" if d=="code" else "creative writing"} (n={out["domains"][d]["test_rows"]})' for d,a in cols],fontsize=8.5)
+    ax.axhline(25,color='#888',ls=':',lw=1);ax.text(len(cols)-.5,26.5,'chance (25%)',ha='right',fontsize=8,color='#555')
     ax.set_ylim(0,112);ax.set_yticks(range(0,101,20));ax.set_ylabel('Target-task test macro-F1 (%)');ax.set_title('RQ3: identifying authors on a task type removed from training (3 seeds)')
     ax.legend(frameon=False,ncol=2,loc='upper center');ax.grid(axis='y',alpha=.2);fig.tight_layout();fig.savefig(FIGURES/'followup_domain.png',dpi=180);plt.close(fig)
 

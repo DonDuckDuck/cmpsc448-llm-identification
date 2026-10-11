@@ -1,0 +1,160 @@
+{
+  "tag": "c2_output_s1450_domain",
+  "candidate": "c2",
+  "mode": "output",
+  "seed": 1450,
+  "suffix": "_domain",
+  "config": {
+    "emb": 128,
+    "hidden": 96,
+    "dropout": 0.4,
+    "lr": 0.001,
+    "max_tokens": 384,
+    "normalized": false,
+    "bidirectional": false,
+    "pooling": "meanmax",
+    "epochs": 20,
+    "patience": 4,
+    "batch": 128,
+    "num_classes": 4,
+    "architecture": "cnn"
+  },
+  "best_epoch": 10,
+  "best_val_macro_f1": 0.8688110229023707,
+  "best_val_loss": 0.3685116991513436,
+  "history": [
+    {
+      "epoch": 1,
+      "train_weighted_loss": 1.2433858452032047,
+      "val_loss": 0.7222723362124814,
+      "val_accuracy": 0.7443267776096822,
+      "val_macro_f1": 0.7310607925177285,
+      "seconds": 1.8185004172846675
+    },
+    {
+      "epoch": 2,
+      "train_weighted_loss": 0.8654005695004442,
+      "val_loss": 0.5821379706286085,
+      "val_accuracy": 0.7881996974281392,
+      "val_macro_f1": 0.7767035576055019,
+      "seconds": 1.7997399172745645
+    },
+    {
+      "epoch": 3,
+      "train_weighted_loss": 0.7153508651136636,
+      "val_loss": 0.5237578624315594,
+      "val_accuracy": 0.8055975794251135,
+      "val_macro_f1": 0.7996086061721547,
+      "seconds": 1.8078226251527667
+    },
+    {
+      "epoch": 4,
+      "train_weighted_loss": 0.632901363281505,
+      "val_loss": 0.467928882085249,
+      "val_accuracy": 0.8328290468986385,
+      "val_macro_f1": 0.8263858343165217,
+      "seconds": 1.783774333074689
+    },
+    {
+      "epoch": 5,
+      "train_weighted_loss": 0.5747858039187317,
+      "val_loss": 0.45041513370854414,
+      "val_accuracy": 0.8305597579425114,
+      "val_macro_f1": 0.8269340810211835,
+      "seconds": 1.8168727499432862
+    },
+    {
+      "epoch": 6,
+      "train_weighted_loss": 0.5265932314662447,
+      "val_loss": 0.4205775902960196,
+      "val_accuracy": 0.8524962178517398,
+      "val_macro_f1": 0.8472354898304166,
+      "seconds": 1.783632708247751
+    },
+    {
+      "epoch": 7,
+      "train_weighted_loss": 0.4868606498938537,
+      "val_loss": 0.4098906639664689,
+      "val_accuracy": 0.859304084720121,
+      "val_macro_f1": 0.8541883532458251,
+      "seconds": 1.7594767082482576
+    },
+    {
+      "epoch": 8,
+      "train_weighted_loss": 0.46322170157198894,
+      "val_loss": 0.41668439163923626,
+      "val_accuracy": 0.8441754916792739,
+      "val_macro_f1": 0.8373210980079738,
+      "seconds": 1.7766635003499687
+    },
+    {
+      "epoch": 9,
+      "train_weighted_loss": 0.42659952620030145,
+      "val_loss": 0.3861592317312821,
+      "val_accuracy": 0.8630862329803328,
+      "val_macro_f1": 0.8585071860940376,
+      "seconds": 1.7897044578567147
+    },
+    {
+      "epoch": 10,
+      "train_weighted_loss": 0.4087918482729314,
+      "val_loss": 0.3685116991513436,
+      "val_accuracy": 0.8721633888048411,
+      "val_macro_f1": 0.8688110229023707,
+      "seconds": 1.7429426657035947
+    },
+    {
+      "epoch": 11,
+      "train_weighted_loss": 0.3796795211634465,
+      "val_loss": 0.3804317667697093,
+      "val_accuracy": 0.8532526475037822,
+      "val_macro_f1": 0.8501743887565573,
+      "seconds": 1.7816926655359566
+    },
+    {
+      "epoch": 12,
+      "train_weighted_loss": 0.35223143555389563,
+      "val_loss": 0.3639499098738816,
+      "val_accuracy": 0.8630862329803328,
+      "val_macro_f1": 0.8586740262026303,
+      "seconds": 1.7628618329763412
+    },
+    {
+      "epoch": 13,
+      "train_weighted_loss": 0.33354036437938994,
+      "val_loss": 0.3638095228105738,
+      "val_accuracy": 0.8661119515885023,
+      "val_macro_f1": 0.861810319669811,
+      "seconds": 1.7929280833341181
+    },
+    {
+      "epoch": 14,
+      "train_weighted_loss": 0.31765361077286836,
+      "val_loss": 0.3506441585234903,
+      "val_accuracy": 0.8661119515885023,
+      "val_macro_f1": 0.8629046328309403,
+      "seconds": 1.7986506251618266
+    }
+  ],
+  "training_seconds": 25.049813208170235,
+  "device": "mps",
+  "torch_version": "2.14.1",
+  "vocab_size": 20000,
+  "parameters": 2708900,
+  "class_weights": [
+    0.8612353269983231,
+    1.0070261437908496,
+    1.1172951414068166,
+    1.0517064846416382
+  ],
+  "training_family_counts": {
+    "DeepSeek": 1465,
+    "Claude": 1789,
+    "GPT": 1530,
+    "Grok": 1379
+  },
+  "training_rows": 6163,
+  "validation_rows": 1322,
+  "split_manifest_sha256": "7264352f4a869d731c088dea5d230c1de89beb0696ae5c46d723290a84459e9a",
+  "test_accessed": false
+}

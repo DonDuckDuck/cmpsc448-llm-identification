@@ -1,0 +1,455 @@
+START c2_output_s1449_domain rows 4626 998 device mps
+c2_output_s1449_domain 1 valF1 0.7118 seconds 2.1
+c2_output_s1449_domain 2 valF1 0.782 seconds 1.3
+c2_output_s1449_domain 3 valF1 0.7971 seconds 1.3
+c2_output_s1449_domain 4 valF1 0.8209 seconds 1.3
+c2_output_s1449_domain 5 valF1 0.8103 seconds 1.3
+c2_output_s1449_domain 6 valF1 0.8388 seconds 1.3
+c2_output_s1449_domain 7 valF1 0.8626 seconds 1.3
+c2_output_s1449_domain 8 valF1 0.8588 seconds 1.3
+c2_output_s1449_domain 9 valF1 0.8662 seconds 1.3
+c2_output_s1449_domain 10 valF1 0.8595 seconds 1.3
+c2_output_s1449_domain 11 valF1 0.8701 seconds 1.3
+c2_output_s1449_domain 12 valF1 0.8704 seconds 1.3
+c2_output_s1449_domain 13 valF1 0.8603 seconds 1.3
+c2_output_s1449_domain 14 valF1 0.8669 seconds 1.3
+c2_output_s1449_domain 15 valF1 0.8765 seconds 1.3
+c2_output_s1449_domain 16 valF1 0.8754 seconds 1.3
+c2_output_s1449_domain 17 valF1 0.8761 seconds 1.3
+c2_output_s1449_domain 18 valF1 0.8668 seconds 1.4
+c2_output_s1449_domain 19 valF1 0.8682 seconds 1.3
+FIT c2_output_s1449_domain valF1 0.8765 epoch 15
+START c2_output_s1449_domain_control rows 4626 998 device mps
+c2_output_s1449_domain_control 1 valF1 0.7216 seconds 1.4
+c2_output_s1449_domain_control 2 valF1 0.7773 seconds 1.3
+c2_output_s1449_domain_control 3 valF1 0.8087 seconds 1.3
+c2_output_s1449_domain_control 4 valF1 0.8092 seconds 1.4
+c2_output_s1449_domain_control 5 valF1 0.8388 seconds 1.3
+c2_output_s1449_domain_control 6 valF1 0.8505 seconds 1.3
+c2_output_s1449_domain_control 7 valF1 0.8499 seconds 1.3
+c2_output_s1449_domain_control 8 valF1 0.8597 seconds 1.3
+c2_output_s1449_domain_control 9 valF1 0.8641 seconds 1.3
+c2_output_s1449_domain_control 10 valF1 0.8622 seconds 1.4
+c2_output_s1449_domain_control 11 valF1 0.8727 seconds 1.4
+c2_output_s1449_domain_control 12 valF1 0.8492 seconds 1.3
+c2_output_s1449_domain_control 13 valF1 0.879 seconds 1.3
+c2_output_s1449_domain_control 14 valF1 0.8766 seconds 1.3
+c2_output_s1449_domain_control 15 valF1 0.8773 seconds 1.3
+c2_output_s1449_domain_control 16 valF1 0.8765 seconds 1.3
+c2_output_s1449_domain_control 17 valF1 0.8701 seconds 1.4
+FIT c2_output_s1449_domain_control valF1 0.879 epoch 13
+START c2_output_s1450_domain rows 4626 998 device mps
+c2_output_s1450_domain 1 valF1 0.717 seconds 1.3
+c2_output_s1450_domain 2 valF1 0.7975 seconds 1.3
+c2_output_s1450_domain 3 valF1 0.8202 seconds 1.3
+c2_output_s1450_domain 4 valF1 0.836 seconds 1.3
+c2_output_s1450_domain 5 valF1 0.8446 seconds 1.3
+c2_output_s1450_domain 6 valF1 0.8561 seconds 1.3
+c2_output_s1450_domain 7 valF1 0.8693 seconds 1.3
+c2_output_s1450_domain 8 valF1 0.87 seconds 1.4
+c2_output_s1450_domain 9 valF1 0.8659 seconds 1.3
+c2_output_s1450_domain 10 valF1 0.875 seconds 1.3
+c2_output_s1450_domain 11 valF1 0.8693 seconds 1.3
+c2_output_s1450_domain 12 valF1 0.8742 seconds 1.3
+c2_output_s1450_domain 13 valF1 0.8734 seconds 1.3
+c2_output_s1450_domain 14 valF1 0.8787 seconds 1.3
+c2_output_s1450_domain 15 valF1 0.8771 seconds 1.3
+c2_output_s1450_domain 16 valF1 0.8828 seconds 1.3
+c2_output_s1450_domain 17 valF1 0.8753 seconds 1.3
+c2_output_s1450_domain 18 valF1 0.8813 seconds 1.3
+c2_output_s1450_domain 19 valF1 0.8711 seconds 1.3
+c2_output_s1450_domain 20 valF1 0.8692 seconds 1.3
+FIT c2_output_s1450_domain valF1 0.8828 epoch 16
+START c2_output_s1450_domain_control rows 4626 998 device mps
+c2_output_s1450_domain_control 1 valF1 0.6861 seconds 1.4
+c2_output_s1450_domain_control 2 valF1 0.7358 seconds 1.3
+c2_output_s1450_domain_control 3 valF1 0.7588 seconds 1.3
+c2_output_s1450_domain_control 4 valF1 0.8058 seconds 1.3
+c2_output_s1450_domain_control 5 valF1 0.835 seconds 1.3
+c2_output_s1450_domain_control 6 valF1 0.8315 seconds 1.3
+c2_output_s1450_domain_control 7 valF1 0.8494 seconds 1.3
+c2_output_s1450_domain_control 8 valF1 0.864 seconds 1.3
+c2_output_s1450_domain_control 9 valF1 0.8484 seconds 1.4
+c2_output_s1450_domain_control 10 valF1 0.8557 seconds 1.3
+c2_output_s1450_domain_control 11 valF1 0.8636 seconds 1.3
+c2_output_s1450_domain_control 12 valF1 0.851 seconds 1.3
+FIT c2_output_s1450_domain_control valF1 0.864 epoch 8
+DOMAIN code cnn 0.7342 0.8115
+START r2_output_s1449_domain rows 4626 998 device mps
+r2_output_s1449_domain 1 valF1 0.5681 seconds 1.2
+r2_output_s1449_domain 2 valF1 0.6021 seconds 1.1
+r2_output_s1449_domain 3 valF1 0.62 seconds 1.1
+r2_output_s1449_domain 4 valF1 0.6586 seconds 1.1
+r2_output_s1449_domain 5 valF1 0.7114 seconds 1.1
+r2_output_s1449_domain 6 valF1 0.688 seconds 1.0
+r2_output_s1449_domain 7 valF1 0.74 seconds 1.1
+r2_output_s1449_domain 8 valF1 0.7004 seconds 1.0
+r2_output_s1449_domain 9 valF1 0.7431 seconds 1.0
+r2_output_s1449_domain 10 valF1 0.7113 seconds 1.1
+r2_output_s1449_domain 11 valF1 0.7584 seconds 1.1
+r2_output_s1449_domain 12 valF1 0.7507 seconds 1.1
+r2_output_s1449_domain 13 valF1 0.7752 seconds 1.1
+r2_output_s1449_domain 14 valF1 0.7567 seconds 1.1
+r2_output_s1449_domain 15 valF1 0.7727 seconds 1.1
+r2_output_s1449_domain 16 valF1 0.7824 seconds 1.0
+r2_output_s1449_domain 17 valF1 0.7814 seconds 1.0
+r2_output_s1449_domain 18 valF1 0.7865 seconds 1.0
+r2_output_s1449_domain 19 valF1 0.7979 seconds 1.1
+r2_output_s1449_domain 20 valF1 0.7929 seconds 1.0
+FIT r2_output_s1449_domain valF1 0.7979 epoch 19
+START r2_output_s1449_domain_control rows 4626 998 device mps
+r2_output_s1449_domain_control 1 valF1 0.5736 seconds 1.1
+r2_output_s1449_domain_control 2 valF1 0.4815 seconds 1.2
+r2_output_s1449_domain_control 3 valF1 0.6493 seconds 1.1
+r2_output_s1449_domain_control 4 valF1 0.673 seconds 1.1
+r2_output_s1449_domain_control 5 valF1 0.7042 seconds 1.1
+r2_output_s1449_domain_control 6 valF1 0.7251 seconds 1.1
+r2_output_s1449_domain_control 7 valF1 0.7394 seconds 1.0
+r2_output_s1449_domain_control 8 valF1 0.739 seconds 1.1
+r2_output_s1449_domain_control 9 valF1 0.7559 seconds 1.1
+r2_output_s1449_domain_control 10 valF1 0.7494 seconds 1.1
+r2_output_s1449_domain_control 11 valF1 0.7662 seconds 1.1
+r2_output_s1449_domain_control 12 valF1 0.782 seconds 1.1
+r2_output_s1449_domain_control 13 valF1 0.7544 seconds 1.1
+r2_output_s1449_domain_control 14 valF1 0.7848 seconds 1.0
+r2_output_s1449_domain_control 15 valF1 0.7644 seconds 1.0
+r2_output_s1449_domain_control 16 valF1 0.786 seconds 1.0
+r2_output_s1449_domain_control 17 valF1 0.8015 seconds 1.0
+r2_output_s1449_domain_control 18 valF1 0.7733 seconds 1.1
+r2_output_s1449_domain_control 19 valF1 0.8009 seconds 1.1
+r2_output_s1449_domain_control 20 valF1 0.7821 seconds 1.1
+FIT r2_output_s1449_domain_control valF1 0.8015 epoch 17
+START r2_output_s1450_domain rows 4626 998 device mps
+r2_output_s1450_domain 1 valF1 0.4772 seconds 1.1
+r2_output_s1450_domain 2 valF1 0.5889 seconds 1.1
+r2_output_s1450_domain 3 valF1 0.6618 seconds 1.0
+r2_output_s1450_domain 4 valF1 0.6968 seconds 1.1
+r2_output_s1450_domain 5 valF1 0.7021 seconds 1.1
+r2_output_s1450_domain 6 valF1 0.738 seconds 1.1
+r2_output_s1450_domain 7 valF1 0.7332 seconds 1.1
+r2_output_s1450_domain 8 valF1 0.7601 seconds 1.0
+r2_output_s1450_domain 9 valF1 0.7701 seconds 1.0
+r2_output_s1450_domain 10 valF1 0.7835 seconds 1.1
+r2_output_s1450_domain 11 valF1 0.7935 seconds 1.1
+r2_output_s1450_domain 12 valF1 0.7776 seconds 1.1
+r2_output_s1450_domain 13 valF1 0.782 seconds 1.1
+r2_output_s1450_domain 14 valF1 0.7802 seconds 1.1
+r2_output_s1450_domain 15 valF1 0.8139 seconds 1.0
+r2_output_s1450_domain 16 valF1 0.787 seconds 1.1
+r2_output_s1450_domain 17 valF1 0.7939 seconds 1.1
+r2_output_s1450_domain 18 valF1 0.811 seconds 1.1
+r2_output_s1450_domain 19 valF1 0.8007 seconds 1.1
+FIT r2_output_s1450_domain valF1 0.8139 epoch 15
+START r2_output_s1450_domain_control rows 4626 998 device mps
+r2_output_s1450_domain_control 1 valF1 0.5904 seconds 1.1
+r2_output_s1450_domain_control 2 valF1 0.5481 seconds 1.1
+r2_output_s1450_domain_control 3 valF1 0.6607 seconds 1.1
+r2_output_s1450_domain_control 4 valF1 0.6461 seconds 1.1
+r2_output_s1450_domain_control 5 valF1 0.6867 seconds 1.1
+r2_output_s1450_domain_control 6 valF1 0.6719 seconds 1.1
+r2_output_s1450_domain_control 7 valF1 0.7274 seconds 1.1
+r2_output_s1450_domain_control 8 valF1 0.7379 seconds 1.1
+r2_output_s1450_domain_control 9 valF1 0.7428 seconds 1.1
+r2_output_s1450_domain_control 10 valF1 0.7461 seconds 1.0
+r2_output_s1450_domain_control 11 valF1 0.7561 seconds 1.1
+r2_output_s1450_domain_control 12 valF1 0.748 seconds 1.1
+r2_output_s1450_domain_control 13 valF1 0.7656 seconds 1.1
+r2_output_s1450_domain_control 14 valF1 0.7557 seconds 1.1
+r2_output_s1450_domain_control 15 valF1 0.7761 seconds 1.1
+r2_output_s1450_domain_control 16 valF1 0.7657 seconds 1.1
+r2_output_s1450_domain_control 17 valF1 0.7982 seconds 1.0
+r2_output_s1450_domain_control 18 valF1 0.79 seconds 1.1
+r2_output_s1450_domain_control 19 valF1 0.7994 seconds 1.1
+r2_output_s1450_domain_control 20 valF1 0.8019 seconds 1.1
+FIT r2_output_s1450_domain_control valF1 0.8019 epoch 20
+DOMAIN code lstm 0.6798 0.7663
+START c2_output_s1448_domain rows 6163 1322 device mps
+c2_output_s1448_domain 1 valF1 0.726 seconds 1.8
+c2_output_s1448_domain 2 valF1 0.787 seconds 1.8
+c2_output_s1448_domain 3 valF1 0.8131 seconds 1.8
+c2_output_s1448_domain 4 valF1 0.7781 seconds 1.8
+c2_output_s1448_domain 5 valF1 0.8332 seconds 1.8
+c2_output_s1448_domain 6 valF1 0.8412 seconds 1.8
+c2_output_s1448_domain 7 valF1 0.8435 seconds 1.8
+c2_output_s1448_domain 8 valF1 0.8484 seconds 1.8
+c2_output_s1448_domain 9 valF1 0.8458 seconds 1.8
+c2_output_s1448_domain 10 valF1 0.8593 seconds 1.7
+c2_output_s1448_domain 11 valF1 0.8573 seconds 1.8
+c2_output_s1448_domain 12 valF1 0.8748 seconds 1.8
+c2_output_s1448_domain 13 valF1 0.8638 seconds 1.8
+c2_output_s1448_domain 14 valF1 0.87 seconds 1.8
+c2_output_s1448_domain 15 valF1 0.8732 seconds 1.8
+c2_output_s1448_domain 16 valF1 0.8768 seconds 1.8
+c2_output_s1448_domain 17 valF1 0.8779 seconds 1.8
+c2_output_s1448_domain 18 valF1 0.8747 seconds 1.8
+c2_output_s1448_domain 19 valF1 0.8706 seconds 1.8
+c2_output_s1448_domain 20 valF1 0.8787 seconds 1.8
+FIT c2_output_s1448_domain valF1 0.8787 epoch 20
+START c2_output_s1448_domain_control rows 6163 1322 device mps
+c2_output_s1448_domain_control 1 valF1 0.7016 seconds 1.8
+c2_output_s1448_domain_control 2 valF1 0.7477 seconds 1.8
+c2_output_s1448_domain_control 3 valF1 0.8093 seconds 1.8
+c2_output_s1448_domain_control 4 valF1 0.8143 seconds 1.8
+c2_output_s1448_domain_control 5 valF1 0.8342 seconds 1.8
+c2_output_s1448_domain_control 6 valF1 0.8473 seconds 1.8
+c2_output_s1448_domain_control 7 valF1 0.8501 seconds 1.8
+c2_output_s1448_domain_control 8 valF1 0.8528 seconds 1.8
+c2_output_s1448_domain_control 9 valF1 0.8557 seconds 1.8
+c2_output_s1448_domain_control 10 valF1 0.8591 seconds 1.8
+c2_output_s1448_domain_control 11 valF1 0.8532 seconds 1.8
+c2_output_s1448_domain_control 12 valF1 0.8582 seconds 1.8
+c2_output_s1448_domain_control 13 valF1 0.8585 seconds 1.8
+c2_output_s1448_domain_control 14 valF1 0.8455 seconds 1.8
+FIT c2_output_s1448_domain_control valF1 0.8591 epoch 10
+START c2_output_s1449_domain rows 6163 1322 device mps
+c2_output_s1449_domain 1 valF1 0.7525 seconds 1.8
+c2_output_s1449_domain 2 valF1 0.7735 seconds 1.8
+c2_output_s1449_domain 3 valF1 0.8179 seconds 1.8
+c2_output_s1449_domain 4 valF1 0.8376 seconds 1.8
+c2_output_s1449_domain 5 valF1 0.8409 seconds 1.8
+c2_output_s1449_domain 6 valF1 0.8534 seconds 1.8
+c2_output_s1449_domain 7 valF1 0.8389 seconds 1.8
+c2_output_s1449_domain 8 valF1 0.848 seconds 1.8
+c2_output_s1449_domain 9 valF1 0.864 seconds 1.8
+c2_output_s1449_domain 10 valF1 0.8697 seconds 1.8
+c2_output_s1449_domain 11 valF1 0.8662 seconds 1.8
+c2_output_s1449_domain 12 valF1 0.8728 seconds 1.8
+c2_output_s1449_domain 13 valF1 0.8445 seconds 1.8
+c2_output_s1449_domain 14 valF1 0.863 seconds 1.8
+c2_output_s1449_domain 15 valF1 0.8606 seconds 1.8
+c2_output_s1449_domain 16 valF1 0.8728 seconds 1.8
+FIT c2_output_s1449_domain valF1 0.8728 epoch 12
+START c2_output_s1449_domain_control rows 6163 1322 device mps
+c2_output_s1449_domain_control 1 valF1 0.7475 seconds 1.8
+c2_output_s1449_domain_control 2 valF1 0.7871 seconds 1.8
+c2_output_s1449_domain_control 3 valF1 0.8166 seconds 1.8
+c2_output_s1449_domain_control 4 valF1 0.8088 seconds 1.8
+c2_output_s1449_domain_control 5 valF1 0.8312 seconds 1.8
+c2_output_s1449_domain_control 6 valF1 0.8414 seconds 1.8
+c2_output_s1449_domain_control 7 valF1 0.8439 seconds 1.8
+c2_output_s1449_domain_control 8 valF1 0.8373 seconds 1.8
+c2_output_s1449_domain_control 9 valF1 0.8518 seconds 1.8
+c2_output_s1449_domain_control 10 valF1 0.8606 seconds 1.8
+c2_output_s1449_domain_control 11 valF1 0.8637 seconds 1.8
+c2_output_s1449_domain_control 12 valF1 0.8594 seconds 1.8
+c2_output_s1449_domain_control 13 valF1 0.8568 seconds 1.8
+c2_output_s1449_domain_control 14 valF1 0.8637 seconds 1.8
+c2_output_s1449_domain_control 15 valF1 0.8577 seconds 1.8
+c2_output_s1449_domain_control 16 valF1 0.8725 seconds 1.8
+c2_output_s1449_domain_control 17 valF1 0.8678 seconds 1.8
+c2_output_s1449_domain_control 18 valF1 0.8743 seconds 1.8
+c2_output_s1449_domain_control 19 valF1 0.8793 seconds 1.8
+c2_output_s1449_domain_control 20 valF1 0.8693 seconds 1.8
+FIT c2_output_s1449_domain_control valF1 0.8793 epoch 19
+START c2_output_s1450_domain rows 6163 1322 device mps
+c2_output_s1450_domain 1 valF1 0.7311 seconds 1.8
+c2_output_s1450_domain 2 valF1 0.7767 seconds 1.8
+c2_output_s1450_domain 3 valF1 0.7996 seconds 1.8
+c2_output_s1450_domain 4 valF1 0.8264 seconds 1.8
+c2_output_s1450_domain 5 valF1 0.8269 seconds 1.8
+c2_output_s1450_domain 6 valF1 0.8472 seconds 1.8
+c2_output_s1450_domain 7 valF1 0.8542 seconds 1.8
+c2_output_s1450_domain 8 valF1 0.8373 seconds 1.8
+c2_output_s1450_domain 9 valF1 0.8585 seconds 1.8
+c2_output_s1450_domain 10 valF1 0.8688 seconds 1.7
+c2_output_s1450_domain 11 valF1 0.8502 seconds 1.8
+c2_output_s1450_domain 12 valF1 0.8587 seconds 1.8
+c2_output_s1450_domain 13 valF1 0.8618 seconds 1.8
+c2_output_s1450_domain 14 valF1 0.8629 seconds 1.8
+FIT c2_output_s1450_domain valF1 0.8688 epoch 10
+START c2_output_s1450_domain_control rows 6163 1322 device mps
+c2_output_s1450_domain_control 1 valF1 0.7006 seconds 1.8
+c2_output_s1450_domain_control 2 valF1 0.7818 seconds 1.8
+c2_output_s1450_domain_control 3 valF1 0.7847 seconds 1.8
+c2_output_s1450_domain_control 4 valF1 0.8126 seconds 1.8
+c2_output_s1450_domain_control 5 valF1 0.8305 seconds 1.8
+c2_output_s1450_domain_control 6 valF1 0.821 seconds 1.8
+c2_output_s1450_domain_control 7 valF1 0.8348 seconds 1.8
+c2_output_s1450_domain_control 8 valF1 0.8479 seconds 1.8
+c2_output_s1450_domain_control 9 valF1 0.8522 seconds 1.8
+c2_output_s1450_domain_control 10 valF1 0.856 seconds 1.8
+c2_output_s1450_domain_control 11 valF1 0.8517 seconds 1.8
+c2_output_s1450_domain_control 12 valF1 0.8638 seconds 1.8
+c2_output_s1450_domain_control 13 valF1 0.8622 seconds 1.8
+c2_output_s1450_domain_control 14 valF1 0.8723 seconds 1.8
+c2_output_s1450_domain_control 15 valF1 0.8717 seconds 1.8
+c2_output_s1450_domain_control 16 valF1 0.8707 seconds 1.8
+c2_output_s1450_domain_control 17 valF1 0.8541 seconds 1.8
+c2_output_s1450_domain_control 18 valF1 0.8644 seconds 1.8
+FIT c2_output_s1450_domain_control valF1 0.8723 epoch 14
+DOMAIN writing cnn 0.7541 0.7908
+START r2_output_s1448_domain rows 6163 1322 device mps
+r2_output_s1448_domain 1 valF1 0.573 seconds 1.5
+r2_output_s1448_domain 2 valF1 0.6736 seconds 1.4
+r2_output_s1448_domain 3 valF1 0.6983 seconds 1.4
+r2_output_s1448_domain 4 valF1 0.7267 seconds 1.4
+r2_output_s1448_domain 5 valF1 0.7406 seconds 1.4
+r2_output_s1448_domain 6 valF1 0.7494 seconds 1.4
+r2_output_s1448_domain 7 valF1 0.7729 seconds 1.4
+r2_output_s1448_domain 8 valF1 0.7576 seconds 1.4
+r2_output_s1448_domain 9 valF1 0.7819 seconds 1.4
+r2_output_s1448_domain 10 valF1 0.8017 seconds 1.5
+r2_output_s1448_domain 11 valF1 0.8102 seconds 1.4
+r2_output_s1448_domain 12 valF1 0.8025 seconds 1.4
+r2_output_s1448_domain 13 valF1 0.8122 seconds 1.4
+r2_output_s1448_domain 14 valF1 0.8135 seconds 1.4
+r2_output_s1448_domain 15 valF1 0.8288 seconds 1.4
+r2_output_s1448_domain 16 valF1 0.8303 seconds 1.4
+r2_output_s1448_domain 17 valF1 0.8403 seconds 1.4
+r2_output_s1448_domain 18 valF1 0.839 seconds 1.4
+r2_output_s1448_domain 19 valF1 0.8416 seconds 1.4
+r2_output_s1448_domain 20 valF1 0.8389 seconds 1.4
+FIT r2_output_s1448_domain valF1 0.8416 epoch 19
+START r2_output_s1448_domain_control rows 6163 1322 device mps
+r2_output_s1448_domain_control 1 valF1 0.5331 seconds 1.4
+r2_output_s1448_domain_control 2 valF1 0.663 seconds 1.4
+r2_output_s1448_domain_control 3 valF1 0.6978 seconds 1.4
+r2_output_s1448_domain_control 4 valF1 0.7112 seconds 1.4
+r2_output_s1448_domain_control 5 valF1 0.6944 seconds 1.4
+r2_output_s1448_domain_control 6 valF1 0.7295 seconds 1.4
+r2_output_s1448_domain_control 7 valF1 0.7497 seconds 1.4
+r2_output_s1448_domain_control 8 valF1 0.7549 seconds 1.4
+r2_output_s1448_domain_control 9 valF1 0.7734 seconds 1.4
+r2_output_s1448_domain_control 10 valF1 0.7761 seconds 1.5
+r2_output_s1448_domain_control 11 valF1 0.7776 seconds 1.4
+r2_output_s1448_domain_control 12 valF1 0.774 seconds 1.4
+r2_output_s1448_domain_control 13 valF1 0.7878 seconds 1.4
+r2_output_s1448_domain_control 14 valF1 0.8002 seconds 1.4
+r2_output_s1448_domain_control 15 valF1 0.7892 seconds 1.4
+r2_output_s1448_domain_control 16 valF1 0.8097 seconds 1.4
+r2_output_s1448_domain_control 17 valF1 0.8201 seconds 1.4
+r2_output_s1448_domain_control 18 valF1 0.8297 seconds 1.4
+r2_output_s1448_domain_control 19 valF1 0.8236 seconds 1.4
+r2_output_s1448_domain_control 20 valF1 0.833 seconds 1.4
+FIT r2_output_s1448_domain_control valF1 0.833 epoch 20
+START r2_output_s1449_domain rows 6163 1322 device mps
+r2_output_s1449_domain 1 valF1 0.4347 seconds 1.4
+r2_output_s1449_domain 2 valF1 0.6631 seconds 1.5
+r2_output_s1449_domain 3 valF1 0.6932 seconds 1.4
+r2_output_s1449_domain 4 valF1 0.7225 seconds 1.4
+r2_output_s1449_domain 5 valF1 0.7442 seconds 1.4
+r2_output_s1449_domain 6 valF1 0.7421 seconds 1.4
+r2_output_s1449_domain 7 valF1 0.7416 seconds 1.4
+r2_output_s1449_domain 8 valF1 0.7679 seconds 1.4
+r2_output_s1449_domain 9 valF1 0.7803 seconds 1.4
+r2_output_s1449_domain 10 valF1 0.7799 seconds 1.4
+r2_output_s1449_domain 11 valF1 0.7866 seconds 1.4
+r2_output_s1449_domain 12 valF1 0.8012 seconds 1.4
+r2_output_s1449_domain 13 valF1 0.8169 seconds 1.4
+r2_output_s1449_domain 14 valF1 0.8154 seconds 1.4
+r2_output_s1449_domain 15 valF1 0.8085 seconds 1.4
+r2_output_s1449_domain 16 valF1 0.7943 seconds 1.4
+r2_output_s1449_domain 17 valF1 0.823 seconds 1.5
+r2_output_s1449_domain 18 valF1 0.7996 seconds 1.4
+r2_output_s1449_domain 19 valF1 0.8188 seconds 1.4
+r2_output_s1449_domain 20 valF1 0.8225 seconds 1.4
+FIT r2_output_s1449_domain valF1 0.823 epoch 17
+START r2_output_s1449_domain_control rows 6163 1322 device mps
+r2_output_s1449_domain_control 1 valF1 0.6015 seconds 1.4
+r2_output_s1449_domain_control 2 valF1 0.5796 seconds 1.4
+r2_output_s1449_domain_control 3 valF1 0.7126 seconds 1.4
+r2_output_s1449_domain_control 4 valF1 0.6846 seconds 1.4
+r2_output_s1449_domain_control 5 valF1 0.7092 seconds 1.4
+r2_output_s1449_domain_control 6 valF1 0.7435 seconds 1.4
+r2_output_s1449_domain_control 7 valF1 0.7593 seconds 1.4
+r2_output_s1449_domain_control 8 valF1 0.7737 seconds 1.4
+r2_output_s1449_domain_control 9 valF1 0.7741 seconds 1.4
+r2_output_s1449_domain_control 10 valF1 0.7723 seconds 1.4
+r2_output_s1449_domain_control 11 valF1 0.7682 seconds 1.4
+r2_output_s1449_domain_control 12 valF1 0.787 seconds 1.4
+r2_output_s1449_domain_control 13 valF1 0.7851 seconds 1.4
+r2_output_s1449_domain_control 14 valF1 0.8134 seconds 1.4
+r2_output_s1449_domain_control 15 valF1 0.8072 seconds 1.4
+r2_output_s1449_domain_control 16 valF1 0.8066 seconds 1.4
+r2_output_s1449_domain_control 17 valF1 0.8126 seconds 1.4
+r2_output_s1449_domain_control 18 valF1 0.8148 seconds 1.4
+r2_output_s1449_domain_control 19 valF1 0.8036 seconds 1.4
+r2_output_s1449_domain_control 20 valF1 0.8187 seconds 1.4
+FIT r2_output_s1449_domain_control valF1 0.8187 epoch 20
+START r2_output_s1450_domain rows 6163 1322 device mps
+r2_output_s1450_domain 1 valF1 0.5169 seconds 1.5
+r2_output_s1450_domain 2 valF1 0.6168 seconds 1.5
+r2_output_s1450_domain 3 valF1 0.679 seconds 1.4
+r2_output_s1450_domain 4 valF1 0.7131 seconds 1.4
+r2_output_s1450_domain 5 valF1 0.6818 seconds 1.4
+r2_output_s1450_domain 6 valF1 0.719 seconds 1.4
+r2_output_s1450_domain 7 valF1 0.7468 seconds 1.4
+r2_output_s1450_domain 8 valF1 0.7712 seconds 1.4
+r2_output_s1450_domain 9 valF1 0.7716 seconds 1.4
+r2_output_s1450_domain 10 valF1 0.7753 seconds 1.4
+r2_output_s1450_domain 11 valF1 0.7734 seconds 1.5
+r2_output_s1450_domain 12 valF1 0.7843 seconds 1.4
+r2_output_s1450_domain 13 valF1 0.8001 seconds 1.4
+r2_output_s1450_domain 14 valF1 0.7858 seconds 1.4
+r2_output_s1450_domain 15 valF1 0.788 seconds 1.4
+r2_output_s1450_domain 16 valF1 0.8025 seconds 1.4
+r2_output_s1450_domain 17 valF1 0.8006 seconds 1.4
+r2_output_s1450_domain 18 valF1 0.8065 seconds 1.4
+r2_output_s1450_domain 19 valF1 0.8285 seconds 1.4
+r2_output_s1450_domain 20 valF1 0.8137 seconds 1.4
+FIT r2_output_s1450_domain valF1 0.8285 epoch 19
+START r2_output_s1450_domain_control rows 6163 1322 device mps
+r2_output_s1450_domain_control 1 valF1 0.5035 seconds 1.4
+r2_output_s1450_domain_control 2 valF1 0.5398 seconds 1.4
+r2_output_s1450_domain_control 3 valF1 0.6067 seconds 1.4
+r2_output_s1450_domain_control 4 valF1 0.72 seconds 1.4
+r2_output_s1450_domain_control 5 valF1 0.7204 seconds 1.4
+r2_output_s1450_domain_control 6 valF1 0.7461 seconds 1.4
+r2_output_s1450_domain_control 7 valF1 0.7439 seconds 1.4
+r2_output_s1450_domain_control 8 valF1 0.7625 seconds 1.4
+r2_output_s1450_domain_control 9 valF1 0.782 seconds 1.4
+r2_output_s1450_domain_control 10 valF1 0.7623 seconds 1.4
+r2_output_s1450_domain_control 11 valF1 0.7793 seconds 1.5
+r2_output_s1450_domain_control 12 valF1 0.8118 seconds 1.4
+r2_output_s1450_domain_control 13 valF1 0.7947 seconds 1.4
+r2_output_s1450_domain_control 14 valF1 0.796 seconds 1.4
+r2_output_s1450_domain_control 15 valF1 0.8167 seconds 1.4
+r2_output_s1450_domain_control 16 valF1 0.8135 seconds 1.4
+r2_output_s1450_domain_control 17 valF1 0.825 seconds 1.4
+r2_output_s1450_domain_control 18 valF1 0.8115 seconds 1.4
+r2_output_s1450_domain_control 19 valF1 0.8056 seconds 1.4
+r2_output_s1450_domain_control 20 valF1 0.8145 seconds 1.4
+FIT r2_output_s1450_domain_control valF1 0.825 epoch 17
+DOMAIN writing lstm 0.7422 0.809
+{
+ "code": {
+  "cnn": {
+   "holdout_macro_f1_mean": 0.7342134509350493,
+   "control_macro_f1_mean": 0.8114970764121147,
+   "difference": -0.07728362547706535,
+   "difference_ci95": [
+    -0.10550527487054223,
+    -0.0518222868839176
+   ]
+  },
+  "lstm": {
+   "holdout_macro_f1_mean": 0.6798467865889418,
+   "control_macro_f1_mean": 0.7662626856439543,
+   "difference": -0.08641589905501246,
+   "difference_ci95": [
+    -0.1156246857726262,
+    -0.0578250852668341
+   ]
+  }
+ },
+ "writing": {
+  "cnn": {
+   "holdout_macro_f1_mean": 0.7541476959600225,
+   "control_macro_f1_mean": 0.7908300268611544,
+   "difference": -0.03668233090113193,
+   "difference_ci95": [
+    -0.07739337710994057,
+    0.002422791183384401
+   ]
+  },
+  "lstm": {
+   "holdout_macro_f1_mean": 0.7421572658391952,
+   "control_macro_f1_mean": 0.8090284045441027,
+   "difference": -0.06687113870490757,
+   "difference_ci95": [
+    -0.12067958012727177,
+    -0.02066609007889395
+   ]
+  }
+ }
+}
