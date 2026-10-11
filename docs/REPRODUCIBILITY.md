@@ -36,7 +36,7 @@ The printed values are uncalibrated, closed-set scores for four specific histori
 
 ## Historical UltraFeedback study
 
-`src/download_data.py`, `src/prepare_data.py`, `src/run_experiments.py`, `src/iterate.py`, and corresponding results remain intact. `src/build_legacy_report.py` rebuilds the archived optimized report. The two datasets and label spaces are not pooled. Default three-class behavior in `models_v2.py` remains compatible with existing weights; the Arena models explicitly request four classes.
+`src/download_data.py`, `src/prepare_data.py`, `src/run_experiments.py`, `src/iterate.py`, and corresponding results remain intact. The two datasets and label spaces are not pooled. Default three-class behavior in `models_v2.py` remains compatible with existing weights; the Arena models explicitly request four classes.
 
 ## Artifacts
 

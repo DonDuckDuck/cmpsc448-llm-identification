@@ -123,8 +123,6 @@ We changed datasets for two reasons: **(1) study the more recognizable Claude/GP
 
 All scores are response-only, three-seed means within each stage. Same-data optimization increased CNN/LSTM accuracy by **3.39/12.99 percentage points**, but was exploratory follow-up on an already evaluated test set. Arena provides **2.27 times as many curated responses**, with explicit model-release selection, session/duplicate grouping, frozen validation selection, and matched-size domain controls. Its scores are **not directly comparable** to the earlier three-class task: author classes, distributions, and split designs changed. A fixed-split Arena learning curve would be needed to isolate the effect of training-set size; it has not been run.
 
-Earlier reports are kept in `report/archive/`.
-
 ## Repository guide
 
 | Path | Purpose |
@@ -140,7 +138,7 @@ Earlier reports are kept in `report/archive/`.
 | `docs/arena_*.json` | Data provenance, curation repair, plans, selection, and freeze records |
 | `data/arena/split_manifest.json` | Non-text published split assignments |
 | `models/arena_*.pt` | Two locally usable demonstration checkpoints |
-| `report/` | Current report plus archived earlier reports |
+| `report/` | Current report (PDF and text version) |
 
 Course grounding: Chapter 4 (CNN/pooling/LSTM) and Chapter 9 (loss/mini-batches/Adam). Specific budgets, filters, and hyperparameters are project design decisions. The submission deliverable is this repository URL and its PDF; publishing it does not submit it to Canvas.
 '''

@@ -225,7 +225,7 @@ p('The study uses one Arena snapshot, four releases, English first turns, and fi
 p('Question or answer truncation may discard useful evidence. Softmax values are uncalibrated and should not be presented as trustworthy probabilities for arbitrary text. Future reuse of this test set for tuning would turn subsequent results into follow-up exploration, requiring another independent test for confirmation.')
 
 page('13. Project evolution and dataset choice')
-p('The project developed in three stages. Earlier code, measured results, demonstration weights, and PDF reports remain available so that the final study can be traced back to its initial implementation. The table reports response-only accuracy, averaged over three seeds within each stage.')
+p('The project developed in three stages. Earlier code, measured results, and demonstration weights remain in the repository so that the final study can be traced back to its initial implementation. The table reports response-only accuracy, averaged over three seeds within each stage.')
 table(['Stage','Data / author classes','Responses','CNN','LSTM'],[
 ['Initial implementation','UltraFeedback: Falcon, GPT, Llama','4,254','77.52%','64.01%'],
 ['Same-data optimization','Same UltraFeedback data and split','4,254','80.91%','77.00%'],
@@ -305,7 +305,7 @@ for title,url in refs:p('<b>'+html.escape(title)+'</b>');p(html.escape(url),smal
 sub('Immutable source revision')
 p(P['revision'],small=True)
 p('The official dataset card licenses user prompts under CC-BY-4.0 and states that model outputs are governed by the respective providers\' terms. The repository references the source and reproduces acquisition without redistributing raw conversation text.',small=True)
-table(['Artifact','Contents'],[['docs/arena_data_provenance.json','Seven pinned URLs, file sizes, and SHA-256 hashes'],['data/arena/split_manifest.json','Non-text IDs, model labels, and fixed group assignments'],['docs/arena_experiment_plan.json; arena_selection.json','Candidates and the validation-selected configuration freeze'],['docs/arena_domain_plan.json; arena_training_complete.json','Domain protocol and checkpoint hashes before test access'],['results/arena/run_ledger.csv','Every fit, validation score, test score if evaluated, and time'],['results/arena/predictions/; verification.json','Non-text predictions, full score audit, and checkpoint replay'],['report/archive/','Earlier UltraFeedback reports and editable source']],[.47,.53],small=True)
+table(['Artifact','Contents'],[['docs/arena_data_provenance.json','Seven pinned URLs, file sizes, and SHA-256 hashes'],['data/arena/split_manifest.json','Non-text IDs, model labels, and fixed group assignments'],['docs/arena_experiment_plan.json; arena_selection.json','Candidates and the validation-selected configuration freeze'],['docs/arena_domain_plan.json; arena_training_complete.json','Domain protocol and checkpoint hashes before test access'],['results/arena/run_ledger.csv','Every fit, validation score, test score if evaluated, and time'],['results/arena/predictions/; verification.json','Non-text predictions, full score audit, and checkpoint replay']],[.47,.53],small=True)
 p('Repository: https://github.com/DonDuckDuck/cmpsc448-llm-identification',small=True)
 
 class NumberedCanvas(canvas.Canvas):

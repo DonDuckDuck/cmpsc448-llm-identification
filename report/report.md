@@ -381,7 +381,7 @@ Question or answer truncation may discard useful evidence. Softmax values are un
 
 ## 13. Project evolution and dataset choice
 
-The project developed in three stages. Earlier code, measured results, demonstration weights, and PDF reports remain available so that the final study can be traced back to its initial implementation. The table reports response-only accuracy, averaged over three seeds within each stage.
+The project developed in three stages. Earlier code, measured results, and demonstration weights remain in the repository so that the final study can be traced back to its initial implementation. The table reports response-only accuracy, averaged over three seeds within each stage.
 
 | Stage | Data / author classes | Responses | CNN | LSTM |
 | --- | --- | --- | --- | --- |
@@ -558,6 +558,5 @@ The official dataset card licenses user prompts under CC-BY-4.0 and states that 
 | docs/arena_domain_plan.json; arena_training_complete.json | Domain protocol and checkpoint hashes before test access |
 | results/arena/run_ledger.csv | Every fit, validation score, test score if evaluated, and time |
 | results/arena/predictions/; verification.json | Non-text predictions, full score audit, and checkpoint replay |
-| report/archive/ | Earlier UltraFeedback reports and editable source |
 
 Repository: https://github.com/DonDuckDuck/cmpsc448-llm-identification
