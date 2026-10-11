@@ -2,7 +2,7 @@
 
 Identifying LLMs from Their Responses
 
-Haodong Huang | Individual projectCMPSC 448 | October 10, 2026
+Haodong Huang | Individual projectCMPSC 448 | October 11, 2026
 
 ### Abstract
 
@@ -233,7 +233,7 @@ This main-study version uses one seed, and the architecture recipes come from th
 
 The character baseline reaches 87.7% accuracy and 87.3% macro-F1, a slightly higher point estimate than the CNN mean. This highlights the strength of local lexical patterns; the small ranking difference alone does not establish reliable superiority.
 
-Word TF-IDF uses 1-2 grams; character TF-IDF uses 3-5 grams. Each is capped at 40,000 features, min_df=3, with sublinear term frequency and balanced logistic regression (C=2). Text baselines use the first 96 question and/or 384 answer tokens. Their longer answer budget than LSTM is disclosed. All transforms are fitted on training data.
+Word TF-IDF uses 1-2 grams; character TF-IDF uses 3-5 grams. Each is capped at 40,000 features, min_df=3, with sublinear term frequency and balanced logistic regression (C=2). Text baselines use the first 96 question and/or 384 answer tokens. This is a longer answer budget than the LSTM's. All transforms are fitted on training data.
 
 Structural baselines use full-answer statistics: log character/word counts, average word length, lexical diversity, newline/punctuation/digit/uppercase rates, list-line rate, and code-fence count. The no-length variant removes the two explicit log length features; other features can still correlate with length. These diagnostics are not controlled equal-input-budget competitors.
 
@@ -391,7 +391,7 @@ The project developed in three stages. Earlier code, measured results, demonstra
 
 ### Why change the dataset?
 
-1. More recognizable model families. The project owner wanted to study Claude, GPT, Grok, and DeepSeek. Arena contains identifiable releases from all four, making the target authors more relevant to that interest than the original Falcon/GPT/Llama subset. This is a relevance motivation, not a measured ranking of dataset popularity or model market share. The selected records are from 2025, not the latest 2026 releases.
+1. More recognizable model families. I wanted to study Claude, GPT, Grok, and DeepSeek. Arena contains identifiable releases from all four, which makes the target authors more relevant than the original Falcon/GPT/Llama subset. The selected records are from 2025, not the latest 2026 releases.
 
 2. More usable examples. After curation, the sample increases from 4,254 to 9,643 responses (2.27 times as many). The motivation was to give the models more training evidence and test whether performance could improve. The dataset name "140k" describes the source release, not the number of responses used for training.
 
@@ -496,7 +496,7 @@ Most of these were not visible in the accuracy number. A model can score well fo
 | 5 | Run shortcut checks (length, identity, same prompt) early. | Confirms the model learns style, not artifacts. |
 
 
-## 15. Reproduction and submission
+## 15. Reproduction
 
 Install Python 3.12 and the exact dependencies in requirements-lock.txt. The recorded runs use PyTorch 2.14.1 with Apple MPS. CPU inference replay verifies the two distributed demonstration weights; training on other devices can yield numerical differences.
 
@@ -513,11 +513,9 @@ Install Python 3.12 and the exact dependencies in requirements-lock.txt. The rec
 | Lessons figures | python src/build_lessons_figures.py |
 | Build this report | python src/build_report.py |
 
-The prepare command refuses to overwrite existing split text and verifies published assignments in a fresh clone. Reproduce from a fresh clone and preserve the archived results. Training caches require matching configuration and split hashes. The domain phase must precede first test evaluation. Two selected response-only weights are included for a local demonstration; other checkpoints remain local and can be regenerated.
+Run the commands in this order in a fresh clone. The two seed-1448 response-only models (CNN and LSTM) are included for demonstration; all other checkpoints can be regenerated with these commands.
 
-Retained final-study fit/validation time totals 12.5 minutes for this experiment collection. This excludes the roughly 1.61 GB download, curation, analysis, report generation, and manual review, and superseded development fits; it is not an end-to-end runtime promise.
-
-Submission: GitHub repository URL containing code, this PDF, author name, manifests, non-text predictions, and measured results. Raw Arena conversations and course handouts are not published. This report does not indicate that a Canvas submission has been made.
+Training and validating all main-study models took 12.5 minutes in total on Apple MPS, not counting the roughly 1.61 GB data download.
 
 
 ## Appendix. Sources and audit trail
