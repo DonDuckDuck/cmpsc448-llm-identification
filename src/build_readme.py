@@ -16,6 +16,8 @@ text=f'''# Who Wrote It?
 
 **Haodong Huang · CMPSC 448 · Individual midterm project**
 
+## [Read the Project Report (PDF)](report/Who_Wrote_It_Haodong_Huang.pdf)
+
 The main study now uses **Arena Human Preference 140k**: **{A['retained_rows']:,} curated English, single-turn responses** from four specific model releases. Required CNN and RNN/LSTM models are trained, selected on validation data, and evaluated across three seeds.
 
 ![Arena neural results](results/figures/arena_results.png)

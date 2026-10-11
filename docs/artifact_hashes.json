@@ -14,7 +14,7 @@
   "src/arena_train.py": "21627febad45812d55bd6dab0396bfbf12437af5d02a98493bb7be2f28d7a53c",
   "src/baselines.py": "ea305d32f0431bb8b647cd078bcf8ca59559bca8496b1e563d0f469be7e26616",
   "src/build_lessons_figures.py": "0a3e5d6325dc2d29f75bc13a807412029c9390c3d8ee4c667bbac433a9d7c989",
-  "src/build_readme.py": "217169172447f64cf09b27f4d33a55f06305029c8958df6df66ba3dc06af905e",
+  "src/build_readme.py": "7ec35b5530c28f6eb0bae5498ef478e5979790227459bdded38615002c519650",
   "src/build_report.py": "7b18a6445742bb70086ece9401a8a1d286e1e9f89046319a47c6c1791719b234",
   "src/download_data.py": "f84eda5aa2ef5497791c627d87e577e3ac0b6c3c5331a19a61a28ec9d545b53b",
   "src/iterate.py": "4ab745499e858c811dcfe6ce7db5015e7741f682a3905c9644d3eef18170ed09",
