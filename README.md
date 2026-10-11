@@ -137,4 +137,4 @@ All scores are response-only, three-seed means within each stage. Same-data opti
 | `models/arena_*.pt` | Two locally usable demonstration checkpoints |
 | `report/` | Current report plus archived earlier reports |
 
-Course grounding: Chapter 4 (CNN/pooling/LSTM) and Chapter 9 (loss/mini-batches/Adam). Specific budgets, filters, and hyperparameters are project design decisions. ChatGPT/Codex and Claude assisted with code, debugging, analysis, and drafting; the student is responsible for understanding and verifying the submission. The submission deliverable is this repository URL and its PDF; publishing it does not submit it to Canvas.
+Course grounding: Chapter 4 (CNN/pooling/LSTM) and Chapter 9 (loss/mini-batches/Adam). Specific budgets, filters, and hyperparameters are project design decisions. The submission deliverable is this repository URL and its PDF; publishing it does not submit it to Canvas.
