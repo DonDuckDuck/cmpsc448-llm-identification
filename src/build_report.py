@@ -55,11 +55,13 @@ def table(headers,rows,widths=None,small=False,keep=False):
     story.extend([KeepTogether([t]) if keep else t,Spacer(1,9)])
     md.extend(['| '+' | '.join(headers)+' |','| '+' | '.join(['---']*len(headers))+' |'])
     md.extend('| '+' | '.join(map(str,row))+' |' for row in rows);md.append('')
-def fig(name,caption,maxheight=215):
+def fig(name,caption,maxheight=215,keep=False):
     path=ROOT/'results/figures'/f'{name}.png'
     with PILImage.open(path) as im:iw,ih=im.size
+    start=len(story)
     factor=min(W/iw,maxheight/ih);story.append(Image(str(path),width=iw*factor,height=ih*factor))
     story.append(Spacer(1,4));p(caption,small=True)
+    if keep:story[start:]=[KeepTogether(story[start:])]
     md.append(f'![{caption}](../results/figures/{name}.png)\n')
 from arena_train import LABELS,CANDIDATES,tag
 core=S['core']
@@ -255,7 +257,7 @@ table(['#','Lesson','Evidence in this project'],[
 
 sub('1. The data limited the first version more than the model did')
 p(f'The hardest part of the project was the first version. On UltraFeedback (Falcon, GPT, Llama; 4,254 usable responses) the LSTM reached only {pct(acc_of(V1,"lstm"))} accuracy. I spent the second stage improving the model on the same data: a bounded validation search over twelve candidates, a longer CNN input, and LSTM pooling. That lifted the LSTM to {pct(acc_of(V2,"lstm"))} and the CNN to {pct(acc_of(V2,"cnn"))}, but I could not find a way past that level. I also could not simply add examples, because public datasets that contain those same model releases barely exist, especially for Falcon. To make a real breakthrough I had to change the dataset and essentially start again on Arena.')
-fig('lessons_journey','Response-only test accuracy at each stage (three-seed means). Stages 1-2 share one dataset and three classes; stage 3 is a different, four-class task, so the jump is not a controlled comparison.',maxheight=200)
+fig('lessons_journey','Response-only test accuracy at each stage (three-seed means). Stages 1-2 share one dataset and three classes; stage 3 is a different, four-class task, so the jump is not a controlled comparison.',maxheight=180,keep=True)
 p('The lesson is that the dataset sets the ceiling. It decides how many examples exist, which authors can be studied, and therefore how far any later tuning can go. Model work in stage 2 was still valuable, since it is where I learned how much pooling matters for an LSTM, but it could not compensate for a small, fixed dataset.')
 
 sub('2. More classes, yet higher accuracy')
